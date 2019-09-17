@@ -210,8 +210,8 @@ public class World {
 			}
 		}
 
-		if(score > 100){
-
+		if(score >= 100){
+			state = WORLD_STATE_NEXT_LEVEL;
 		}
 	}
 
