@@ -16,6 +16,9 @@
 
 package com.example.myapplication.BirdCore;
 
+/*
+* 用于见光死
+* */
 public class Squirrel extends DynamicGameObject {
 	public static final float SQUIRREL_WIDTH = 1;
 	public static final float SQUIRREL_HEIGHT = 0.6f;

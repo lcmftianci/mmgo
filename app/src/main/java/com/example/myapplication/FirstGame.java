@@ -3,11 +3,9 @@ package com.example.myapplication;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class FirstGame implements ApplicationListener {
     //绘图用的SpriteBatch
@@ -18,7 +16,7 @@ public class FirstGame implements ApplicationListener {
     @Override
     public void create() {
         batch = new SpriteBatch(); //实例化
-        texture = new Texture(Gdx.files.internal("panda.jpg"));
+        texture = new Texture(Gdx.files.internal("data/panda.jpg"));
         //region = new TextureRegion(texture, 30,80, 200,200);
         sprite = new Sprite(texture, 80, 80, 400, 300);
         sprite.setPosition(10, 10); //位置

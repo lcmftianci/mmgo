@@ -16,6 +16,9 @@
 
 package com.example.myapplication.BirdCore;
 
+/*
+* 平台，用于目标跳动
+* */
 public class Platform extends DynamicGameObject {
 	public static final float PLATFORM_WIDTH = 2;
 	public static final float PLATFORM_HEIGHT = 0.5f;

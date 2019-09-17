@@ -103,7 +103,7 @@ public class World {
 		castle = new Castle(WORLD_WIDTH / 2, y);
 	}
 
-	public void update (float deltaTime, float accelX) {
+	public void update(float deltaTime, float accelX) {
 		updateBob(deltaTime, accelX);
 		updatePlatforms(deltaTime);
 		updateSquirrels(deltaTime);
@@ -208,6 +208,10 @@ public class World {
 					listener.highJump();
 				}
 			}
+		}
+
+		if(score > 100){
+
 		}
 	}
 

@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.example.myapplication.BingGo.SuperBall;
 import com.example.myapplication.BirdCore.SuperJumper;
 
 import android.os.Bundle;

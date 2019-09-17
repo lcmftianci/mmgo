@@ -16,6 +16,9 @@
 
 package com.example.myapplication.BirdCore;
 
+/*
+* 这是精灵
+* */
 public class Bob extends DynamicGameObject {
 	public static final int BOB_STATE_JUMP = 0;
 	public static final int BOB_STATE_FALL = 1;
