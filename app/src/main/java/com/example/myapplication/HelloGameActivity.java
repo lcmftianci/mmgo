@@ -5,6 +5,7 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.example.myapplication.BingGo.SuperBall;
 import com.example.myapplication.BirdCore.SuperJumper;
 import com.example.myapplication.GeniusDirection.Lib025_PicChange;
+import com.example.myapplication.GeniusDirection.OrthographicCameraExample;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,6 @@ public class HelloGameActivity extends AndroidApplication {
 
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         config.useWakelock = true;
-        initialize(new SuperBall(), config);
+        initialize(new OrthographicCameraExample(), config);
     }
 }

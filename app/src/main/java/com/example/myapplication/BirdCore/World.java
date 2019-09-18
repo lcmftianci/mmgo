@@ -117,8 +117,12 @@ public class World {
 	}
 
 	private void updateBob (float deltaTime, float accelX) {
-		if (bob.state != Bob.BOB_STATE_HIT && bob.position.y <= 0.5f) bob.hitPlatform();
-		if (bob.state != Bob.BOB_STATE_HIT) bob.velocity.x = -accelX / 10 * Bob.BOB_MOVE_VELOCITY;
+		if (bob.state != Bob.BOB_STATE_HIT && bob.position.y <= 0.5f)
+			bob.hitPlatform();
+
+		if (bob.state != Bob.BOB_STATE_HIT)
+			bob.velocity.x = -accelX / 10 * Bob.BOB_MOVE_VELOCITY;
+
 		bob.update(deltaTime);
 		heightSoFar = Math.max(bob.position.y, heightSoFar);
 	}

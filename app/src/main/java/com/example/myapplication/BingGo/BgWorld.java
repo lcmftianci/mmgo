@@ -18,6 +18,7 @@ public class BgWorld{
 
         public void coin();
     }
+
     public BgWorld (BgWorldListener listener) {
         this.ball = new BgSpirit(5, 1);
 //        this.platforms = new ArrayList<Platform>();
@@ -37,5 +38,6 @@ public class BgWorld{
 //        ball.position.x = x;
 //        ball.position.y = y;
 //        Log.d(TAG, "x:" + x + " y:" + y );
+        //ball.position.add(x, y);
     }
 }
