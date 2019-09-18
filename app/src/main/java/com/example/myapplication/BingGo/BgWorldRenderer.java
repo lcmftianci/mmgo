@@ -48,7 +48,7 @@ public class BgWorldRenderer {
     }
 
     public void renderSpirit(){
-        this.cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+        this.cam.unproject(touchPoint.set(world.ball.position.x, world.ball.position.y, 0));
         batch.draw(BgAsserts.ball, touchPoint.x, touchPoint.y - 0.5f, 1, 1);
         Log.d(TAG, "x:" + touchPoint.x + " y:" + touchPoint.y );
     }

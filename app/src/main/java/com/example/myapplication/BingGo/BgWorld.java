@@ -35,8 +35,7 @@ public class BgWorld{
     }
 
     public void update(int x, int y) {
-//        ball.position.x = x;
-//        ball.position.y = y;
+        ball.update(x, y);
 //        Log.d(TAG, "x:" + x + " y:" + y );
         //ball.position.add(x, y);
     }

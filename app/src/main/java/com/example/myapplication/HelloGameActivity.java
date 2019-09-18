@@ -22,6 +22,6 @@ public class HelloGameActivity extends AndroidApplication {
 
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         config.useWakelock = true;
-        initialize(new OrthographicCameraExample(), config);
+        initialize(new SuperBall(), config);
     }
 }
