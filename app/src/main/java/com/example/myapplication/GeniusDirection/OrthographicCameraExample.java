@@ -69,14 +69,22 @@ public class OrthographicCameraExample implements ApplicationListener {
 
         // should work also with Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer)
         if (appType == Application.ApplicationType.Android || appType == Application.ApplicationType.iOS) {
-            if(Gdx.input.isTouched()){
-                if(prePos.x == 0 && prePos.y == 0) {
+            if (Gdx.input.isTouched()) {
+                if (prePos.x == 0 && prePos.y == 0) {
                     prePos.x = Gdx.input.getX();
                     prePos.y = Gdx.input.getY();
                     nowPos.x = prePos.x;
                     nowPos.y = prePos.y;
-                }else{
-                    if(nowPos.x > prePos.x){cam.zoom += 0.02;}
+                } else {
+                    if (Gdx.input.isTouched(1)) {
+                        for (int i = 0; i < 2; i++) {
+                            if (Gdx.input.isTouched()) {
+                                if (nowPos.x > prePos.x) {
+                                    cam.zoom += 0.02;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }else{
