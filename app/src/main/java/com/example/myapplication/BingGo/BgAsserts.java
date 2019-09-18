@@ -12,6 +12,8 @@ public class BgAsserts {
     public static TextureRegion backgroundRegion;
 
     public static Texture items;
+    public static Texture bingo;
+
     public static TextureRegion mainMenu;
     public static TextureRegion pauseMenu;
     public static TextureRegion ready;
@@ -31,6 +33,9 @@ public class BgAsserts {
     public static BgAnimation squirrelFly;
     public static TextureRegion platform;
     public static BgAnimation brakingPlatform;
+
+    public static TextureRegion ball;
+
     public static BitmapFont font;
 
     public static Music music;
@@ -45,32 +50,11 @@ public class BgAsserts {
     }
 
     public static void load () {
-        background = loadTexture("data/panda.jpg");
+        background = loadTexture("bingo/bgbackground.png");
         backgroundRegion = new TextureRegion(background, 0, 0, 320, 480);
 
-        items = loadTexture("data/items.png");
-        mainMenu = new TextureRegion(items, 0, 224, 300, 110);
-        pauseMenu = new TextureRegion(items, 224, 128, 192, 96);
-        ready = new TextureRegion(items, 320, 224, 192, 32);
-        gameOver = new TextureRegion(items, 352, 256, 160, 96);
-        highScoresRegion = new TextureRegion(BgAsserts.items, 0, 257, 300, 110 / 3);
-        logo = new TextureRegion(items, 0, 352, 274, 142);
-        soundOff = new TextureRegion(items, 0, 0, 64, 64);
-        soundOn = new TextureRegion(items, 64, 0, 64, 64);
-        arrow = new TextureRegion(items, 0, 64, 64, 64);
-        pause = new TextureRegion(items, 64, 64, 64, 64);
-
-        spring = new TextureRegion(items, 128, 0, 32, 32);
-        castle = new TextureRegion(items, 128, 64, 64, 64);
-        coinAnim = new BgAnimation(0.2f, new TextureRegion(items, 128, 32, 32, 32), new TextureRegion(items, 160, 32, 32, 32),
-                new TextureRegion(items, 192, 32, 32, 32), new TextureRegion(items, 160, 32, 32, 32));
-        bobJump = new BgAnimation(0.2f, new TextureRegion(items, 0, 128, 32, 32), new TextureRegion(items, 32, 128, 32, 32));
-        bobFall = new BgAnimation(0.2f, new TextureRegion(items, 64, 128, 32, 32), new TextureRegion(items, 96, 128, 32, 32));
-        bobHit = new TextureRegion(items, 128, 128, 32, 32);
-        squirrelFly = new BgAnimation(0.2f, new TextureRegion(items, 0, 160, 32, 32), new TextureRegion(items, 32, 160, 32, 32));
-        platform = new TextureRegion(items, 64, 160, 64, 16);
-        brakingPlatform = new BgAnimation(0.2f, new TextureRegion(items, 64, 160, 64, 16), new TextureRegion(items, 64, 176, 64, 16),
-                new TextureRegion(items, 64, 192, 64, 16), new TextureRegion(items, 64, 208, 64, 16));
+        bingo = loadTexture("bingo/bgspirit.png");
+        ball = new TextureRegion(bingo, 28, 28, 56, 56);
 
         font = new BitmapFont(Gdx.files.internal("data/font.fnt"), Gdx.files.internal("data/font.png"), false);
 
@@ -83,6 +67,11 @@ public class BgAsserts {
         hitSound = Gdx.audio.newSound(Gdx.files.internal("data/hit.wav"));
         coinSound = Gdx.audio.newSound(Gdx.files.internal("data/coin.wav"));
         clickSound = Gdx.audio.newSound(Gdx.files.internal("data/click.wav"));
+
+        items = loadTexture("data/items.png");
+        mainMenu = new TextureRegion(items, 0, 224, 300, 110);
+        pause = new TextureRegion(items, 64, 64, 64, 64);
+        //ball = new TextureRegion(items, 64, 0, 64, 64);
     }
 
     public static void playSound (Sound sound) {

@@ -16,11 +16,18 @@
 
 package com.example.myapplication.BirdCore;
 
+import android.util.Log;
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/*
+* 此类主要用于目标渲染
+* */
+
 public class WorldRenderer {
+	private final String TAG = "WorldRenderer";
 	static final float FRUSTUM_WIDTH = 10;
 	static final float FRUSTUM_HEIGHT = 15;
 	World world;
@@ -80,6 +87,8 @@ public class WorldRenderer {
 			batch.draw(keyFrame, world.bob.position.x + 0.5f, world.bob.position.y - 0.5f, side * 1, 1);
 		else
 			batch.draw(keyFrame, world.bob.position.x - 0.5f, world.bob.position.y - 0.5f, side * 1, 1);
+
+		Log.d(TAG, "x:" + world.bob.position.x + " y:" + world.bob.position.y);
 	}
 
 	private void renderPlatforms () {

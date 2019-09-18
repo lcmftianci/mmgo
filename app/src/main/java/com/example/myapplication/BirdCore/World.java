@@ -22,6 +22,10 @@ import java.util.Random;
 
 import com.badlogic.gdx.math.Vector2;
 
+/*
+	此类主要用于逻辑判断
+ */
+
 public class World {
 	public interface WorldListener {
 		public void jump();

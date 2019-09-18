@@ -71,9 +71,9 @@ public class BgMenuScreen extends ScreenAdapter {
 
         game.batcher.enableBlending();
         game.batcher.begin();
-        game.batcher.draw(BgAsserts.logo, 160 - 274 / 2, 480 - 10 - 142, 274, 142);
+//        game.batcher.draw(BgAsserts.logo, 160 - 274 / 2, 480 - 10 - 142, 274, 142);
         game.batcher.draw(BgAsserts.mainMenu, 10, 200 - 110 / 2, 300, 110);
-        game.batcher.draw(BgSettings.soundEnabled ? BgAsserts.soundOn : BgAsserts.soundOff, 0, 0, 64, 64);
+//        game.batcher.draw(BgSettings.soundEnabled ? BgAsserts.soundOn : BgAsserts.soundOff, 0, 0, 64, 64);
         game.batcher.end();
     }
 

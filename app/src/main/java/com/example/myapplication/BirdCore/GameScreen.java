@@ -28,6 +28,10 @@ import com.badlogic.gdx.math.Vector3;
 
 import com.example.myapplication.BirdCore.World.WorldListener;
 
+/*
+* 绘制游戏对象以外的精灵
+* */
+
 public class GameScreen extends ScreenAdapter {
 	static final int GAME_READY = 0;
 	static final int GAME_RUNNING = 1;
@@ -116,6 +120,7 @@ public class GameScreen extends ScreenAdapter {
 		}
 	}
 
+	//驱动整个游戏运行
 	private void updateRunning (float deltaTime) {
 		if (Gdx.input.justTouched()) {
 			guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
@@ -131,7 +136,7 @@ public class GameScreen extends ScreenAdapter {
 		
 		// should work also with Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer)
 		if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
-			world.update(deltaTime, Gdx.input.getAccelerometerX());
+			world.update(deltaTime, Gdx.input.getAccelerometerX());  //获取X坐标加速度，控制任务方向
 		} else {
 			float accel = 0;
 			if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) accel = 5f;

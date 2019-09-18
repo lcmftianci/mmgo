@@ -7,6 +7,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
 
+/*
+* 此逻辑主要用于胜利庆祝
+* */
+
 public class WinScreen extends ScreenAdapter {
 	SuperJumper game;
 	OrthographicCamera cam;

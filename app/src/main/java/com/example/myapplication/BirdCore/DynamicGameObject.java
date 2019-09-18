@@ -19,8 +19,9 @@ package com.example.myapplication.BirdCore;
 import com.badlogic.gdx.math.Vector2;
 
 public class DynamicGameObject extends GameObject {
-	public final Vector2 velocity;
-	public final Vector2 accel;
+
+	public final Vector2 velocity;	//精灵速度
+	public final Vector2 accel;		//精灵加速度
 
 	public DynamicGameObject (float x, float y, float width, float height) {
 		super(x, y, width, height);

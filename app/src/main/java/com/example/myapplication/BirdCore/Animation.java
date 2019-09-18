@@ -18,6 +18,10 @@ package com.example.myapplication.BirdCore;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/*
+	拖去多个图片，形成动画
+ */
+
 public class Animation {
 	public static final int ANIMATION_LOOPING = 0;
 	public static final int ANIMATION_NONLOOPING = 1;
