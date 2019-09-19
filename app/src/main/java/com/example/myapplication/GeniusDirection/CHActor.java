@@ -185,7 +185,7 @@ public class CHActor extends Actor implements Poolable {
 				setSize(sprite.getWidth(), sprite.getHeight());
 			} else if (bgTextureRegion instanceof AtlasRegion) {
 				AtlasRegion atlasRegion = (AtlasRegion)bgTextureRegion;
-				bgTextureRegion = Chao.plistCenter.createSprite(atlasRegion);
+				//bgTextureRegion = Chao.plistCenter.createSprite(atlasRegion);
 				Sprite sprite = (Sprite)bgTextureRegion;
 				setSize(sprite.getWidth(), sprite.getHeight());
 			} else {

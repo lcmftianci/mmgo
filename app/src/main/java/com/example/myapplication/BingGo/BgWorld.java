@@ -3,11 +3,15 @@ package com.example.myapplication.BingGo;
 import android.util.Log;
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.math.Bezier;
+import com.badlogic.gdx.math.Vector2;
+import com.example.myapplication.GeniusDirection.CHBezierLine;
 
 public class BgWorld{
 
     private final String TAG = "BgWorld";
     BgSpirit ball;
+    //CHBezierLine cbl;
 
     public interface BgWorldListener {
         public void jump();
@@ -21,6 +25,13 @@ public class BgWorld{
 
     public BgWorld (BgWorldListener listener) {
         this.ball = new BgSpirit(5, 1);
+        // 起点，控制点，控制点，终点
+//        Bezier<Vector2> bezier = new Bezier<Vector2>(
+//                new Vector2(10, 300),
+//                new Vector2(100, 500),
+//                new Vector2(300, 100),
+//                new Vector2(410, 300));
+        //this.cbl = new CHBezierLine(bezier);
 //        this.platforms = new ArrayList<Platform>();
 //        this.springs = new ArrayList<Spring>();
 //        this.squirrels = new ArrayList<Squirrel>();

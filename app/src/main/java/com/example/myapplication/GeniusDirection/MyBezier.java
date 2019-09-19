@@ -7,42 +7,42 @@ import com.badlogic.gdx.math.Vector2;
   * @author whs
   *
   */
-public abstract class Bezier {
+public abstract class MyBezier {
  
 	protected Vector2 tmpVec;
  
 	public abstract Vector2 apply(float f);
  
-	public Bezier() {
+	public MyBezier() {
 		tmpVec = new Vector2();
 	}
  
-	public static Bezier cubic(float x1, float y1, float x2, float y2, float x3,
+	public static MyBezier cubic(float x1, float y1, float x2, float y2, float x3,
 			float y3, float x4, float y4) {
 		return cubic(new Vector2(x1, y1), new Vector2(x2, y2), new Vector2(x3,
 				y3), new Vector2(x4, y4));
 	}
  
-	public static Bezier cubic(Vector2 p0, Vector2 p1,
+	public static MyBezier cubic(Vector2 p0, Vector2 p1,
 			Vector2 p2, Vector2 p3) {
 		return new CubicBezier(p0, p1, p2, p3);
 	}
  
-	public static Bezier linear(float x1, float y1, float x2, float y2) {
+	public static MyBezier linear(float x1, float y1, float x2, float y2) {
 		return linear(new Vector2(x2, y1), new Vector2(x2, y2));
 	}
  
-	public static Bezier linear(Vector2 p0, Vector2 p1) {
+	public static MyBezier linear(Vector2 p0, Vector2 p1) {
 		return new LinearBezier(p0, p1);
 	}
  
-	public static Bezier quadratic(float x1, float y1, float x2, float y2, float x3,
+	public static MyBezier quadratic(float x1, float y1, float x2, float y2, float x3,
 			float y3) {
 		return quadratic(new Vector2(x1, y1), new Vector2(x2, y2), new Vector2(x3,
 				y3));
 	}
  
-	public static Bezier quadratic(Vector2 p0, Vector2 p1,
+	public static MyBezier quadratic(Vector2 p0, Vector2 p1,
 			Vector2 p2) {
 		return new QuadraticBezier(p0, p1, p2);
 	}
@@ -52,7 +52,7 @@ public abstract class Bezier {
 	 * @author whs
 	 *
 	 */
-	public static class CubicBezier extends Bezier {
+	public static class CubicBezier extends MyBezier {
  
 		public Vector2 p0;
 		public Vector2 p1;
@@ -87,7 +87,7 @@ public abstract class Bezier {
 	 * @author whs
 	 *
 	 */
-	public static class LinearBezier extends Bezier {
+	public static class LinearBezier extends MyBezier {
  
 		public Vector2 p0;
 		public Vector2 p1;
@@ -111,7 +111,7 @@ public abstract class Bezier {
 	 * @author whs
 	 *
 	 */
-	public static class QuadraticBezier extends Bezier {
+	public static class QuadraticBezier extends MyBezier {
  
 		public Vector2 p0;
 		public Vector2 p1;
