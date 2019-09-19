@@ -18,7 +18,11 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+    }
+
+    ext {
+        gdxVersion = '1.9.6'
+        box2dVersion = '1.9.6'
     }
 }
 

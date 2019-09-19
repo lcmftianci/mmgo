@@ -42,7 +42,7 @@ public class BgWorldRenderer {
         cam.update();
         batch.setProjectionMatrix(cam.combined);
         renderBackground();
-        renderObjects();
+        //renderObjects();
         renderBezierLine();
     }
 
@@ -83,8 +83,8 @@ public class BgWorldRenderer {
             torchflag = true;
             touchPrePt.x = touchPoint.x;
             touchPrePt.y = touchPoint.y;
-            Log.d(TAG, "torchflag isTouched x:" + touchPoint.x + " y:" + touchPoint.y );
-        }else if(Gdx.input.isTouched()){
+            Log.d(TAG, "============================================================         torchflag isTouched x:" + touchPoint.x + " y:" + touchPoint.y );
+        }else if( torchflag && Gdx.input.isTouched()){
             //this.cam.unproject(touchPoint.set(world.ball.position.x, world.ball.position.y, 0));
 
             this.cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
@@ -93,7 +93,7 @@ public class BgWorldRenderer {
             //shapeRenderer.flush();
 
             shapeRenderer.setColor(this.lineColor);
-            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
             //绘制第一个点
             //shapeRenderer.ellipse(5,5,3,3);
             shapeRenderer.line(touchPrePt.x, touchPrePt.y, touchPoint.x, touchPoint.y);
@@ -104,7 +104,7 @@ public class BgWorldRenderer {
 //            touchPrePt.y = touchPoint.y;
             Log.d(TAG, "isTouched x:" + touchPoint.x + " y:" + touchPoint.y );
             Log.d(TAG, "isTouched pre x:" + touchPrePt.x + " y:" + touchPrePt.y );
-        }else{
+        }else if(torchflag && !Gdx.input.isTouched()){
             torchflag = false;
             Log.d(TAG, "torchflag x:" + touchPrePt.x + " y:" + touchPrePt.y );
         }
