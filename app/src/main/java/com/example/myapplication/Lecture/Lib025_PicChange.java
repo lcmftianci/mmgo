@@ -20,20 +20,17 @@ public class Lib025_PicChange extends ApplicationAdapter{
         @Override
         public boolean fling(float velocityX, float velocityY, int button) {
             // TODO Auto-generated method stub
-/*            if( velocityX > 0 ){
+            if( velocityX > 0 ){
                 System.out.println( "fling right" );
                 stage.getCamera().translate( -stage.getWidth(), 0, 0 );
             }
             else{
                 System.out.println( "fling left" );
                 stage.getCamera().translate( stage.getWidth(), 0, 0 );
-            }*/
+            }
             
             return super.fling(velocityX, velocityY, button);
         }
-
-        
-        
         @Override
         public boolean pan(float x, float y, float deltaX, float deltaY) {
             // TODO Auto-generated method stub
@@ -41,13 +38,9 @@ public class Lib025_PicChange extends ApplicationAdapter{
             if( index>0 && deltaX>0 || index<imgs.length-1 && deltaX<0 ){
                 stage.getCamera().translate( -deltaX, 0, 0 );
                 add = deltaX > 0? -1: 1; 
-            }            
-            
+            }
             return super.pan(x, y, deltaX, deltaY);
         }
-
-
-
         @Override
         public boolean panStop(float x, float y, int pointer, int button) {
             // TODO Auto-generated method stub
@@ -57,12 +50,9 @@ public class Lib025_PicChange extends ApplicationAdapter{
                 stage.getCamera().position.set( index*500+stage.getWidth()/2, stage.getHeight()/2, 0 );                
             }
             return super.panStop(x, y, pointer, button);
-        }    
-        
-        
-        
-        
+        }
     };
+
     GestureDetector detector = new GestureDetector( gestureAdapter );
     
     Stage stage;
