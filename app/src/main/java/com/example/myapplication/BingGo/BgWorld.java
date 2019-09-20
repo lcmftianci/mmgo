@@ -1,12 +1,5 @@
 package com.example.myapplication.BingGo;
 
-import android.util.Log;
-
-import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.math.Bezier;
-import com.badlogic.gdx.math.Vector2;
-import com.example.myapplication.GeniusDirection.CHBezierLine;
-
 public class BgWorld{
 
     private final String TAG = "BgWorld";

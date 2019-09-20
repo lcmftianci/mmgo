@@ -3,7 +3,6 @@ package com.example.myapplication;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.example.myapplication.GeniusDirection.Lib021_Box2d1;
-import com.example.myapplication.GeniusDirection.MyBezier;
 
 import android.os.Bundle;
 import android.util.Log;

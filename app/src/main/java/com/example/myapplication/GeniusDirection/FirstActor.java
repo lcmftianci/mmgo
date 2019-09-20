@@ -1,7 +1,5 @@
 package com.example.myapplication.GeniusDirection;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class FirstActor extends Actor{
