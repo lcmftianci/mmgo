@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.example.myapplication.GeniusDirection.Lib021_Box2d1;
 import com.example.myapplication.GeniusDirection.MyBezier;
 
 import android.os.Bundle;
@@ -19,6 +20,6 @@ public class HelloGameActivity extends AndroidApplication {
 
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         config.useWakelock = true;
-        initialize(new MyBezier.Box2dUser(), config);
+        initialize(new Lib021_Box2d1(), config);
     }
 }

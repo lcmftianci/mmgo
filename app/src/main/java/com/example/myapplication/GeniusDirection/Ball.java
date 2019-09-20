@@ -20,6 +20,7 @@ public class Ball {
     public Sprite ballSprite;//精灵
     public int type;         //小球的类型
     public Ball(World world, int type, Camera camera) {
+
         BodyDef ballBodyDef = new BodyDef();    //生成一个def
         ballBodyDef.type = BodyDef.BodyType.DynamicBody;  //定义成小球是不受控制的动态物体
         CircleShape shape = new CircleShape(); //定义小球的形状
