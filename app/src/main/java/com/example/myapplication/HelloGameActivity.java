@@ -2,7 +2,8 @@ package com.example.myapplication;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.example.myapplication.GeniusDirection.Lib021_Box2d1;
+import com.example.myapplication.Lecture.FreeType;
+import com.example.myapplication.Lecture.Lib021_Box2d1;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,6 @@ public class HelloGameActivity extends AndroidApplication {
 
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         config.useWakelock = true;
-        initialize(new Lib021_Box2d1(), config);
+        initialize(new FreeType(), config);
     }
 }
