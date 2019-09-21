@@ -20,6 +20,7 @@ import com.example.myapplication.mylecture.box2dmodel.MyGdxGameBox2dModel;
 import com.example.myapplication.mylecture.box2duser.MyGdxGameBox2d;
 import com.example.myapplication.mylecture.parallaeffect.MyGdxGameParallaEffect;
 import com.example.myapplication.mylecture.parallax.MyGdxGameParallax;
+import com.example.myapplication.mylecture.shadershockwave.MyGdxGameShader;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -48,7 +49,8 @@ public class HelloGameActivity extends AndroidApplication {
 //                  initialize(new MyGdxGameMulti(), config);
 //                          initialize(new MyGdxGameParallax(), config);
 //            initialize(new MyGdxGameParallaEffect(), config);
-        initialize(new MyGdxGameRunnableAction(), config);
+//        initialize(new MyGdxGameRunnableAction(), config);
+          initialize(new MyGdxGameShader(), config);
     }
 
 }
