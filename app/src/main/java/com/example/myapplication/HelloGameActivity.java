@@ -2,7 +2,11 @@ package com.example.myapplication;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.example.myapplication.BingGo.SuperBall;
+import com.example.myapplication.BirdCore.SuperJumper;
+import com.example.myapplication.Flappy.FlappyBird;
 import com.example.myapplication.flappybird.MainGame;
+import com.example.myapplication.mario.MarioGame;
 import com.example.myapplication.mylecture.AnimationUser;
 import com.example.myapplication.mylecture.LabelStyleUser;
 import com.example.myapplication.mylecture.LecGame;
@@ -50,7 +54,10 @@ public class HelloGameActivity extends AndroidApplication {
 //                          initialize(new MyGdxGameParallax(), config);
 //            initialize(new MyGdxGameParallaEffect(), config);
 //        initialize(new MyGdxGameRunnableAction(), config);
-          initialize(new MyGdxGameShader(), config);
+//          initialize(new MyGdxGameShader(), config);
+                  //initialize(new MainGame(), config);
+        initialize(new SuperBall(), config);
+//        initialize(new MarioGame(), config);
+//        initialize(new SuperJumper(), config);
     }
-
 }

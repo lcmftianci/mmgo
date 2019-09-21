@@ -37,8 +37,8 @@ public class World {
 		public void coin();
 	}
 
-	public static final float WORLD_WIDTH = 10;
-	public static final float WORLD_HEIGHT = 15 * 20;
+	public static final float WORLD_WIDTH = 10;       //10 视野宽度
+	public static final float WORLD_HEIGHT = 15 * 20; //300 视野高度
 	public static final int WORLD_STATE_RUNNING = 0;
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
 	public static final int WORLD_STATE_GAME_OVER = 2;
@@ -75,35 +75,38 @@ public class World {
 	private void generateLevel () {
 		float y = Platform.PLATFORM_HEIGHT / 2;
 		float maxJumpHeight = Bob.BOB_JUMP_VELOCITY * Bob.BOB_JUMP_VELOCITY / (2 * -gravity.y);
+
+		//随机生成画面上目标,一次生产所有精灵，但是只显示部分
 		while (y < WORLD_HEIGHT - WORLD_WIDTH / 2) {
 			int type = rand.nextFloat() > 0.8f ? Platform.PLATFORM_TYPE_MOVING : Platform.PLATFORM_TYPE_STATIC;
 			float x = rand.nextFloat() * (WORLD_WIDTH - Platform.PLATFORM_WIDTH) + Platform.PLATFORM_WIDTH / 2;
-
+			//随机生成平台
 			Platform platform = new Platform(type, x, y);
 			platforms.add(platform);
 
+			//随机生成弹簧，有弹簧的平台不能动所以需要将平台固定
 			if (rand.nextFloat() > 0.9f && type != Platform.PLATFORM_TYPE_MOVING) {
-				Spring spring = new Spring(platform.position.x, platform.position.y + Platform.PLATFORM_HEIGHT / 2
-					+ Spring.SPRING_HEIGHT / 2);
+				//弹簧的位置需要在平台中间
+				Spring spring = new Spring(platform.position.x, platform.position.y + Platform.PLATFORM_HEIGHT / 2 + Spring.SPRING_HEIGHT / 2);
 				springs.add(spring);
 			}
 
+			//随机生成食人虫，但是要求高度大于高度三分之一
 			if (y > WORLD_HEIGHT / 3 && rand.nextFloat() > 0.8f) {
-				Squirrel squirrel = new Squirrel(platform.position.x + rand.nextFloat(), platform.position.y
-					+ Squirrel.SQUIRREL_HEIGHT + rand.nextFloat() * 2);
+				Squirrel squirrel = new Squirrel(platform.position.x + rand.nextFloat(), platform.position.y  + Squirrel.SQUIRREL_HEIGHT + rand.nextFloat() * 2);
 				squirrels.add(squirrel);
 			}
 
+			//随机生成金币
 			if (rand.nextFloat() > 0.6f) {
-				Coin coin = new Coin(platform.position.x + rand.nextFloat(), platform.position.y + Coin.COIN_HEIGHT
-					+ rand.nextFloat() * 3);
+				Coin coin = new Coin(platform.position.x + rand.nextFloat(), platform.position.y + Coin.COIN_HEIGHT + rand.nextFloat() * 3);
 				coins.add(coin);
 			}
 
 			y += (maxJumpHeight - 0.5f);
 			y -= rand.nextFloat() * (maxJumpHeight / 3);
 		}
-
+		//生成堡垒
 		castle = new Castle(WORLD_WIDTH / 2, y);
 	}
 
@@ -218,9 +221,9 @@ public class World {
 			}
 		}
 
-		if(score >= 100){
-			state = WORLD_STATE_NEXT_LEVEL;
-		}
+//		if(score >= 100){
+//			state = WORLD_STATE_NEXT_LEVEL;
+//		}
 	}
 
 	private void checkCastleCollisions () {

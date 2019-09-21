@@ -26,6 +26,8 @@ public class BgWorldRenderer {
 
     public BgWorldRenderer(SpriteBatch batch, BgWorld world) {
         this.world = world;
+
+        //设置相机位置
         this.cam = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
         this.cam.position.set(FRUSTUM_WIDTH / 2, FRUSTUM_HEIGHT / 2, 0);
         this.batch = batch;
@@ -38,7 +40,8 @@ public class BgWorldRenderer {
     }
 
     public void render () {
-        if (world.ball.position.y > cam.position.y) cam.position.y = world.ball.position.y;
+        //这是调整相机照射位置的判断
+        //if (world.ball.position.y > cam.position.y) cam.position.y = world.ball.position.y;
         cam.update();
         batch.setProjectionMatrix(cam.combined);
         renderBackground();
@@ -88,12 +91,10 @@ public class BgWorldRenderer {
             //this.cam.unproject(touchPoint.set(world.ball.position.x, world.ball.position.y, 0));
 
             this.cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-
-
             //shapeRenderer.flush();
 
             shapeRenderer.setColor(this.lineColor);
-            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             //绘制第一个点
             //shapeRenderer.ellipse(5,5,3,3);
             shapeRenderer.line(touchPrePt.x, touchPrePt.y, touchPoint.x, touchPoint.y);

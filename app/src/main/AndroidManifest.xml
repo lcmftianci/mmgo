@@ -20,6 +20,9 @@
             </intent-filter>
         </activity>
 
+        <!--<activity android:name=".HelloGameActivity"-->
+            <!--android:screenOrientation="landscape"-->
+            <!--android:configChanges="keyboard|keyboardHidden|orientation|screenSize"></activity>-->
         <activity android:name=".HelloGameActivity"></activity>
     </application>
 

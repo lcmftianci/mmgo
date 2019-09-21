@@ -41,30 +41,34 @@ public class WorldRenderer {
 		this.batch = batch;
 	}
 
+	//渲染所有目标
 	public void render () {
+		//如果精灵的高度岛屿相机高度，相机高度进行跟进
 		if (world.bob.position.y > cam.position.y) cam.position.y = world.bob.position.y;
-		cam.update();
-		batch.setProjectionMatrix(cam.combined);
-		renderBackground();
-		renderObjects();
+		cam.update();//并更新相机
+		batch.setProjectionMatrix(cam.combined);//重新合并相机
+
+		renderBackground();						//渲染背景
+		renderObjects();						//渲染目标
 	}
 
 	public void renderBackground () {
 		batch.disableBlending();
 		batch.begin();
-		batch.draw(Assets.backgroundRegion, cam.position.x - FRUSTUM_WIDTH / 2, cam.position.y - FRUSTUM_HEIGHT / 2, FRUSTUM_WIDTH,
-			FRUSTUM_HEIGHT);
+		//因为camera的坐标在中间，需要渲染整个北京，所以讲渲染其实位置向下一点
+		batch.draw(Assets.backgroundRegion, cam.position.x - FRUSTUM_WIDTH / 2, cam.position.y - FRUSTUM_HEIGHT / 2, FRUSTUM_WIDTH,	FRUSTUM_HEIGHT);
 		batch.end();
 	}
 
+	//渲染所有目标
 	public void renderObjects () {
 		batch.enableBlending();
 		batch.begin();
-		renderBob();
-		renderPlatforms();
-		renderItems();
-		renderSquirrels();
-		renderCastle();
+		renderBob();			//渲染主人公
+		renderPlatforms();	    //渲染平台
+		renderItems();          //渲染弹簧和金币，这两个目标是随机生成的
+		renderSquirrels();      //渲染食人虫，目标随机生成
+		renderCastle();         //渲染城堡
 		batch.end();
 	}
 
@@ -88,7 +92,7 @@ public class WorldRenderer {
 		else
 			batch.draw(keyFrame, world.bob.position.x - 0.5f, world.bob.position.y - 0.5f, side * 1, 1);
 
-		Log.d(TAG, "x:" + world.bob.position.x + " y:" + world.bob.position.y);
+		Log.d(TAG, "renderBob： x:" + world.bob.position.x + " y:" + world.bob.position.y);
 	}
 
 	private void renderPlatforms () {
@@ -132,8 +136,9 @@ public class WorldRenderer {
 		}
 	}
 
-	private void renderCastle () {
+	private void renderCastle() {
 		Castle castle = world.castle;
 		batch.draw(Assets.castle, castle.position.x - 1, castle.position.y - 1, 2, 2);
+		Log.d(TAG, "renderCastle： x:" + castle.position.x + " y:" + castle.position.y);
 	}
 }
