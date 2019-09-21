@@ -6,6 +6,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -13,12 +15,12 @@ public class Lib001_Font extends ApplicationAdapter{
 
     BitmapFont font;
     SpriteBatch batch;
-    
+
     @Override
     public void create() {
         // TODO Auto-generated method stub
         batch = new SpriteBatch();
-        font = new BitmapFont( Gdx.files.internal( "font/test.fnt" ), Gdx.files.internal( "font/test.png" ), false );
+        font = new BitmapFont( Gdx.files.internal( "font/bitmap_font.fnt" ), Gdx.files.internal( "font/bitmap_font.png" ), false );
         font.setColor(Color.BLUE);
     }
 

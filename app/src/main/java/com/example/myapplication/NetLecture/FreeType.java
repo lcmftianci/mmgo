@@ -18,7 +18,7 @@ import javax.microedition.khronos.opengles.GL10;
 public class FreeType implements ApplicationListener{
 
     BitmapFont[] font;
-    //FreeTypeBitmapFontData fontData;
+    FreeTypeFontGenerator.FreeTypeBitmapFontData fontData;
     FreeTypeFontGenerator generator;    
     SpriteBatch batch;
     
@@ -30,12 +30,12 @@ public class FreeType implements ApplicationListener{
         Color[] colors = { Color.RED, Color.BLUE, Color.GREEN };
         for( int i=0; i<3; ++i ){
             generator = new FreeTypeFontGenerator( Gdx.files.internal( "type/" + "simhei" + ".ttf" ) );
-            font[i] = generator.generateFont( 25, FreeTypeFontGenerator.DEFAULT_CHARS+"今天是个好日子，大家心情都很", false );
+            font[i] = generator.generateFont( 25, FreeTypeFontGenerator.DEFAULT_CHARS + "今天是个好日子，大家心情都很", false );
             font[i].setColor( colors[i] );
             generator.dispose();
         }
-
-        //fontData = generator.generateData( 25, FreeTypeFontGenerator.DEFAULT_CHARS+"今天是个好日子，大家心情都很", false );
+        //font[0] = new BitmapFont(fontData,)
+        fontData = generator.generateData( 25, FreeTypeFontGenerator.DEFAULT_CHARS + "今天是个好日子，大家心情都很", false );
     }
 
     @Override
