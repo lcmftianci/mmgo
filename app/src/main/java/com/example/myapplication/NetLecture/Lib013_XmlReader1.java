@@ -1,7 +1,6 @@
-package com.example.myapplication.Lecture;
+package com.example.myapplication.NetLecture;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringWriter;
 
 import com.badlogic.gdx.ApplicationAdapter;

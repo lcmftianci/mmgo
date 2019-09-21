@@ -1,8 +1,9 @@
-package com.example.myapplication.Lecture;
+package com.example.myapplication.NetLecture;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 //import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -18,6 +19,7 @@ public class Lib001_Font extends ApplicationAdapter{
         // TODO Auto-generated method stub
         batch = new SpriteBatch();
         font = new BitmapFont( Gdx.files.internal( "font/test.fnt" ), Gdx.files.internal( "font/test.png" ), false );
+        font.setColor(Color.BLUE);
     }
 
     @Override

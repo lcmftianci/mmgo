@@ -1,4 +1,4 @@
-package com.example.myapplication.Lecture;
+package com.example.myapplication.NetLecture;
 
 import android.util.Log;
 
