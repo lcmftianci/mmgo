@@ -4,7 +4,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.example.myapplication.tzfe.MainGame;
+//import com.example.myapplication.tzfe.MainGame;
+import com.example.myapplication.tzfe.TZFEMainGame;
 import com.example.myapplication.tzfe.tzfeactor.base.BaseGroup;
 import com.example.myapplication.tzfe.tzferes.Res;
 
@@ -25,7 +26,7 @@ public class BottomGroup extends BaseGroup {
     /** 退出按钮 */
     private Button exitButton;
 
-	public BottomGroup(MainGame mainGame) {
+	public BottomGroup(TZFEMainGame mainGame) {
 		super(mainGame);
 		init();
 	}

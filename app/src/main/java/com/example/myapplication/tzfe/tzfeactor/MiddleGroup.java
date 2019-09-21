@@ -8,7 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.ScaleToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
-import com.example.myapplication.tzfe.MainGame;
+//import com.example.myapplication.tzfe.MainGame;
+import com.example.myapplication.tzfe.TZFEMainGame;
 import com.example.myapplication.tzfe.tzfeactor.base.BaseGroup;
 import com.example.myapplication.tzfe.tzfedata.IDataModel;
 import com.example.myapplication.tzfe.tzferes.Res;
@@ -47,7 +48,7 @@ public class MiddleGroup extends BaseGroup {
     /** 数据模型（封装了核心的数据与逻辑） */
     private IDataModel dataModel;
     
-    public MiddleGroup(MainGame mainGame) {
+    public MiddleGroup(TZFEMainGame mainGame) {
         super(mainGame);
         init();
     }

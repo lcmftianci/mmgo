@@ -4,7 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.example.myapplication.tzfe.MainGame;
+//import com.example.myapplication.tzfe.MainGame;
+import com.example.myapplication.tzfe.TZFEMainGame;
 import com.example.myapplication.tzfe.tzferes.Res;
 import com.example.myapplication.tzfe.tzfestage.ExitConfirmStage;
 import com.example.myapplication.tzfe.tzfestage.GameOverStage;
@@ -24,7 +25,7 @@ import com.example.myapplication.tzfe.tzfestage.HelpStage;
  */
 public class GameScreen extends ScreenAdapter {
 
-    private MainGame mainGame;
+    private TZFEMainGame mainGame;
 
     /** 1. 主游戏舞台 */
     private GameStage gameStage;
@@ -38,7 +39,7 @@ public class GameScreen extends ScreenAdapter {
     /** 4. 退出确认舞台 */
     private ExitConfirmStage exitConfirmStage;
 
-    public GameScreen(MainGame mainGame) {
+    public GameScreen(TZFEMainGame mainGame) {
         this.mainGame = mainGame;
         init();
     }

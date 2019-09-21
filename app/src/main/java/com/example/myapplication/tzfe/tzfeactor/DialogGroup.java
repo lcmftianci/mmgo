@@ -6,7 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.example.myapplication.tzfe.MainGame;
+//import com.example.myapplication.tzfe.MainGame;
+import com.example.myapplication.tzfe.TZFEMainGame;
 import com.example.myapplication.tzfe.tzfeactor.base.BaseGroup;
 import com.example.myapplication.tzfe.tzferes.Res;
 //import cn.appkf.game2048.MainGame;
@@ -41,7 +42,7 @@ public class DialogGroup extends BaseGroup {
     /** 取消按钮 */
     private Button cancelButton;
 
-    public DialogGroup(MainGame mainGame, String message) {
+    public DialogGroup(TZFEMainGame mainGame, String message) {
         super(mainGame);
         setWidth(Res.DIALOG_WIDTH);
         init(message);

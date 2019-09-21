@@ -3,7 +3,8 @@ package com.example.myapplication.tzfe.tzfeactor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.example.myapplication.tzfe.MainGame;
+//import com.example.myapplication.tzfe.MainGame;
+import com.example.myapplication.tzfe.TZFEMainGame;
 import com.example.myapplication.tzfe.tzfeactor.base.BaseGroup;
 import com.example.myapplication.tzfe.tzferes.Res;
 //import cn.appkf.game2048.MainGame;
@@ -26,7 +27,7 @@ public class CardGroup extends BaseGroup {
 	/** 卡片当前显示的数字 */
 	private int num;
 
-	public CardGroup(MainGame mainGame) {
+	public CardGroup(TZFEMainGame mainGame) {
 		super(mainGame);
 		init();
 	}

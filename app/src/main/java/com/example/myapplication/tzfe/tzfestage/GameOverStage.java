@@ -10,7 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.example.myapplication.tzfe.MainGame;
+//import com.example.myapplication.tzfe.MainGame;
+import com.example.myapplication.tzfe.TZFEMainGame;
 import com.example.myapplication.tzfe.tzferes.Res;
 import com.example.myapplication.tzfe.tzfestage.base.BaseStage;
 //import cn.appkf.game2048.MainGame;
@@ -42,7 +43,7 @@ public class GameOverStage extends BaseStage {
     /** 再来一局按钮 */
     private Button againButton;
 
-    public GameOverStage(MainGame mainGame, Viewport viewport) {
+    public GameOverStage(TZFEMainGame mainGame, Viewport viewport) {
         super(mainGame, viewport);
         init();
     }

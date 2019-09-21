@@ -1,7 +1,8 @@
 package com.example.myapplication.tzfe.tzfeactor;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.example.myapplication.tzfe.MainGame;
+//import com.example.myapplication.tzfe.MainGame;
+import com.example.myapplication.tzfe.TZFEMainGame;
 import com.example.myapplication.tzfe.tzfeactor.base.BaseGroup;
 import com.example.myapplication.tzfe.tzferes.Res;
 //import cn.appkf.game2048.MainGame;
@@ -24,7 +25,7 @@ public class TopGroup extends BaseGroup {
     /** 当前分数 */
     private ScoreGroup currScoreGroup;
 
-    public TopGroup(MainGame mainGame) {
+    public TopGroup(TZFEMainGame mainGame) {
         super(mainGame);
         init();
     }

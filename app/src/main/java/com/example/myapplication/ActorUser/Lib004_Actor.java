@@ -1,4 +1,6 @@
 package com.example.myapplication.ActorUser;
+import android.util.Log;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -17,7 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import javax.microedition.khronos.opengles.GL10;
 
 public class Lib004_Actor extends ApplicationAdapter{
-
+private final static String TAG = "Lib004_Actor";
     BitmapFont font;
     Stage stage;
     MyActor actor;
@@ -41,6 +43,7 @@ public class Lib004_Actor extends ApplicationAdapter{
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 // TODO Auto-generated method stub
                 count++;
+                Log.d(TAG, "touch : " + count);
                 return true;
             }            
         });

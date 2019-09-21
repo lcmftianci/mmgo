@@ -6,7 +6,8 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.example.myapplication.tzfe.MainGame;
+//import com.example.myapplication.tzfe.MainGame;
+import com.example.myapplication.tzfe.TZFEMainGame;
 import com.example.myapplication.tzfe.tzfeactor.BottomGroup;
 import com.example.myapplication.tzfe.tzfeactor.MiddleGroup;
 import com.example.myapplication.tzfe.tzfeactor.TopGroup;
@@ -35,7 +36,7 @@ public class GameStage extends BaseStage {
     /** 底部演员组（包括 游戏帮助 和 退出游戏 按钮） */
     private BottomGroup bottomGroup;
 
-    public GameStage(MainGame mainGame, Viewport viewport) {
+    public GameStage(TZFEMainGame mainGame, Viewport viewport) {
         super(mainGame, viewport);
         init();
     }

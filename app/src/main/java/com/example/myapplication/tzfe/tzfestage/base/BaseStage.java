@@ -2,7 +2,8 @@ package com.example.myapplication.tzfe.tzfestage.base;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.example.myapplication.tzfe.MainGame;
+import com.example.myapplication.tzfe.TZFEMainGame;
+//import com.example.myapplication.tzfe.MainGame;
 //import cn.appkf.game2048.MainGame;
 
 /**
@@ -12,21 +13,21 @@ import com.example.myapplication.tzfe.MainGame;
  */
 public abstract class BaseStage extends Stage {
 
-    private MainGame mainGame;
+    private TZFEMainGame mainGame;
 
     /** 舞台是否可见（是否更新和绘制） */
     private boolean visible = true;
 
-    public BaseStage(MainGame mainGame, Viewport viewport) {
+    public BaseStage(TZFEMainGame mainGame, Viewport viewport) {
         super(viewport);
         this.mainGame = mainGame;
     }
 
-    public MainGame getMainGame() {
+    public TZFEMainGame getMainGame() {
         return mainGame;
     }
 
-    public void setMainGame(MainGame mainGame) {
+    public void setMainGame(TZFEMainGame mainGame) {
         this.mainGame = mainGame;
     }
 

@@ -10,7 +10,7 @@ class MyActor extends Actor {
     TextureRegion region;
     
     public MyActor(){
-        Texture texture = new Texture( Gdx.files.internal( "data/badlogic.jpg" ) );
+        Texture texture = new Texture( Gdx.files.internal( "badlogic.jpg" ) );
         region = new TextureRegion( texture );
         setSize( region.getRegionWidth()/2, region.getRegionHeight()/2 );
         setOrigin( getWidth()/2, getHeight()/2 );

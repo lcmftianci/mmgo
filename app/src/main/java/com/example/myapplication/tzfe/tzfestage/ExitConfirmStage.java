@@ -8,7 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.example.myapplication.tzfe.MainGame;
+//import com.example.myapplication.tzfe.MainGame;
+import com.example.myapplication.tzfe.TZFEMainGame;
 import com.example.myapplication.tzfe.tzfeactor.DialogGroup;
 import com.example.myapplication.tzfe.tzferes.Res;
 import com.example.myapplication.tzfe.tzfestage.base.BaseStage;
@@ -33,7 +34,7 @@ public class ExitConfirmStage extends BaseStage {
 	/** 确认对话框 */
 	private DialogGroup dialogGroup;
 
-    public ExitConfirmStage(MainGame mainGame, Viewport viewport) {
+    public ExitConfirmStage(TZFEMainGame mainGame, Viewport viewport) {
         super(mainGame, viewport);
         init();
     }

@@ -3,7 +3,8 @@ package com.example.myapplication.tzfe.tzfeactor;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.example.myapplication.tzfe.MainGame;
+//import com.example.myapplication.tzfe.MainGame;
+import com.example.myapplication.tzfe.TZFEMainGame;
 import com.example.myapplication.tzfe.tzfeactor.base.BaseGroup;
 //import cn.appkf.game2048.MainGame;
 //import cn.appkf.game2048.actor.base.BaseGroup;
@@ -24,7 +25,7 @@ public class ScoreGroup extends BaseGroup {
     /** 当前显示的分数 */
     private int score = 99999;
 
-    public ScoreGroup(MainGame mainGame, TextureRegion bgRegion) {
+    public ScoreGroup(TZFEMainGame mainGame, TextureRegion bgRegion) {
         super(mainGame);
         init(bgRegion);
     }

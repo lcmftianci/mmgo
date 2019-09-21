@@ -17,7 +17,7 @@ import com.example.myapplication.tzfe.tzfescreen.GameScreen;
  *
  * @author xietansheng
  */
-public class MainGame extends Game {
+public class TZFEMainGame extends Game {
 
     public static final String TAG = "Game2048";
 

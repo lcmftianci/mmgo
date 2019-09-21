@@ -1,7 +1,8 @@
 package com.example.myapplication.tzfe.tzfeactor.base;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.example.myapplication.tzfe.MainGame;
+import com.example.myapplication.tzfe.TZFEMainGame;
+//import com.example.myapplication.tzfe.MainGame;
 //import cn.appkf.game2048.MainGame;
 
 /**
@@ -11,17 +12,17 @@ import com.example.myapplication.tzfe.MainGame;
  */
 public abstract class BaseGroup extends Group {
 
-    private MainGame mainGame;
+    private TZFEMainGame mainGame;
 
-    public BaseGroup(MainGame mainGame) {
+    public BaseGroup(TZFEMainGame mainGame) {
         this.mainGame = mainGame;
     }
 
-    public MainGame getMainGame() {
+    public TZFEMainGame getMainGame() {
         return mainGame;
     }
 
-    public void setMainGame(MainGame mainGame) {
+    public void setMainGame(TZFEMainGame mainGame) {
         this.mainGame = mainGame;
     }
 }

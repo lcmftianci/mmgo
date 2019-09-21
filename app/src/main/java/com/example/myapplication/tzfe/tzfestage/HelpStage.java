@@ -7,7 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.example.myapplication.tzfe.MainGame;
+//import com.example.myapplication.tzfe.MainGame;
+import com.example.myapplication.tzfe.TZFEMainGame;
 import com.example.myapplication.tzfe.tzferes.Res;
 import com.example.myapplication.tzfe.tzfestage.base.BaseStage;
 //import cn.appkf.game2048.MainGame;
@@ -30,7 +31,7 @@ public class HelpStage extends BaseStage {
     /** 帮助内容图片 */
     private Image helpContentImage;
 
-    public HelpStage(MainGame mainGame, Viewport viewport) {
+    public HelpStage(TZFEMainGame mainGame, Viewport viewport) {
         super(mainGame, viewport);
         init();
     }
