@@ -57,7 +57,7 @@ public class HelloGameActivity extends AndroidApplication {
 //        initialize(new MyGdxGameBox2dLight(), config);
 //        initialize(new MyGdxGameMulti(), config);
 //        initialize(new MyGdxGameParallax(), config);
-//        initialize(new MyGdxGameParallaEffect(), config);
+        initialize(new MyGdxGameParallaEffect(), config);
 //        initialize(new MyGdxGameRunnableAction(), config);
 //        initialize(new MyGdxGameShader(), config);   //Shader 例子
 //        initialize(new MainGame(), config);      //flappy bird 例子
@@ -68,6 +68,7 @@ public class HelloGameActivity extends AndroidApplication {
 //        initialize(new TZFEMainGame(), config);       //2048
 //        initialize(new TenWaterGame(), config);       //10滴水游戏
 //        initialize(new SnakeGame(), config);       //贪吃蛇
-        initialize(new Lib004_Actor(), config);       //Actor
+//        initialize(new Lib004_Actor(), config);       //Actor
+//        initialize(new Lib004_Actor(), config);       //Actor
     }
 }

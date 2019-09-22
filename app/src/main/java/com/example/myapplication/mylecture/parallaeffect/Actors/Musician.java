@@ -43,6 +43,4 @@ public class Musician extends Image {
         effect.setPosition(this.getWidth()+this.getX(),this.getHeight()+this.getY());
 
     }
-
-
 }
