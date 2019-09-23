@@ -11,7 +11,8 @@ public class AdvanceGame implements ApplicationListener {
     @Override
     public void create() {
         asserts = new AdvanceAsserts();
-        mainGameStage = new MainGameStage(asserts);
+        //mainGameStage = new MainGameStage(asserts);
+        mainGameStage = new MainGameStage();
         Gdx.input.setInputProcessor(mainGameStage);
     }
 

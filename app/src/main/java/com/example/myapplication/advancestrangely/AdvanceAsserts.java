@@ -13,12 +13,13 @@ public class AdvanceAsserts {
     TextureRegion regionBundle;
     TextureRegion regionReverseBundle;
     public AdvanceAsserts(){
-        init();
+        uniinit();
     }
 
-    public void init(){
+    public void uniinit(){
         texture = new Texture(Gdx.files.internal("atlas/images.png"));
-        regionBack = new TextureRegion(texture, 0,0,481,1000);
+        regionBack = new TextureRegion(texture, 1,1,480,1000);
+
         regionFloor = new TextureRegion(texture, 481,842,964,1001);
 
         regionad = new TextureRegion(texture, 817,618, 864,711);
