@@ -40,6 +40,6 @@ public class Resources {
     }
     
     public class GameMusic {
-        public static final String bgMusic = "bgm.wav";
+        public static final String bgMusic = "water/bgm.wav";
     }
 }

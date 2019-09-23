@@ -20,7 +20,7 @@ public class Floor extends Image {
     private World world;
 
     public Floor(World aWorld, float pos_x, float pos_y, float aWidth, float aHeight, float angle){
-        super(new Texture(Gdx.files.internal("wood.jpg")));
+        super(new Texture(Gdx.files.internal("mylecture/wood.jpg")));
         this.setSize(aWidth,aHeight);
         this.setOrigin(this.getWidth()/2,this.getHeight()/2);
         this.rotateBy(angle);

@@ -1,0 +1,30 @@
+package com.example.myapplication.advancestrangely;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+public class AdvanceAsserts {
+
+    Texture texture;
+    TextureRegion regionBack;
+    TextureRegion regionFloor;
+    TextureRegion regionad;
+    TextureRegion regionBundle;
+    TextureRegion regionReverseBundle;
+    public AdvanceAsserts(){
+        init();
+    }
+
+    public void init(){
+        texture = new Texture(Gdx.files.internal("atlas/images.png"));
+        regionBack = new TextureRegion(texture, 0,0,481,1000);
+        regionFloor = new TextureRegion(texture, 481,842,964,1001);
+
+        regionad = new TextureRegion(texture, 817,618, 864,711);
+
+        regionBundle = new TextureRegion(texture, 482, 263, 566,666);
+        regionReverseBundle = new TextureRegion(texture, 482, 263, 566, 666);
+        regionReverseBundle.flip(true, true);
+    }
+}

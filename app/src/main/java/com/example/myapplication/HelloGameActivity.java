@@ -8,6 +8,7 @@ import com.example.myapplication.BirdCore.SuperJumper;
 import com.example.myapplication.Flappy.FlappyBird;
 import com.example.myapplication.GeniusDirection.MyAdapter;
 import com.example.myapplication.Snake.SnakeGame;
+import com.example.myapplication.advancestrangely.AdvanceGame;
 import com.example.myapplication.flappybird.MainGame;
 import com.example.myapplication.mario.MarioGame;
 import com.example.myapplication.mylecture.AnimationUser;
@@ -28,6 +29,7 @@ import com.example.myapplication.mylecture.box2duser.MyGdxGameBox2d;
 import com.example.myapplication.mylecture.parallaeffect.MyGdxGameParallaEffect;
 import com.example.myapplication.mylecture.parallax.MyGdxGameParallax;
 import com.example.myapplication.mylecture.shadershockwave.MyGdxGameShader;
+import com.example.myapplication.mylecture.stageandactor.GamePad;
 import com.example.myapplication.tenwater.TenWaterGame;
 import com.example.myapplication.tzfe.TZFEMainGame;
 
@@ -57,7 +59,7 @@ public class HelloGameActivity extends AndroidApplication {
 //        initialize(new MyGdxGameBox2dLight(), config);
 //        initialize(new MyGdxGameMulti(), config);
 //        initialize(new MyGdxGameParallax(), config);
-        initialize(new MyGdxGameParallaEffect(), config);
+//        initialize(new MyGdxGameParallaEffect(), config);
 //        initialize(new MyGdxGameRunnableAction(), config);
 //        initialize(new MyGdxGameShader(), config);   //Shader 例子
 //        initialize(new MainGame(), config);      //flappy bird 例子
@@ -70,5 +72,9 @@ public class HelloGameActivity extends AndroidApplication {
 //        initialize(new SnakeGame(), config);       //贪吃蛇
 //        initialize(new Lib004_Actor(), config);       //Actor
 //        initialize(new Lib004_Actor(), config);       //Actor
+
+//        initialize(new GamePad(), config); //虚拟摇杆
+
+        initialize(new AdvanceGame(), config); //勇往直前
     }
 }
