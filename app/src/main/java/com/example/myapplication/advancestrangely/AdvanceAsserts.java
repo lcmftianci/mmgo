@@ -22,7 +22,7 @@ public class AdvanceAsserts {
 
         regionFloor = new TextureRegion(texture, 481,842,480,160);
 
-        regionad = new TextureRegion(texture, 817,618, 864,711);
+        regionad = new TextureRegion(texture, 817,618, 41,53);
 
         regionBundle = new TextureRegion(texture, 482, 263, 566,666);
         regionReverseBundle = new TextureRegion(texture, 482, 263, 566, 666);
