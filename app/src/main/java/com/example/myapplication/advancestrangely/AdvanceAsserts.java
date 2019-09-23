@@ -20,7 +20,7 @@ public class AdvanceAsserts {
         texture = new Texture(Gdx.files.internal("atlas/images.png"));
         regionBack = new TextureRegion(texture, 1,1,480,1000);
 
-        regionFloor = new TextureRegion(texture, 481,842,964,1001);
+        regionFloor = new TextureRegion(texture, 481,842,480,160);
 
         regionad = new TextureRegion(texture, 817,618, 864,711);
 
