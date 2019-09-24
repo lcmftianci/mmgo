@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.example.myapplication.advanceactor.Bomb;
 
 public class MainGameStage extends Stage {
 
@@ -17,6 +18,7 @@ public class MainGameStage extends Stage {
     Image floor;
     Texture texture;
     TextureRegion regionBack;
+    Bomb bomb;
 
     public MainGameStage() {
         super();
@@ -34,6 +36,7 @@ public class MainGameStage extends Stage {
         this.asserts = asserts;
         background = new Image(asserts.regionBack);
         floor = new Image(asserts.regionFloor);
+        bomb = new Bomb();
 
         floor.setWidth(Gdx.graphics.getWidth());
         floor.setHeight(Gdx.graphics.getHeight()/4);
@@ -45,6 +48,7 @@ public class MainGameStage extends Stage {
         floor.setPosition(0,0);
         this.addActor(background);
         this.addActor(floor);
+        this.addActor(bomb);
     }
 
     public void update(){

@@ -4,6 +4,7 @@ import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.example.myapplication.advancestrangely.ActionUser;
 import com.example.myapplication.advancestrangely.AdvanceGame;
+import com.example.myapplication.advancestrangely.FirstGame;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -48,6 +49,7 @@ public class HelloGameActivity extends AndroidApplication {
 //        initialize(new GamePad(), config); //虚拟摇杆
 
         initialize(new AdvanceGame(), config); //勇往直前
-//        initialize(new ActionUser(), config); //勇往直前
+//       initialize(new ActionUser(), config); //勇往直前
+        //initialize(new FirstGame(), config); //勇往直前
     }
 }
