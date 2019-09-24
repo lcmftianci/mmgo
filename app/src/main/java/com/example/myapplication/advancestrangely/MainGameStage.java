@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.example.myapplication.advanceactor.Ball;
 import com.example.myapplication.advanceactor.Bomb;
 
 public class MainGameStage extends Stage {
@@ -19,6 +20,9 @@ public class MainGameStage extends Stage {
     Texture texture;
     TextureRegion regionBack;
     Bomb bomb;
+    Ball ball;
+    float[] ballxy;
+    boolean bDrawBall;
 
     public MainGameStage() {
         super();
@@ -37,6 +41,9 @@ public class MainGameStage extends Stage {
         background = new Image(asserts.regionBack);
         floor = new Image(asserts.regionFloor);
         bomb = new Bomb();
+        ball = new Ball();
+
+        bDrawBall = false;
 
         floor.setWidth(Gdx.graphics.getWidth());
         floor.setHeight(Gdx.graphics.getHeight()/4);
@@ -49,9 +56,26 @@ public class MainGameStage extends Stage {
         this.addActor(background);
         this.addActor(floor);
         this.addActor(bomb);
+        this.addActor(ball);
+    }
+
+    public boolean changeBall(){
+        if(bomb.getState()&&bomb.getTouchState()){
+            ballxy = bomb.AlreadyGet();
+            bomb.setBubble(true);
+            bDrawBall = true;
+            return true;
+        }
+        return false;
     }
 
     public void update(){
         //batch.draw(asserts.regionBack, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        changeBall();
+
+        if(bDrawBall)
+            ball.update((int)ballxy[0], (int)ballxy[1]);
+        bomb.setBubble(false);
     }
 }

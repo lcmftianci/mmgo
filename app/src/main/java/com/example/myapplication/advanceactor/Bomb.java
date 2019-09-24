@@ -30,6 +30,14 @@ public class Bomb extends Actor {
     SpriteBatch spriteBatch;
     Pixmap pixmap;
 
+    float mWeight;
+    boolean bTouch;
+    boolean bCanGet;
+    float mTouchX;
+    float mTouchY;
+
+    boolean bBubble;
+
     public Bomb(){
         textureBomb = new Texture(Gdx.files.internal("bomb/bomb.jpg"));
         spriteBomb = new Sprite(textureBomb, 138, 158, 306 - 138,378 - 157);
@@ -44,13 +52,25 @@ public class Bomb extends Actor {
         bs = new BallSpring();
         result = new Texture(pixmap);
         spriteBatch = new SpriteBatch();
+
+        mTouchX = 0;
+        mTouchY = 0;
+        bTouch = false;
+        bCanGet = false;
+        bBubble = false;
+        mWeight = 0;
     }
 
     //更改大炮的方向
     public void update(){
+        if(bBubble)
+            return;
         if(Gdx.input.isTouched()){
             int touchX = Gdx.input.getX();
             int touchY =  Gdx.graphics.getHeight() - Gdx.input.getY();
+
+            mTouchX = touchX;
+            mTouchY = touchY;
 
             if(touchX > Gdx.graphics.getWidth()/2){
                 int touchCutX = touchX - Gdx.graphics.getWidth()/2;
@@ -80,7 +100,8 @@ public class Bomb extends Actor {
                 {
                     if(point.x%6 == 0 || point.x%7 == 0 || point.x%8 == 0 || point.x%9 == 0)
                         continue;
-                    pixmap.drawPixel(point.x, point.y);
+                    //pixmap.drawPixel(point.x, point.y);
+                    pixmap.drawCircle(point.x, point.y, 2);
                 }
             }else if(touchX < Gdx.graphics.getWidth()/2){
                 weight = bs.Yaxb(0, 0, Gdx.graphics.getWidth() / 2 - touchX, touchY);
@@ -88,17 +109,37 @@ public class Bomb extends Actor {
                 {
                     if(point.x%6 == 0 || point.x%7 == 0 || point.x%8 == 0 || point.x%9 == 0)
                         continue;
-                    pixmap.drawPixel(point.x, point.y);
+                    //pixmap.drawPixel(point.x, point.y);
+                    pixmap.drawCircle(point.x, point.y, 2);
                 }
             }
-
+            mWeight = weight;
             result.draw(pixmap,0,0);
-        }
-        else{
+            bTouch = true;
+        } else{
             pixmap.dispose();
             pixmap = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGBA8888);
             result.draw(pixmap,0,0);
+            bCanGet = true;
         }
+    }
+
+    public boolean getState(){
+        return bCanGet;
+    }
+
+    public boolean getTouchState(){
+        return bTouch;
+    }
+
+    public void setBubble(boolean bBubble){
+        this.bBubble = bBubble;
+    }
+
+    public float[] AlreadyGet(){
+        bCanGet = false;
+        bTouch = false;
+        return new float[]{mTouchX,mTouchY,mWeight};
     }
 
     @Override

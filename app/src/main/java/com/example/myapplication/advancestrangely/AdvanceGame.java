@@ -132,6 +132,7 @@ public class AdvanceGame implements ApplicationListener {
 //        font.draw(batch, "touch me", 100, 100);
 //        batch.end();
 
+        mainGameStage.update();
         mainGameStage.act();
         mainGameStage.draw();
     }
