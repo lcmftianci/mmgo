@@ -2,37 +2,8 @@ package com.example.myapplication;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.example.myapplication.ActorUser.Lib004_Actor;
-import com.example.myapplication.BingGo.SuperBall;
-import com.example.myapplication.BirdCore.SuperJumper;
-import com.example.myapplication.Flappy.FlappyBird;
-import com.example.myapplication.GeniusDirection.MyAdapter;
-import com.example.myapplication.Snake.SnakeGame;
 import com.example.myapplication.advancestrangely.ActionUser;
 import com.example.myapplication.advancestrangely.AdvanceGame;
-import com.example.myapplication.flappybird.MainGame;
-import com.example.myapplication.mario.MarioGame;
-import com.example.myapplication.mylecture.AnimationUser;
-import com.example.myapplication.mylecture.LabelStyleUser;
-import com.example.myapplication.mylecture.LecGame;
-import com.example.myapplication.mylecture.LibgdxSpineEffectView;
-import com.example.myapplication.mylecture.MyGdxGameAction;
-import com.example.myapplication.mylecture.MyGdxGameButton;
-import com.example.myapplication.mylecture.MyGdxGameCamera;
-import com.example.myapplication.mylecture.MyGdxGameImage;
-import com.example.myapplication.mylecture.MyGdxGameLabel;
-import com.example.myapplication.mylecture.MyGdxGameMulti;
-import com.example.myapplication.mylecture.MyGdxGameRunnableAction;
-import com.example.myapplication.mylecture.MyGdxGameScreen;
-import com.example.myapplication.mylecture.box2dlightbasic.MyGdxGameBox2dLight;
-import com.example.myapplication.mylecture.box2dmodel.MyGdxGameBox2dModel;
-import com.example.myapplication.mylecture.box2duser.MyGdxGameBox2d;
-import com.example.myapplication.mylecture.parallaeffect.MyGdxGameParallaEffect;
-import com.example.myapplication.mylecture.parallax.MyGdxGameParallax;
-import com.example.myapplication.mylecture.shadershockwave.MyGdxGameShader;
-import com.example.myapplication.mylecture.stageandactor.GamePad;
-import com.example.myapplication.tenwater.TenWaterGame;
-import com.example.myapplication.tzfe.TZFEMainGame;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -76,7 +47,7 @@ public class HelloGameActivity extends AndroidApplication {
 
 //        initialize(new GamePad(), config); //虚拟摇杆
 
-//        initialize(new AdvanceGame(), config); //勇往直前
-        initialize(new ActionUser(), config); //勇往直前
+        initialize(new AdvanceGame(), config); //勇往直前
+//        initialize(new ActionUser(), config); //勇往直前
     }
 }
