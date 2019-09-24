@@ -8,6 +8,7 @@ import com.example.myapplication.BirdCore.SuperJumper;
 import com.example.myapplication.Flappy.FlappyBird;
 import com.example.myapplication.GeniusDirection.MyAdapter;
 import com.example.myapplication.Snake.SnakeGame;
+import com.example.myapplication.advancestrangely.ActionUser;
 import com.example.myapplication.advancestrangely.AdvanceGame;
 import com.example.myapplication.flappybird.MainGame;
 import com.example.myapplication.mario.MarioGame;
@@ -75,6 +76,7 @@ public class HelloGameActivity extends AndroidApplication {
 
 //        initialize(new GamePad(), config); //虚拟摇杆
 
-        initialize(new AdvanceGame(), config); //勇往直前
+//        initialize(new AdvanceGame(), config); //勇往直前
+        initialize(new ActionUser(), config); //勇往直前
     }
 }

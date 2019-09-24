@@ -20,6 +20,7 @@ public class AdvanceGame implements ApplicationListener {
     AdvanceAsserts asserts;
     MainGameStage mainGameStage;
 
+    //按钮测试例子
     ImageButton btnShow;
     ImageButton btnOk;
     ImageButton btnCaccel;
@@ -33,15 +34,14 @@ public class AdvanceGame implements ApplicationListener {
         asserts = new AdvanceAsserts();
         mainGameStage = new MainGameStage(asserts);
 
-        font = new BitmapFont(Gdx.files.internal(""), Gdx.files.internal(""), false);
-        batch = new SpriteBatch();
-        this.setButton();
-        this.setListner();
-        this.setWindow();
+        //按钮测试例子
+//        font = new BitmapFont(Gdx.files.internal(""), Gdx.files.internal(""), false);
+//        batch = new SpriteBatch();
+//        this.setButton();
+//        this.setListner();
+//        this.setWindow();
+//        mainGameStage.addActor(btnShow);
 
-        mainGameStage.addActor(btnShow);
-
-        //mainGameStage = new MainGameStage();
         Gdx.input.setInputProcessor(mainGameStage);
     }
 
@@ -128,9 +128,9 @@ public class AdvanceGame implements ApplicationListener {
         Gdx.gl.glClearColor(1,1,1,1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-        font.draw(batch, "touch me", 100, 100);
-        batch.end();
+//        batch.begin();
+//        font.draw(batch, "touch me", 100, 100);
+//        batch.end();
 
         mainGameStage.act();
         mainGameStage.draw();

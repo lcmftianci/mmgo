@@ -13,8 +13,6 @@ public class AdvanceAsserts {
     TextureRegion regionBundle;
     TextureRegion regionReverseBundle;
 
-
-
     public AdvanceAsserts(){
         uniinit();
     }
