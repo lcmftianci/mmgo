@@ -92,9 +92,14 @@ public class MainGameStage extends Stage {
         int inx = -1;
         for(int i = 0; i < arrBallRect.length; i++){
             Log.d(TAG, "==>> x:" + arrBallRect[i].x + " y:" + arrBallRect[i].y);
+            Log.d(TAG, "==>>1 x:" + arrBrickRect[0].x + " y:" + arrBrickRect[0].y
+                    + "==>>2 x:" + arrBrickRect[1].x + " y:" + arrBrickRect[1].y
+                    + "==>>3 x:" + arrBrickRect[2].x + " y:" + arrBrickRect[2].y
+                    + "==>>3 x:" + arrBrickRect[3].x + " y:" + arrBrickRect[3].y);
             if(b2d.checkTwoBox(arrBrickRect[0], arrBrickRect[1], arrBrickRect[2], arrBrickRect[3], arrBallRect[i])){
                 inx = i;
-                break;
+                Log.d(TAG, "===>>" + inx);
+                //break;
             }
         }
 
