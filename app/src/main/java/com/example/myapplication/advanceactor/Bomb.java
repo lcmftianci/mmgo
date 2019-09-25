@@ -38,13 +38,19 @@ public class Bomb extends Actor {
 
     boolean bBubble;
 
-    public Bomb(){
+    int xPos;
+    int yPos;
+
+    public Bomb(int x, int y){
+        this.xPos = x;
+        this.yPos = y;
+
         textureBomb = new Texture(Gdx.files.internal("bomb/bomb.jpg"));
         spriteBomb = new Sprite(textureBomb, 138, 158, 306 - 138,378 - 157);
         spriteBomb.setSize(Gdx.graphics.getWidth()/6,Gdx.graphics.getHeight()/6);
         //spriteBomb.setOrigin(spriteBomb.getWidth()/2, spriteBomb.getHeight()/4);
         spriteBomb.setOrigin(spriteBomb.getWidth()/2, 0);
-        spriteBomb.setPosition(Gdx.graphics.getWidth()/2 - spriteBomb.getWidth()/2,0);
+        spriteBomb.setPosition(this.xPos - spriteBomb.getWidth()/2,x);
         statetime = 0.0f;
 
         pixmap = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGBA8888);
@@ -117,10 +123,12 @@ public class Bomb extends Actor {
             result.draw(pixmap,0,0);
             bTouch = true;
         } else{
+            //Log.d(TAG, "get no touch");
             pixmap.dispose();
             pixmap = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGBA8888);
             result.draw(pixmap,0,0);
-            bCanGet = true;
+            if(bTouch)
+                bCanGet = true;   //这里逻辑有错误,点击时直接就被重置并绘制
         }
     }
 

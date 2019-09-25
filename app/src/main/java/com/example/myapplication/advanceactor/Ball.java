@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Ball extends Actor {
@@ -14,17 +15,17 @@ public class Ball extends Actor {
     Sprite spriteball;
     TextureRegion region;
 
-    int xd;
-    int yd;
-    float weight;
-    int xv;
-    int yv;
-
-    int curPosX,curPosY;
-
-    boolean bleft,btop;
-
-    boolean brun;
+    int xd;    //x方向
+    int yd;    //y方向
+    float weight; //斜率
+    int xv;     //x方向速度
+    int yv;     //y方向上速度
+    int vul;    //运行速度
+    int curPosX,curPosY;   //x，y坐标
+    boolean bleft,btop;    //方向标志
+    boolean brun;          //是否还在移动
+    Vector2 curPos;
+    ConstantRect cr;       //四个角的坐标点
 
     private final static String TAG = "BALL";
 
@@ -40,6 +41,7 @@ public class Ball extends Actor {
         spriteball.setSize(Gdx.graphics.getWidth()/13, Gdx.graphics.getWidth()/13);
         xd = -10;
         yd = -10;
+        vul = Gdx.graphics.getHeight()/40;
         xv = Gdx.graphics.getWidth()/100;
         yv = Gdx.graphics.getHeight()/40;
         brun = false;
@@ -49,17 +51,40 @@ public class Ball extends Actor {
 
         curPosX = Gdx.graphics.getWidth()/2;
         curPosY = 0;
+        curPos = new Vector2(curPosX, curPosY);
+        cr = new ConstantRect();
+        cr.setPosRect(curPosX, curPosY, spriteball.getWidth(), spriteball.getHeight());
     }
 
-    public void setvum(int x, int y,float weight){
+    public Vector2[] getRect(){
+        return cr.getPosRect();
+    }
+
+    public void setvum(int x, int y, float weight){
         this.xd = x;
         this.yd = y;
         this.weight = weight;
         brun = true;
+
+        //弧度＝(角度/180) *PI                   //弧度跟角度关系
+        double hw = Math.atan(weight);           //斜率转弧度
+        //double aw = Math.toDegrees(hw);        //弧度转角度
+        //hw = Math.toRadians(aw);               //角度转弧度
         this.yv = (int)(weight*(float) xv);
 
-        bleft = true;
+        this.yv = (int)((double)vul*Math.sin(hw));
+        this.xv = (int)((double)vul*Math.cos(hw));
+
+        if(x > Gdx.graphics.getWidth()/2)
+            bleft = false;
+        else
+            bleft = true;
         btop = true;
+
+        curPosX = Gdx.graphics.getWidth()/2;
+        curPosY = 0;
+        curPos.x = curPosX;
+        curPos.y = curPosY;
     }
 
     public boolean isrun(){
@@ -68,6 +93,15 @@ public class Ball extends Actor {
 
     public void update(int x, int y){
         spriteball.setPosition(x - Gdx.graphics.getWidth()/13/2, y - Gdx.graphics.getWidth()/13/2);
+    }
+
+    public Vector2 getCurPos(){
+        return curPos;
+    }
+
+    public void setDirection(boolean bleft, boolean btop){
+        this.bleft = bleft;
+        this.btop = btop;
     }
 
     @Override
@@ -108,6 +142,16 @@ public class Ball extends Actor {
             spriteball.setPosition(curPosX,curPosY);
 
             spriteball.draw(batch);
+
+            if(!btop){
+                if(curPosY < Gdx.graphics.getHeight()/4){
+                    brun = false;
+                }
+            }
+
+            curPos.x = curPosX;
+            curPos.y = curPosY;
+            cr.setPosRect(curPosX, curPosY, spriteball.getWidth(), spriteball.getHeight());
         }
     }
 }
