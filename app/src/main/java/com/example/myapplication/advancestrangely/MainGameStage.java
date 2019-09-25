@@ -3,6 +3,8 @@ package com.example.myapplication.advancestrangely;
 import android.util.Log;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -36,6 +38,8 @@ public class MainGameStage extends Stage {
 
     public final List<Ball> balls;
 
+    Camera cam;
+
     private final static String TAG = "MainGameStage";
 
 
@@ -53,6 +57,9 @@ public class MainGameStage extends Stage {
 //    }
 
     public MainGameStage(AdvanceAsserts asserts){
+        //创建相机
+        this.cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        this.cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
         this.asserts = asserts;
         background = new Image(asserts.regionBack);
         floor = new Image(asserts.regionFloor);
