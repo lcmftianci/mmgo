@@ -26,31 +26,41 @@ public class Ball extends Actor {
     boolean brun;          //是否还在移动
     Vector2 curPos;
     ConstantRect cr;       //四个角的坐标点
+    int inx;
 
     private final static String TAG = "BALL";
 
-    public Ball(){
-        init();
+    public Ball(int x, int y){
+        inx = 0;
+        init(x,y);
     }
 
-    public void init(){
+    public void delay(int inx){
+        this.inx = inx;
+    }
+
+    public void init(int x, int y){
         texture = new Texture(Gdx.files.internal("ball.jpg"));
         region = new TextureRegion(texture, 5,5,15,15);
         spriteball = new Sprite(region);
+
         //spriteball.setScale(100,100);
-        spriteball.setSize(Gdx.graphics.getWidth()/13, Gdx.graphics.getWidth()/13);
+        spriteball.setSize(Gdx.graphics.getWidth()/18, Gdx.graphics.getWidth()/18);
         xd = -10;
         yd = -10;
         vul = Gdx.graphics.getHeight()/80;
         xv = Gdx.graphics.getWidth()/100;
         yv = Gdx.graphics.getHeight()/40;
-        brun = false;
 
+        brun = false;
         bleft = true;
         btop = true;
 
-        curPosX = Gdx.graphics.getWidth()/2;
-        curPosY = 0;
+        //curPosX = Gdx.graphics.getWidth()/2;
+        //curPosY = 0;
+
+        curPosX = x;
+        curPosY = y;
         curPos = new Vector2(curPosX, curPosY);
         cr = new ConstantRect();
         cr.setPosRect(curPosX, curPosY, spriteball.getWidth(), spriteball.getHeight());
@@ -119,8 +129,13 @@ public class Ball extends Actor {
 
         //1.从 (width/2,0)出发，以wight方向移动，每次移动(xv，xv*wight)距离  //这种方法，有点问题每次都要重新计算权重
         //2.从起始点出发，每次在x,y方向移动xv,yv方向，碰到边界如何反弹
+        //3.延迟发射
         if(brun)
         {
+            if(inx != 0){
+                inx--;
+                return;
+            }
             if(bleft){
                 curPosX -= xv;
             }else{
