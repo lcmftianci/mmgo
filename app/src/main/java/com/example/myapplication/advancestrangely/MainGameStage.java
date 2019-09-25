@@ -64,6 +64,7 @@ public class MainGameStage extends Stage {
             ballxy = bomb.AlreadyGet();
             bomb.setBubble(true);
             bDrawBall = true;
+            ball.setvum((int)ballxy[0], (int)ballxy[1], ballxy[2]);
             return true;
         }
         return false;
@@ -74,8 +75,8 @@ public class MainGameStage extends Stage {
 
         changeBall();
 
-        if(bDrawBall)
-            ball.update((int)ballxy[0], (int)ballxy[1]);
+        //if(bDrawBall)
+        //    ball.setvum((int)ballxy[0], (int)ballxy[1], ballxy[2]);
         bomb.setBubble(false);
     }
 }
