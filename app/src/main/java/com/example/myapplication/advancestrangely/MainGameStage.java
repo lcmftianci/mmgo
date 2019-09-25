@@ -89,28 +89,47 @@ public class MainGameStage extends Stage {
         Vector2[] arrBallRect = ball.getRect();
         Vector2[] arrBrickRect = brick.getRect();
 
-        int inx = -1;
+        int lb = -1, rb = -1, rt = -1, lt = -1;
         for(int i = 0; i < arrBallRect.length; i++){
-            Log.d(TAG, "==>> x:" + arrBallRect[i].x + " y:" + arrBallRect[i].y);
-            Log.d(TAG, "==>>1 x:" + arrBrickRect[0].x + " y:" + arrBrickRect[0].y
-                    + "==>>2 x:" + arrBrickRect[1].x + " y:" + arrBrickRect[1].y
-                    + "==>>3 x:" + arrBrickRect[2].x + " y:" + arrBrickRect[2].y
-                    + "==>>3 x:" + arrBrickRect[3].x + " y:" + arrBrickRect[3].y);
+//            Log.d(TAG, "==>> x:" + arrBallRect[i].x + " y:" + arrBallRect[i].y);
+//            Log.d(TAG, "==>>1 x:" + arrBrickRect[0].x + " y:" + arrBrickRect[0].y
+//                    + "==>>2 x:" + arrBrickRect[1].x + " y:" + arrBrickRect[1].y
+//                    + "==>>3 x:" + arrBrickRect[2].x + " y:" + arrBrickRect[2].y
+//                    + "==>>3 x:" + arrBrickRect[3].x + " y:" + arrBrickRect[3].y);
             if(b2d.checkTwoBox(arrBrickRect[0], arrBrickRect[1], arrBrickRect[2], arrBrickRect[3], arrBallRect[i])){
-                inx = i;
-                Log.d(TAG, "===>>" + inx);
+                if(i == 0)
+                    lb = 1;
+                if(i == 1)
+                    rb = 1;
+                if(i == 2)
+                    rt = 1;
+                if(i == 3)
+                    lt = 1;
+                //Log.d(TAG, "===>>" + inx);
                 //break;
             }
         }
 
+        if(lb == 1 && rb == 1)
+            ball.setTopBottomDirection(true);
+
+        if(lb == 1 && lt == 1)
+            ball.setLeftRightDirection(false);
+
+        if(rb == 1 && rt == 1)
+            ball.setLeftRightDirection(true);
+
+        if(rt == 1 && lt == 2)
+            ball.setTopBottomDirection(false);
+
 //        if(inx == 0)
-//            ball.setDirection(false,false);
+//            ball.setLeftRightDirection(false);
 //        else if(inx ==1)
-//            ball.setDirection(false, true);
+//            ball.setLeftRightDirection(true);
 //        else if(inx == 2)
-//            ball.setDirection(true, false);
+//            ball.setTopBottomDirection(false);
 //        else if(inx == 3)
-//            ball.setDirection(true, true);
+//            ball.setTopBottomDirection(false);
         return true;
     }
 

@@ -104,6 +104,14 @@ public class Ball extends Actor {
         this.btop = btop;
     }
 
+    public void setLeftRightDirection(boolean bLeft){
+        this.bleft = bLeft;
+    }
+
+    public void setTopBottomDirection(boolean bTop){
+        this.btop = bTop;
+    }
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
