@@ -40,7 +40,8 @@ public class Brick extends Actor {
     }
 
     public void setNum(int num){
-        this.score = num;
+        //this.score = num;
+        this.score--;
     }
 
     public Vector2[] getRect(){

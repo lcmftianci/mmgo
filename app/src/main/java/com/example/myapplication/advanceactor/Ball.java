@@ -41,7 +41,7 @@ public class Ball extends Actor {
         spriteball.setSize(Gdx.graphics.getWidth()/13, Gdx.graphics.getWidth()/13);
         xd = -10;
         yd = -10;
-        vul = Gdx.graphics.getHeight()/40;
+        vul = Gdx.graphics.getHeight()/80;
         xv = Gdx.graphics.getWidth()/100;
         yv = Gdx.graphics.getHeight()/40;
         brun = false;
