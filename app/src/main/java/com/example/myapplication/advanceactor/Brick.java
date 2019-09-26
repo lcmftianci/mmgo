@@ -21,7 +21,7 @@ public class Brick extends Actor {
     BitmapFont font;
     ConstantRect cr;
 
-    public Brick(int x, int y, int score, TextureRegion region){
+    public Brick(int x, int y, int sw, int sh, int score, TextureRegion region){
         //this.asserts = asserts;
         pos = new Vector2();
         size = new Vector2();
@@ -29,8 +29,8 @@ public class Brick extends Actor {
         this.pos.y = y;
         this.score = score;
         brickSprite = new Sprite(region);
-        size.x = Gdx.graphics.getWidth()/10;
-        size.y = Gdx.graphics.getHeight()/10;
+        size.x = sw;
+        size.y = sh;
         brickSprite.setSize(size.x, size.y);
         brickSprite.setPosition(x, y);
         font = new BitmapFont( Gdx.files.internal( "font/bitmap_font.fnt" ), Gdx.files.internal( "font/bitmap_font.png" ), false );
@@ -46,6 +46,12 @@ public class Brick extends Actor {
 
     public Vector2[] getRect(){
         return cr.getPosRect();
+    }
+
+    //实时更新当前砖块的位置
+    public void setCurPos(int x, int y){
+        pos.x = x;
+        pos.y = y;
     }
 
     @Override
