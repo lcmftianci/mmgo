@@ -104,7 +104,7 @@ public class MainGameStage extends Stage {
 
     //在随机的位置上生成一堆砖块供攻击
     public void generaAllBrick(){
-        for(int i =0; i < 5; i++){
+        for(int i =0; i < 50; i++){
             if(i < 10)
                 this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,10) +  (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i+1, this.asserts.regionBrick));
             else if(i >= 10 && i < 20)
@@ -193,7 +193,7 @@ public class MainGameStage extends Stage {
                 balls.get(bi).setLeftRightDirection(true);
             }
 
-            if((rt == 1 && lt == 1)|| (rt == 1 && lt == 0) || (rt == 0 && lt == 1) || rt == 1 || lt == 1){
+            if((rt == 1 && lt == 1)|| (rt == 1 && lt == 0) || (rb == 0 && rt == 0 && lt == 1) || rt == 1 || lt == 1){
                 balls.get(bi).setTopBottomDirection(false);
             }
 
