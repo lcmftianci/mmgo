@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.baidu.mobstat.StatService;
 import com.example.myapplication.advancestrangely.ActionUser;
 import com.example.myapplication.advancestrangely.AdvanceGame;
 import com.example.myapplication.advancestrangely.FirstGame;
@@ -18,7 +19,7 @@ public class HelloGameActivity extends AndroidApplication {
         Log.d(TAG, "Login Main");
 //        setContentView(R.layout.activity_main);
 //        initialize(new FirstGame());
-
+        StatService.start(this);
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         config.useWakelock = true;
 //        initialize(new MyGdxGameCamera(), config);
