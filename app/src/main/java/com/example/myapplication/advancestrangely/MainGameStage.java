@@ -64,7 +64,7 @@ public class MainGameStage extends Stage {
         background = new Image(asserts.regionBack);
         floor = new Image(asserts.regionFloor);
         bomb = new Bomb(Gdx.graphics.getWidth()/2, (int)floor.getHeight());
-        ball = new Ball(Gdx.graphics.getWidth()/2, 0);
+        ball = new Ball(Gdx.graphics.getWidth()/2, 0, this.asserts);
         brick = new Brick(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/10*9, 100, asserts.regionBrick);
         b2d = new Box2dDetection();
 
@@ -85,7 +85,7 @@ public class MainGameStage extends Stage {
         //this.addActor(ball);
 
         for(int i =0; i < 10; i++){
-            this.balls.add(new Ball(Gdx.graphics.getWidth()/2, 0));
+            this.balls.add(new Ball(Gdx.graphics.getWidth()/2, 0, this.asserts));
             this.addActor(this.balls.get(i));
         }
 
@@ -155,6 +155,7 @@ public class MainGameStage extends Stage {
 
             if(rt == 1 || lt == 1 || lb == 1 || rb == 1) {
                 Log.d(TAG, "==>>rt:" + rt + " lt:" + lt + " lb:" + lb + " rb:" + rb);
+                asserts.bitSound.play(1);
                 brick.setNum(0);
             }
         }

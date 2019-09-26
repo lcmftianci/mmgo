@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.example.myapplication.advancestrangely.AdvanceAsserts;
 
 public class Ball extends Actor {
     Texture texture;
@@ -30,8 +31,11 @@ public class Ball extends Actor {
 
     private final static String TAG = "BALL";
 
-    public Ball(int x, int y){
+    AdvanceAsserts asserts;
+
+    public Ball(int x, int y, AdvanceAsserts asserts){
         inx = 0;
+        this.asserts = asserts;
         init(x,y);
     }
 
@@ -148,17 +152,25 @@ public class Ball extends Actor {
                 curPosY -= yv;
             }
 
-            if(curPosY > Gdx.graphics.getHeight())
+            if(curPosY > Gdx.graphics.getHeight()){
+                asserts.clickSound.play(1);
                 btop=false;
+            }
 
-            if(curPosY < 0)
+            if(curPosY < 0){
+                asserts.clickSound.play(1);
                 btop=true;
+            }
 
-            if(curPosX > Gdx.graphics.getWidth())
+            if(curPosX > Gdx.graphics.getWidth()){
+                asserts.clickSound.play(1);
                 bleft=true;
+            }
 
-            if(curPosX < 0)
+            if(curPosX < 0){
+                asserts.clickSound.play(1);
                 bleft=false;
+            }
 
             Log.d(TAG, "x:" + curPosX + " y:" + curPosY + " vx:" + this.xv + " vy:" + this.yv);
 

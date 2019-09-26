@@ -1,6 +1,8 @@
 package com.example.myapplication.advancestrangely;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -15,6 +17,10 @@ public class AdvanceAsserts {
     TextureRegion regionad;
     TextureRegion regionBundle;
     TextureRegion regionReverseBundle;
+
+    public Sound bitSound;
+    public Sound clickSound;
+    public Music music;
 
 
     public AdvanceAsserts(){
@@ -32,5 +38,13 @@ public class AdvanceAsserts {
         regionBundle = new TextureRegion(texture, 482, 263, 566,666);
         regionReverseBundle = new TextureRegion(texture, 482, 263, 566, 666);
         regionReverseBundle.flip(true, true);
+
+        //加载所有用到的声音
+        music = Gdx.audio.newMusic(Gdx.files.internal("audio/music.mp3"));
+        music.setLooping(true);
+        music.setVolume(0.5f);
+        //if (Settings.soundEnabled) music.play();
+        bitSound = Gdx.audio.newSound(Gdx.files.internal("audio/coin.wav"));
+        clickSound = Gdx.audio.newSound(Gdx.files.internal("audio/jump.wav"));
     }
 }
