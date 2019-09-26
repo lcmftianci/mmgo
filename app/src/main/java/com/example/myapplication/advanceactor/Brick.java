@@ -11,6 +11,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.example.myapplication.advancestrangely.AdvanceAsserts;
 
+import javax.microedition.khronos.opengles.GL10;
+
 public class Brick extends Actor {
     Sprite brickSprite;         //需要碰撞的砖
     Texture texture;            //砖块精灵
@@ -39,9 +41,13 @@ public class Brick extends Actor {
         cr.setPosRect(x, y, size.x, size.y);
     }
 
-    public void setNum(int num){
+    public boolean setNum(int num){
         //this.score = num;
         this.score--;
+        if(this.score == 0)
+            return true;
+        else
+            return false;
     }
 
     public Vector2[] getRect(){
@@ -52,11 +58,22 @@ public class Brick extends Actor {
     public void setCurPos(int x, int y){
         pos.x = x;
         pos.y = y;
+        brickSprite.setPosition(pos.x, pos.y);
+    }
+
+    public Vector2 getCurPos(){
+        return pos;
+    }
+
+    public int getCurSocre(){
+        return this.score;
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
+        //Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+        //Gdx.gl.glClearColor(1,1,1,1);
         brickSprite.draw(batch);
         String str = "";
         str += score;

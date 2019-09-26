@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">测试游戏</string>
+    <string name="app_name">虫虫炮</string>
     <string name="app_name_fragments">GDX Tests (Fragments)</string>
     <string name="change_color">Change Color</string>
     <string name="new_window">New Window</string>

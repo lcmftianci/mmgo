@@ -19,6 +19,7 @@ public class AdvanceGame implements ApplicationListener {
 
     AdvanceAsserts asserts;
     MainGameStage mainGameStage;
+    GameOverStage gameOverStage;
 
     //按钮测试例子
     ImageButton btnShow;
@@ -28,25 +29,45 @@ public class AdvanceGame implements ApplicationListener {
     Window dialogWindow;
     Texture texture;
     SpriteBatch batch;
+    boolean bGameOver;
+
+    public void SelectStageRender(){
+        if(MarioConstants.StageFlag == MarioConstants.StageStartOn){
+            Gdx.input.setInputProcessor(gameOverStage);
+            gameOverStage.act();
+            gameOverStage.draw();
+        }else if(MarioConstants.StageFlag == MarioConstants.StageGameOn){
+            Gdx.input.setInputProcessor(mainGameStage);
+            mainGameStage.act();
+            mainGameStage.draw();
+        }
+//        }else if(MarioConstants.StageFlag == MarioConstants.StageShopOn){
+//            Gdx.input.setInputProcessor(shopStage);
+//            shopStage.act();
+//            shopStage.draw();
+//        }
+    }
 
     @Override
     public void create() {
         asserts = new AdvanceAsserts();
         mainGameStage = new MainGameStage(asserts);
+        gameOverStage = new GameOverStage();
 
         //按钮测试例子
-//        font = new BitmapFont(Gdx.files.internal(""), Gdx.files.internal(""), false);
-//        batch = new SpriteBatch();
-//        this.setButton();
-//        this.setListner();
-//        this.setWindow();
-//        mainGameStage.addActor(btnShow);
+        font = new BitmapFont(Gdx.files.internal("font/bitmap_font.fnt"), Gdx.files.internal("font/bitmap_font.png"), false);
+        batch = new SpriteBatch();
+        this.setButton();
+        this.setListner();
+        this.setWindow();
+        this.bGameOver = false;
+        //mainGameStage.addActor(btnShow);
 
         Gdx.input.setInputProcessor(mainGameStage);
     }
 
     public void setButton(){
-        texture = new Texture(Gdx.files.internal(""));
+        texture = new Texture(Gdx.files.internal("button/button.png"));
         TextureRegion[][] split = TextureRegion.split(texture, 64,64);
         TextureRegion[] regions = new TextureRegion[6];
 
@@ -73,7 +94,6 @@ public class AdvanceGame implements ApplicationListener {
 
     public void setListner(){
         btnShow.addListener(new InputListener(){
-
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 mainGameStage.addActor(dialogWindow);
@@ -101,7 +121,7 @@ public class AdvanceGame implements ApplicationListener {
     }
 
     public void setWindow(){
-        TextureRegionDrawable winDrable = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(""))));
+        TextureRegionDrawable winDrable = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("background.png"))));
         Window.WindowStyle style = new Window.WindowStyle(font, Color.BLACK, winDrable);
         dialogWindow = new Window("Game", style);
         dialogWindow.setWidth(Gdx.graphics.getWidth()/1.5f);
@@ -110,8 +130,8 @@ public class AdvanceGame implements ApplicationListener {
         dialogWindow.setPosition(100,100);
         dialogWindow.setModal(true);
 
-        btnOk.setPosition(Gdx.graphics.getWidth()/10.0f,0);
-        btnCaccel.setPosition(Gdx.graphics.getHeight()/10.0f,0);
+        btnOk.setPosition(Gdx.graphics.getWidth()/10.0f,dialogWindow.getY()+10);
+        btnCaccel.setPosition(Gdx.graphics.getHeight()/10.0f,dialogWindow.getY()+10);
 
         dialogWindow.addActor(btnOk);
         dialogWindow.addActor(btnCaccel);
@@ -133,6 +153,10 @@ public class AdvanceGame implements ApplicationListener {
 //        batch.end();
 
         mainGameStage.update();
+        if(mainGameStage.checkGameOver() && bGameOver == false){
+            bGameOver = true;
+            mainGameStage.addActor(dialogWindow);
+        }
         mainGameStage.act();
         mainGameStage.draw();
     }

@@ -43,6 +43,8 @@ public class MainGameStage extends Stage {
 
     Camera cam;
 
+    boolean bBrickCanUpdate;
+
     private final static String TAG = "MainGameStage";
 
 
@@ -75,6 +77,7 @@ public class MainGameStage extends Stage {
         this.balls = new ArrayList<Ball>();
 
         bDrawBall = false;
+        bBrickCanUpdate = false;
 
         floor.setWidth(Gdx.graphics.getWidth());
         floor.setHeight(Gdx.graphics.getHeight()/4);
@@ -85,7 +88,7 @@ public class MainGameStage extends Stage {
         background.setPosition(0,0);
         floor.setPosition(0,0);
         this.addActor(background);
-        this.addActor(floor);
+
         //this.addActor(ball);
 
         for(int i =0; i < 10; i++){
@@ -96,13 +99,33 @@ public class MainGameStage extends Stage {
         //this.addActor(brick);
         generaAllBrick();
         this.addActor(bomb);
+        this.addActor(floor);
     }
 
     //在随机的位置上生成一堆砖块供攻击
     public void generaAllBrick(){
-        for(int i =0; i < 10; i++){
-            this.bricks.add(new Brick(Gdx.graphics.getWidth()/5 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,10), Gdx.graphics.getHeight()/6, Gdx.graphics.getWidth()/6, i, this.asserts.regionBrick));
+        for(int i =0; i < 5; i++){
+            if(i < 10)
+                this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,10) +  (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i+1, this.asserts.regionBrick));
+            else if(i >= 10 && i < 20)
+                this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,20) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
+            else if(i >= 20 && i < 30)
+                this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,30) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
+            else if(i >= 30 && i < 40)
+                this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,40) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
+            else if(i >= 40 && i < 50)
+                this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,50) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
+
             this.addActor(this.bricks.get(i));
+        }
+    }
+
+    public void updateBrickPos(){
+        for(int i = 0; i < this.bricks.size(); i++){
+            Brick tBrick = this.bricks.get(i);
+            Vector2 curPos = tBrick.getCurPos();
+            //int curScore = tBrick.getCurSocre();
+            tBrick.setCurPos((int)curPos.x, (int)(curPos.y-Gdx.graphics.getWidth()/6));
         }
     }
 
@@ -111,6 +134,7 @@ public class MainGameStage extends Stage {
             ballxy = bomb.AlreadyGet();
             bomb.setBubble(true);
             bDrawBall = true;
+            bBrickCanUpdate = true;
 
             for (int i =0; i < balls.size(); i++){
                 balls.get(i).setvum((int)ballxy[0], (int)ballxy[1], ballxy[2]);
@@ -176,7 +200,10 @@ public class MainGameStage extends Stage {
             if(rt == 1 || lt == 1 || lb == 1 || rb == 1) {
                 Log.d(TAG, "==>>rt:" + rt + " lt:" + lt + " lb:" + lb + " rb:" + rb);
                 asserts.bitSound.play(1);
-                mBrick.setNum(0);
+                if(mBrick.setNum(0)){
+                    this.getRoot().removeActor(mBrick);
+                    this.bricks.remove(mBrick);
+                }
             }
         }
 
@@ -224,6 +251,30 @@ public class MainGameStage extends Stage {
         }
 
         return true;
+    }
+
+    public void checkCanTouch(){
+        for(int i = 0; i < balls.size(); i++){
+            if(balls.get(i).isrun())
+                continue;
+            if(i == balls.size() - 1){
+                bomb.setBubble(false);
+                if(bBrickCanUpdate)
+                    updateBrickPos();
+                bBrickCanUpdate = false;
+            }
+        }
+    }
+
+    public boolean checkGameOver(){
+        for(int i = 0; i < bricks.size(); i++){
+            Brick brick = bricks.get(i);
+            Vector2[] vec = brick.getRect();
+            Log.d(TAG, "==>> y:" + vec[0].y + " floor y:" + (int)floor.getHeight());
+            if(vec[0].y <= (int)floor.getHeight())
+                return true;
+        }
+        return false;
     }
 
     public boolean checkBallBrick(){
@@ -291,11 +342,6 @@ public class MainGameStage extends Stage {
         //实现逻辑每点击攻击一次，所有蛋蛋向下拖动一个砖块的高度
         changeAllBall(); //初始化所有导弹
         checkAllBb();    //检测导弹与砖块的碰撞
-        for(int i = 0; i < balls.size(); i++){
-            if(balls.get(i).isrun())
-                continue;
-            if(i == balls.size() - 1)
-                bomb.setBubble(false);
-        }
+        checkCanTouch(); //检测是否可以点击
     }
 }
