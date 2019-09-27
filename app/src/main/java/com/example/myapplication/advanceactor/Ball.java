@@ -23,6 +23,7 @@ public class Ball extends Actor {
     int yv;     //y方向上速度
     int vul;    //运行速度
     int curPosX,curPosY;   //x，y坐标
+    int staticPosX,staticPosY;  //x,y坐标
     boolean bleft,btop;    //方向标志
     boolean brun;          //是否还在移动
     Vector2 curPos;
@@ -49,7 +50,7 @@ public class Ball extends Actor {
         spriteball = new Sprite(region);
 
         //spriteball.setScale(100,100);
-        spriteball.setSize(Gdx.graphics.getWidth()/18, Gdx.graphics.getWidth()/18);
+        spriteball.setSize(Gdx.graphics.getWidth()/22, Gdx.graphics.getWidth()/22);
         xd = -10;
         yd = -10;
         vul = Gdx.graphics.getHeight()/80;
@@ -65,6 +66,8 @@ public class Ball extends Actor {
 
         curPosX = x;
         curPosY = y;
+        staticPosX = curPosX;
+        staticPosY = curPosY;
         curPos = new Vector2(curPosX, curPosY);
         cr = new ConstantRect();
         cr.setPosRect(curPosX, curPosY, spriteball.getWidth(), spriteball.getHeight());
@@ -95,10 +98,14 @@ public class Ball extends Actor {
             bleft = true;
         btop = true;
 
-        curPosX = Gdx.graphics.getWidth()/2;
-        curPosY = 0;
-        curPos.x = curPosX;
-        curPos.y = curPosY;
+//        curPosX = Gdx.graphics.getWidth()/2;
+//        curPosY = 0;
+//        curPos.x = curPosX;
+//        curPos.y = curPosY;
+        curPosX = staticPosX;
+        curPosY = staticPosY;
+        curPos.x = staticPosX;
+        curPos.y = staticPosY;
     }
 
     public boolean isrun(){
@@ -116,6 +123,14 @@ public class Ball extends Actor {
     public void setDirection(boolean bleft, boolean btop){
         this.bleft = bleft;
         this.btop = btop;
+    }
+
+    public void setReverseHorizenDir(){
+        this.bleft = !bleft;
+    }
+
+    public void setReverseVerticalDir(){
+        this.btop = !btop;
     }
 
     public void setLeftRightDirection(boolean bLeft){
@@ -172,7 +187,7 @@ public class Ball extends Actor {
                 bleft=false;
             }
 
-            Log.d(TAG, "x:" + curPosX + " y:" + curPosY + " vx:" + this.xv + " vy:" + this.yv);
+            //Log.d(TAG, "x:" + curPosX + " y:" + curPosY + " vx:" + this.xv + " vy:" + this.yv);
 
             spriteball.setPosition(curPosX,curPosY);
 

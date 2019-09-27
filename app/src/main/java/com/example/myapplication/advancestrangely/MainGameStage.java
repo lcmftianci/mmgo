@@ -68,6 +68,10 @@ public class MainGameStage extends Stage {
         this.asserts = asserts;
         background = new Image(asserts.regionBack);
         floor = new Image(asserts.regionFloor);
+
+        floor.setWidth(Gdx.graphics.getWidth());
+        floor.setHeight(Gdx.graphics.getHeight()/4);
+
         bomb = new Bomb(Gdx.graphics.getWidth()/2, (int)floor.getHeight());
         ball = new Ball(Gdx.graphics.getWidth()/2, 0, this.asserts);
         brick = new Brick(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/10*9, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10, 100, asserts.regionBrick);
@@ -79,9 +83,6 @@ public class MainGameStage extends Stage {
         bDrawBall = false;
         bBrickCanUpdate = false;
 
-        floor.setWidth(Gdx.graphics.getWidth());
-        floor.setHeight(Gdx.graphics.getHeight()/4);
-
         background.setHeight(Gdx.graphics.getHeight());
         background.setWidth(Gdx.graphics.getWidth());
         //background.setScale(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -92,7 +93,7 @@ public class MainGameStage extends Stage {
         //this.addActor(ball);
 
         for(int i =0; i < 10; i++){
-            this.balls.add(new Ball(Gdx.graphics.getWidth()/2, 0, this.asserts));
+            this.balls.add(new Ball(Gdx.graphics.getWidth()/2, (int)floor.getHeight(), this.asserts));
             this.addActor(this.balls.get(i));
         }
 
@@ -102,11 +103,14 @@ public class MainGameStage extends Stage {
         this.addActor(floor);
     }
 
-    //在随机的位置上生成一堆砖块供攻击
+    //在随机的位置上生成一堆砖块供攻击,这个函数需要重写，保证生成数据连续，并且随着高度增加而增加
+    /*
+    * 根据行来生成数据，每行必须有数据，数据的量可以随机取得
+    * */
     public void generaAllBrick(){
         for(int i =0; i < 50; i++){
             if(i < 10)
-                this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,10) +  (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i+1, this.asserts.regionBrick));
+                this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,10) + Gdx.graphics.getHeight()/2, Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i+1, this.asserts.regionBrick));
             else if(i >= 10 && i < 20)
                 this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,20) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
             else if(i >= 20 && i < 30)
@@ -164,6 +168,18 @@ public class MainGameStage extends Stage {
         return true;
     }
 
+    /*
+    * 分析每个球球的移动方向
+    * 1.如果球是向右上角移动的话那么球碰右边界的反弹方向应该变成左上角   -->  == <--，判断rt与rb是否碰撞
+    * 2.如果球是向右下角移动的话那么球碰右边界的反弹方向应该变成左下角   -->  == <--，判断rt与rb是否碰撞
+    * 3.如果球是向左上角移动的话那么球碰左边界的反弹方向应该变成右上角   <--  == -->，判断lt与lb是否碰撞
+    * 4.如果球是向左下角移动的话那么球碰左边界的反弹方向应该变成右下角   <--  == -->，判断lt与lb是否碰撞
+    * 5.如果球是向左下角移动的话那么球碰上边界的反弹方向应该变成左上角   下 == 上， 判断lb与rb是否碰撞
+    * 6.如果球是向右下角移动的话那么球碰上边界的反弹方向应该变成右上角   下 == 上， 判断lb与rb是否碰撞
+    * 7.如果球是向左上角移动的话那么球碰上边界的反弹方向应该变成左下角   上 == 下， 判断lt与rt是否碰撞
+    * 8.如果球是向右上角移动的话那么球碰上边界的反弹方向应该变成右下角   上 == 下， 判断lt与rt是否碰撞
+    * */
+
     public boolean checkAllBallBrick(Brick mBrick){
         if(!bDrawBall)
             return false;
@@ -181,6 +197,31 @@ public class MainGameStage extends Stage {
                 }
             }
 
+            if((rt == 1 && rb == 1) || (lt == 1 && lb == 1)){
+                balls.get(bi).setReverseHorizenDir();
+            }
+
+            if((lb == 1 && rb == 1) || (lt == 1 && rt == 1)){
+                balls.get(bi).setReverseVerticalDir();
+            }
+
+            if(lt == 0 &&  lb == 0 && rt == 1 && rb == 0) {
+                balls.get(bi).setReverseHorizenDir();
+            }
+
+            if(lt == 1 &&  lb == 0 && rt == 0 && rb == 0) {
+                balls.get(bi).setReverseHorizenDir();
+            }
+
+            if(lt == 0 &&  lb == 1 && rt == 0 && rb == 0) {
+                balls.get(bi).setReverseVerticalDir();
+            }
+
+            if(lt == 0 &&  lb == 0 && rt == 0 && rb == 1) {
+                balls.get(bi).setReverseVerticalDir();
+            }
+
+            /*
             if(lb == 1 && rb == 1){
                 balls.get(bi).setTopBottomDirection(true);
             }
@@ -196,9 +237,9 @@ public class MainGameStage extends Stage {
             if((rt == 1 && lt == 1)|| (rt == 1 && lt == 0) || (rb == 0 && rt == 0 && lt == 1) || rt == 1 || lt == 1){
                 balls.get(bi).setTopBottomDirection(false);
             }
-
+            */
             if(rt == 1 || lt == 1 || lb == 1 || rb == 1) {
-                Log.d(TAG, "==>>rt:" + rt + " lt:" + lt + " lb:" + lb + " rb:" + rb);
+                //Log.d(TAG, "==>>rt:" + rt + " lt:" + lt + " lb:" + lb + " rb:" + rb);
                 asserts.bitSound.play(1);
                 if(mBrick.setNum(0)){
                     this.getRoot().removeActor(mBrick);
@@ -244,7 +285,7 @@ public class MainGameStage extends Stage {
             }
 
             if(rt == 1 || lt == 1 || lb == 1 || rb == 1) {
-                Log.d(TAG, "==>>rt:" + rt + " lt:" + lt + " lb:" + lb + " rb:" + rb);
+                //Log.d(TAG, "==>>rt:" + rt + " lt:" + lt + " lb:" + lb + " rb:" + rb);
                 asserts.bitSound.play(1);
                 brick.setNum(0);
             }
@@ -270,9 +311,11 @@ public class MainGameStage extends Stage {
         for(int i = 0; i < bricks.size(); i++){
             Brick brick = bricks.get(i);
             Vector2[] vec = brick.getRect();
-            Log.d(TAG, "==>> y:" + vec[0].y + " floor y:" + (int)floor.getHeight());
-            if(vec[0].y <= (int)floor.getHeight())
+            //Log.d(TAG, "==>> y:" + vec[0].y + " floor y:" + (int)floor.getHeight());
+            if(vec[0].y <= (int)floor.getHeight() + Gdx.graphics.getHeight()/2) {
+                bomb.setBubble(true);
                 return true;
+            }
         }
         return false;
     }
@@ -310,7 +353,7 @@ public class MainGameStage extends Stage {
         }
 
         if(rt == 1 || lt == 1 || lb == 1 || rb == 1) {
-            Log.d(TAG, "==>>rt:" + rt + " lt:" + lt + " lb:" + lb + " rb:" + rb);
+            //Log.d(TAG, "==>>rt:" + rt + " lt:" + lt + " lb:" + lb + " rb:" + rb);
             brick.setNum(0);
         }
 

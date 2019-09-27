@@ -1,5 +1,7 @@
 package com.example.myapplication.advancestrangely;
 
+import android.util.Log;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -30,6 +32,8 @@ public class AdvanceGame implements ApplicationListener {
     Texture texture;
     SpriteBatch batch;
     boolean bGameOver;
+
+    private final static String TAG = "AdvanceGame";
 
     public void SelectStageRender(){
         if(MarioConstants.StageFlag == MarioConstants.StageStartOn){
@@ -123,15 +127,21 @@ public class AdvanceGame implements ApplicationListener {
     public void setWindow(){
         TextureRegionDrawable winDrable = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("background.png"))));
         Window.WindowStyle style = new Window.WindowStyle(font, Color.BLACK, winDrable);
-        dialogWindow = new Window("Game", style);
-        dialogWindow.setWidth(Gdx.graphics.getWidth()/1.5f);
-        dialogWindow.setHeight(Gdx.graphics.getHeight()/1.5f);
+        dialogWindow = new Window("Game Over", style);
+        dialogWindow.setWidth(Gdx.graphics.getWidth()/5 * 3);
+        dialogWindow.setHeight(Gdx.graphics.getHeight()/5);
 
-        dialogWindow.setPosition(100,100);
+        dialogWindow.setPosition(Gdx.graphics.getWidth()/5,Gdx.graphics.getHeight()/5 *2);
         dialogWindow.setModal(true);
 
-        btnOk.setPosition(Gdx.graphics.getWidth()/10.0f,dialogWindow.getY()+10);
-        btnCaccel.setPosition(Gdx.graphics.getHeight()/10.0f,dialogWindow.getY()+10);
+        Log.d(TAG, "-=-= y1:" + dialogWindow.getY());
+        Log.d(TAG, "-=-= x:" + (int)Gdx.graphics.getWidth()/5);
+        Log.d(TAG, "-=-= x:" + (int)Gdx.graphics.getWidth()/5 +" " + 10);
+        Log.d(TAG, "-=-= y:" + (int)Gdx.graphics.getHeight()/5 *2);
+        Log.d(TAG, "-=-= y:" + dialogWindow.getY() + " " + (int)Gdx.graphics.getHeight()/5/2);
+        btnOk.setSize(Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        btnOk.setPosition((int)Gdx.graphics.getWidth()/5 + 10,dialogWindow.getY() + 10);
+        btnCaccel.setPosition((int)Gdx.graphics.getWidth()/5 + (int)Gdx.graphics.getWidth()/5 + 20,dialogWindow.getY()+10);
 
         dialogWindow.addActor(btnOk);
         dialogWindow.addActor(btnCaccel);

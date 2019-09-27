@@ -77,7 +77,7 @@ public class Brick extends Actor {
         brickSprite.draw(batch);
         String str = "";
         str += score;
-        font.draw(batch, str, this.pos.x + size.x/3, this.pos.y+size.y/2);
+        font.draw(batch, str, this.pos.x + size.x/3, this.pos.y+size.y);
         cr.setPosRect((int)this.pos.x, (int)this.pos.y, size.x, size.y);
     }
 }

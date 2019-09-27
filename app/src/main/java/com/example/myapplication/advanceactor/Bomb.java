@@ -45,12 +45,13 @@ public class Bomb extends Actor {
         this.xPos = x;
         this.yPos = y;
 
-        textureBomb = new Texture(Gdx.files.internal("bomb/bomb.jpg"));
-        spriteBomb = new Sprite(textureBomb, 138, 158, 306 - 138,378 - 157);
-        spriteBomb.setSize(Gdx.graphics.getWidth()/6,Gdx.graphics.getHeight()/6);
+        textureBomb = new Texture(Gdx.files.internal("icon/newicon.png"));
+        //spriteBomb = new Sprite(textureBomb, 138, 158, 306 - 138,378 - 157);
+        spriteBomb = new Sprite(textureBomb, 88*2, 78*2, (387 - 88)*2,(437 - 78)*2);
+        spriteBomb.setSize(Gdx.graphics.getWidth()/8,Gdx.graphics.getWidth()/8);
         //spriteBomb.setOrigin(spriteBomb.getWidth()/2, spriteBomb.getHeight()/4);
         spriteBomb.setOrigin(spriteBomb.getWidth()/2, 0);
-        spriteBomb.setPosition(this.xPos - spriteBomb.getWidth()/2,x);
+        spriteBomb.setPosition(this.xPos - spriteBomb.getWidth()/2, this.yPos);
         statetime = 0.0f;
 
         pixmap = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGBA8888);
@@ -72,6 +73,7 @@ public class Bomb extends Actor {
         if(bBubble)
             return;
         if(Gdx.input.isTouched()){
+            //绘制大炮
             int touchX = Gdx.input.getX();
             int touchY =  Gdx.graphics.getHeight() - Gdx.input.getY();
 
@@ -94,6 +96,8 @@ public class Bomb extends Actor {
                 spriteBomb.setRotation(90 - degress);
                 Log.d(TAG, "s degress:" + (90 -degress)  + " dgre:" + dgre + " touchX:" + touchX + " Gdx.input.getY():" + Gdx.input.getY());
             }
+
+            //绘制描绘线
             //pixmap.drawPixel(0,0, GL20.GL_COLOR_BUFFER_BIT);
             pixmap.dispose();
             pixmap = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGBA8888);
@@ -102,7 +106,7 @@ public class Bomb extends Actor {
             float weight = 0;
             if(touchX > Gdx.graphics.getWidth()/2) {
                 weight = bs.Yaxb(0, 0, touchX - Gdx.graphics.getWidth() / 2, touchY);
-                for (GridPoint2 point : bresenham.line(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight() - (int)(weight*(float) Gdx.graphics.getWidth()/2.0f)))
+                for (GridPoint2 point : bresenham.line(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() - this.yPos, Gdx.graphics.getWidth(), Gdx.graphics.getHeight() - (int)(weight*(float) Gdx.graphics.getWidth()/2.0f)))
                 {
                     if(point.x%6 == 0 || point.x%7 == 0 || point.x%8 == 0 || point.x%9 == 0)
                         continue;
@@ -111,7 +115,7 @@ public class Bomb extends Actor {
                 }
             }else if(touchX < Gdx.graphics.getWidth()/2){
                 weight = bs.Yaxb(0, 0, Gdx.graphics.getWidth() / 2 - touchX, touchY);
-                for (GridPoint2 point : bresenham.line(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight(), 0, Gdx.graphics.getHeight() - (int)(weight*(float) Gdx.graphics.getWidth()/2.0f)))
+                for (GridPoint2 point : bresenham.line(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() - this.yPos, 0, Gdx.graphics.getHeight() - (int)(weight*(float) Gdx.graphics.getWidth()/2.0f)))
                 {
                     if(point.x%6 == 0 || point.x%7 == 0 || point.x%8 == 0 || point.x%9 == 0)
                         continue;
