@@ -79,6 +79,10 @@ public class Bomb extends Actor {
             //触摸点相对于地面的位置
             int touchY =  Gdx.graphics.getHeight() - Gdx.input.getY() - this.yPos;
 
+            if(touchY <= 20)
+                return;
+
+
             //触摸点 左上角为（0，0），绘制图形左下角为（0，0）
 
             Log.d(TAG, "==>> tourchX:" + touchX + " touchY:" + touchY + " inputY:" + Gdx.input.getY());

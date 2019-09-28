@@ -134,10 +134,13 @@ public class MainGameStage extends Stage {
 
     //生成砖块算法,
     //生成砖块的层数
+    int inx = 0;
     public void generalAllBrick(int length, int bw, int bh){
         for(int i =0;i < length;i++){
-            this.bricks.add(new Brick(bw*MathUtils.random(0,5),Gdx.graphics.getHeight() + bh*i - bh, bw, bh, i+1, this.asserts.regionBrick));
-            this.addActor(this.bricks.get(i));
+            for(int j = 0; j < MathUtils.random(1,5); j++) {
+                this.bricks.add(new Brick(bw * MathUtils.random(0, 5), Gdx.graphics.getHeight() + bh * i - bh, bw, bh, i + 1, this.asserts.regionBrick));
+                this.addActor(this.bricks.get(inx++));
+            }
         }
     }
 
