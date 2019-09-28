@@ -33,6 +33,7 @@ public class MainGameStage extends Stage {
     Bomb bomb;
     Ball ball;
     Brick brick;
+    Vector2 brickVec;
     float[] ballxy;
     boolean bDrawBall;
     Box2dDetection b2d;
@@ -71,7 +72,7 @@ public class MainGameStage extends Stage {
 
         floor.setWidth(Gdx.graphics.getWidth());
         floor.setHeight(Gdx.graphics.getHeight()/4);
-
+        brickVec = new Vector2();
         bomb = new Bomb(Gdx.graphics.getWidth()/2, (int)floor.getHeight());
         ball = new Ball(Gdx.graphics.getWidth()/2, 0, this.asserts);
         brick = new Brick(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/10*9, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10, 100, asserts.regionBrick);
@@ -98,7 +99,10 @@ public class MainGameStage extends Stage {
         }
 
         //this.addActor(brick);
-        generaAllBrick();
+        //generaAllBrick();
+        brickVec.x = Gdx.graphics.getWidth()/6;
+        brickVec.y = Gdx.graphics.getHeight()/19;
+        generalAllBrick(100, Gdx.graphics.getWidth()/6, Gdx.graphics.getHeight()/19);
         this.addActor(bomb);
         this.addActor(floor);
     }
@@ -110,9 +114,13 @@ public class MainGameStage extends Stage {
     public void generaAllBrick(){
         for(int i =0; i < 50; i++){
             if(i < 10)
-                this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,10) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i+1, this.asserts.regionBrick));
+                this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5),
+                        Gdx.graphics.getHeight()/10 * MathUtils.random(i,10) + (int)floor.getHeight(),
+                        Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i+1, this.asserts.regionBrick));
             else if(i >= 10 && i < 20)
-                this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,20) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
+                this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5),
+                        Gdx.graphics.getHeight()/10 * MathUtils.random(i,20) + (int)floor.getHeight(),
+                        Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
             else if(i >= 20 && i < 30)
                 this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,30) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
             else if(i >= 30 && i < 40)
@@ -124,12 +132,21 @@ public class MainGameStage extends Stage {
         }
     }
 
+    //生成砖块算法,
+    //生成砖块的层数
+    public void generalAllBrick(int length, int bw, int bh){
+        for(int i =0;i < length;i++){
+            this.bricks.add(new Brick(bw*MathUtils.random(0,5),Gdx.graphics.getHeight() + bh*i - bh, bw, bh, i+1, this.asserts.regionBrick));
+            this.addActor(this.bricks.get(i));
+        }
+    }
+
     public void updateBrickPos(){
         for(int i = 0; i < this.bricks.size(); i++){
             Brick tBrick = this.bricks.get(i);
             Vector2 curPos = tBrick.getCurPos();
             //int curScore = tBrick.getCurSocre();
-            tBrick.setCurPos((int)curPos.x, (int)(curPos.y-Gdx.graphics.getWidth()/6));
+            tBrick.setCurPos((int)curPos.x, (int)(curPos.y - brickVec.y));
         }
     }
 

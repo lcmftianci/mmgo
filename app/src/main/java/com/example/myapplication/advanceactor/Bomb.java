@@ -74,8 +74,14 @@ public class Bomb extends Actor {
             return;
         if(Gdx.input.isTouched()){
             //绘制大炮
+            //x坐标
             int touchX = Gdx.input.getX();
-            int touchY =  Gdx.graphics.getHeight() - Gdx.input.getY();
+            //触摸点相对于地面的位置
+            int touchY =  Gdx.graphics.getHeight() - Gdx.input.getY() - this.yPos;
+
+            //触摸点 左上角为（0，0），绘制图形左下角为（0，0）
+
+            Log.d(TAG, "==>> tourchX:" + touchX + " touchY:" + touchY + " inputY:" + Gdx.input.getY());
 
             mTouchX = touchX;
             mTouchY = touchY;
@@ -97,8 +103,8 @@ public class Bomb extends Actor {
                 Log.d(TAG, "s degress:" + (90 -degress)  + " dgre:" + dgre + " touchX:" + touchX + " Gdx.input.getY():" + Gdx.input.getY());
             }
 
-            int originPosX = Gdx.graphics.getWidth()/2;
-            int originPosY = Gdx.graphics.getHeight() - this.yPos;
+            //int originPosX = this.xPos;//Gdx.graphics.getWight();
+            //int originPosY = Gdx.graphics.getHeight() - this.yPos;
             //绘制描绘线,这里需要修改绘制曲线位置不准确，无法反射
             //pixmap.drawPixel(0,0, GL20.GL_COLOR_BUFFER_BIT);
             pixmap.dispose();
@@ -106,9 +112,11 @@ public class Bomb extends Actor {
             pixmap.setColor(Color.BLACK);
             Bresenham2 bresenham = new Bresenham2();
             float weight = 0;
+
+            //pixmap的绘制曲线（0，0）点在左上角
             if(touchX > Gdx.graphics.getWidth()/2) {
-                weight = bs.Yaxb(0, 0, touchX - Gdx.graphics.getWidth() / 2, touchY);
-                for (GridPoint2 point : bresenham.line(originPosX, originPosY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight() - (int)(weight*(float) Gdx.graphics.getWidth()/2.0f)))
+                weight = bs.Yaxb(0, 0, touchX - Gdx.graphics.getWidth()/2, touchY);
+                for (GridPoint2 point : bresenham.line(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()-this.yPos, Gdx.graphics.getWidth(), Gdx.graphics.getHeight() - this.yPos -(int)(weight*(float) Gdx.graphics.getWidth()/2.0)))
                 {
                     if(point.x%6 == 0 || point.x%7 == 0 || point.x%8 == 0 || point.x%9 == 0)
                         continue;
@@ -116,8 +124,8 @@ public class Bomb extends Actor {
                     pixmap.drawCircle(point.x, point.y, 2);
                 }
             }else if(touchX < Gdx.graphics.getWidth()/2){
-                weight = bs.Yaxb(0, 0, Gdx.graphics.getWidth() / 2 - touchX, touchY);
-                for (GridPoint2 point : bresenham.line(originPosX, originPosY, 0, Gdx.graphics.getHeight() - (int)(weight*(float) Gdx.graphics.getWidth()/2.0f)))
+                weight = bs.Yaxb( 0, 0,  Gdx.graphics.getWidth()/2 - touchX, touchY);
+                for (GridPoint2 point : bresenham.line(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()-this.yPos,0, Gdx.graphics.getHeight() - this.yPos - (int)(weight*(float) Gdx.graphics.getWidth()/2.0f)))
                 {
                     if(point.x%6 == 0 || point.x%7 == 0 || point.x%8 == 0 || point.x%9 == 0)
                         continue;
