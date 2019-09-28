@@ -139,9 +139,11 @@ public class AdvanceGame implements ApplicationListener {
         Log.d(TAG, "-=-= x:" + (int)Gdx.graphics.getWidth()/5 +" " + 10);
         Log.d(TAG, "-=-= y:" + (int)Gdx.graphics.getHeight()/5 *2);
         Log.d(TAG, "-=-= y:" + dialogWindow.getY() + " " + (int)Gdx.graphics.getHeight()/5/2);
-        btnOk.setSize(Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
-        btnOk.setPosition((int)Gdx.graphics.getWidth()/5 + 10,dialogWindow.getY() + 10);
-        btnCaccel.setPosition((int)Gdx.graphics.getWidth()/5 + (int)Gdx.graphics.getWidth()/5 + 20,dialogWindow.getY()+10);
+
+        btnOk.setSize(Gdx.graphics.getWidth()/5 * 3/2, Gdx.graphics.getHeight()/5/2);
+        btnCaccel.setSize(Gdx.graphics.getWidth()/5 * 3/2, Gdx.graphics.getHeight()/5/2);
+        btnOk.setPosition(10,10);
+        btnCaccel.setPosition(Gdx.graphics.getWidth()/5 * 3/3 + 10,10);
 
         dialogWindow.addActor(btnOk);
         dialogWindow.addActor(btnCaccel);
