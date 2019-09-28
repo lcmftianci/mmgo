@@ -110,7 +110,7 @@ public class MainGameStage extends Stage {
     public void generaAllBrick(){
         for(int i =0; i < 50; i++){
             if(i < 10)
-                this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,10) + Gdx.graphics.getHeight()/2, Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i+1, this.asserts.regionBrick));
+                this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,10) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i+1, this.asserts.regionBrick));
             else if(i >= 10 && i < 20)
                 this.bricks.add(new Brick(Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,20) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
             else if(i >= 20 && i < 30)
@@ -312,7 +312,8 @@ public class MainGameStage extends Stage {
             Brick brick = bricks.get(i);
             Vector2[] vec = brick.getRect();
             //Log.d(TAG, "==>> y:" + vec[0].y + " floor y:" + (int)floor.getHeight());
-            if(vec[0].y <= (int)floor.getHeight() + Gdx.graphics.getHeight()/2) {
+            //if(vec[0].y <= (int)floor.getHeight() + Gdx.graphics.getHeight()/2) {
+            if(vec[0].y <= (int)floor.getHeight()) {
                 bomb.setBubble(true);
                 return true;
             }
