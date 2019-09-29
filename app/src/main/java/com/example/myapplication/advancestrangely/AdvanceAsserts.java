@@ -29,7 +29,7 @@ public class AdvanceAsserts {
 
     public void uniinit(){
         texture = new Texture(Gdx.files.internal("atlas/images.png"));
-        texturebrick = new Texture(Gdx.files.internal("bomb/brick.png"));
+        texturebrick = new Texture(Gdx.files.internal("spirite/wood.jpg"));
 
         regionBrick = new TextureRegion(texturebrick,22,18,102-22,65-18);
         regionBack = new TextureRegion(texture, 1,1,480,1000);

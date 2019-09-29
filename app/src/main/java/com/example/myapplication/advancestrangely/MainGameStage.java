@@ -62,6 +62,18 @@ public class MainGameStage extends Stage {
 //        this.addActor(background);
 //    }
 
+    private void generateAllBall(int nub){
+        for(int i =0; i < nub; i++){
+            //this.balls.add(new Ball(Gdx.graphics.getWidth()/2, (int)floor.getHeight(), this.asserts));
+            //this.addActor(this.balls.get(i));
+        }
+    }
+
+    private void generareOneBall(){
+        this.balls.add(new Ball(Gdx.graphics.getWidth()/2, (int)floor.getHeight(), this.asserts));
+        this.addActor(this.balls.get(this.balls.size()-1));
+    }
+
     public MainGameStage(AdvanceAsserts asserts){
         //创建相机
         this.cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -93,11 +105,9 @@ public class MainGameStage extends Stage {
 
         //this.addActor(ball);
 
-        for(int i =0; i < 10; i++){
-            this.balls.add(new Ball(Gdx.graphics.getWidth()/2, (int)floor.getHeight(), this.asserts));
-            this.addActor(this.balls.get(i));
-        }
-
+        //用来生成随机的100个球球，用来供玩家哭泣
+        generateAllBall(100);
+        generareOneBall();
         //this.addActor(brick);
         //generaAllBrick();
         brickVec.x = Gdx.graphics.getWidth()/6;
