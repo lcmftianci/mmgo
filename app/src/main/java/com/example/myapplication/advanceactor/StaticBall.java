@@ -30,6 +30,7 @@ public class StaticBall extends Actor {
     public void setCurPos(int x, int y){
         pos.x = x;
         pos.y = y;
+        cr.setPosRect(x, y, (float)staticball.getWidth(), (float)staticball.getHeight());
         staticball.setPosition(x, y);
     }
 

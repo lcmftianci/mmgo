@@ -229,6 +229,38 @@ public class MainGameStage extends Stage {
         return true;
     }
 
+    public void checkAllSBall(){
+        for(int i =0; i < this.staticballs.size(); i++){
+            if(checkStaticBall(this.staticballs.get(i))){
+                StaticBall sBall = this.staticballs.get(i);
+                this.getRoot().removeActor(sBall);
+                this.bricks.remove(sBall);
+            }
+        }
+    }
+
+    public boolean checkStaticBall(StaticBall sball) {
+        if (!bDrawBall)
+            return false;
+        Vector2[] arrSBallRect = sball.getRect();
+        for (int bi = 0; bi < balls.size(); bi++) {
+            Vector2[] arrBallRect = balls.get(bi).getRect();
+            int lb = 0, rb = 0, rt = 0, lt = 0;
+            for (int i = 0; i < arrBallRect.length; i++) {
+                if (b2d.checkTwoBox(arrSBallRect[0], arrSBallRect[1], arrSBallRect[2], arrSBallRect[3], arrBallRect[i])) {
+                    if (i == 0) lb = 1;
+                    if (i == 1) rb = 1;
+                    if (i == 2) rt = 1;
+                    if (i == 3) lt = 1;
+                }
+            }
+            if(lb == 1 || rb == 1 || lt == 1 || rt == 1)
+                return true;
+        }
+        return false;
+    }
+
+
     /*
     * 分析每个球球的移动方向
     * 1.如果球是向右上角移动的话那么球碰右边界的反弹方向应该变成左上角   -->  == <--，判断rt与rb是否碰撞
@@ -449,6 +481,7 @@ public class MainGameStage extends Stage {
         //实现逻辑每点击攻击一次，所有蛋蛋向下拖动一个砖块的高度
         changeAllBall(); //初始化所有导弹
         checkAllBb();    //检测导弹与砖块的碰撞
+        checkAllSBall();
         checkCanTouch(); //检测是否可以点击
     }
 }
