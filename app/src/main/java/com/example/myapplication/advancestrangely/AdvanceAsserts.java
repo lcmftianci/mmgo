@@ -18,6 +18,9 @@ public class AdvanceAsserts {
     TextureRegion regionBundle;
     TextureRegion regionReverseBundle;
 
+    public TextureRegion regionBall;
+    Texture textureBall;
+
     public Sound bitSound;
     public Sound clickSound;
     public Music music;
@@ -30,7 +33,9 @@ public class AdvanceAsserts {
     public void uniinit(){
         texture = new Texture(Gdx.files.internal("atlas/images.png"));
         texturebrick = new Texture(Gdx.files.internal("spirite/wood.jpg"));
+        textureBall = new Texture(Gdx.files.internal("ball.jpg"));
 
+        regionBall = new TextureRegion(textureBall, 5,5,15,15);
         regionBrick = new TextureRegion(texturebrick,22,18,102-22,65-18);
         regionBack = new TextureRegion(texture, 1,1,480,1000);
         regionFloor = new TextureRegion(texture, 481,842,480,160);

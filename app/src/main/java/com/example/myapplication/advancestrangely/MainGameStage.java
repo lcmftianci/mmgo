@@ -17,9 +17,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.example.myapplication.advanceactor.Ball;
 import com.example.myapplication.advanceactor.Bomb;
 import com.example.myapplication.advanceactor.Brick;
+import com.example.myapplication.advanceactor.StaticBall;
 import com.example.myapplication.algorithm.Box2dDetection;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class MainGameStage extends Stage {
@@ -37,17 +39,12 @@ public class MainGameStage extends Stage {
     float[] ballxy;
     boolean bDrawBall;
     Box2dDetection b2d;
-
     public final List<Ball> balls;
-
+    public final List<StaticBall> staticballs;
     public final List<Brick> bricks;
-
     Camera cam;
-
     boolean bBrickCanUpdate;
-
     private final static String TAG = "MainGameStage";
-
 
 //    public MainGameStage() {
 //        super();
@@ -66,6 +63,7 @@ public class MainGameStage extends Stage {
         for(int i =0; i < nub; i++){
             //this.balls.add(new Ball(Gdx.graphics.getWidth()/2, (int)floor.getHeight(), this.asserts));
             //this.addActor(this.balls.get(i));
+            //this.staticballs.add(new StaticBall(Gdx));
         }
     }
 
@@ -92,6 +90,7 @@ public class MainGameStage extends Stage {
 
         this.bricks = new ArrayList<Brick>();
         this.balls = new ArrayList<Ball>();
+        this.staticballs = new ArrayList<StaticBall>();
 
         bDrawBall = false;
         bBrickCanUpdate = false;
@@ -142,14 +141,39 @@ public class MainGameStage extends Stage {
         }
     }
 
+    /*
+     * 判断数组中是否有重复的值
+     */
+    public boolean checkIsRepeat(int[] array) {
+        HashSet<Integer> hashSet = new HashSet<Integer>();
+        for (int i = 0; i < array.length; i++) {
+            hashSet.add(array[i]);
+        }
+        if (hashSet.size() == array.length) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     //生成砖块算法,
     //生成砖块的层数
-    int inx = 0;
     public void generalAllBrick(int length, int bw, int bh){
+        int inx = 0, jnx = 0;
         for(int i =0;i < length;i++){
+            int[] arr = {10,11,12,13,14};
             for(int j = 0; j < MathUtils.random(1,5); j++) {
-                this.bricks.add(new Brick(bw * MathUtils.random(0, 5), Gdx.graphics.getHeight() + bh * i - bh, bw, bh, i + 1, this.asserts.regionBrick));
-                this.addActor(this.bricks.get(inx++));
+                arr[j] = MathUtils.random(0, 5);//如果数组中已有指定数值就不在插入
+                //遍历数组查找重复值
+                if(!checkIsRepeat(arr)){
+                    if(arr[j]%3 != 0) {
+                        this.bricks.add(new Brick(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, bw, bh, i + 1, this.asserts.regionBrick));
+                        this.addActor(this.bricks.get(inx++));
+                    }else{
+                        this.staticballs.add(new StaticBall(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, this.asserts));
+                        this.addActor(this.staticballs.get(jnx++));
+                    }
+                }
             }
         }
     }
@@ -163,18 +187,25 @@ public class MainGameStage extends Stage {
         }
     }
 
+    public void updateStaticBallPos(){
+        for(int i = 0; i < this.staticballs.size(); i++){
+            StaticBall staticBall = this.staticballs.get(i);
+            Vector2 curPos = staticBall.getCurPos();
+            //int curScore = tBrick.getCurSocre();
+            staticBall.setCurPos((int)curPos.x, (int)(curPos.y - brickVec.y));
+        }
+    }
+
     public boolean changeAllBall(){
         if(bomb.getState()&&bomb.getTouchState()){
             ballxy = bomb.AlreadyGet();
             bomb.setBubble(true);
             bDrawBall = true;
             bBrickCanUpdate = true;
-
             for (int i =0; i < balls.size(); i++){
                 balls.get(i).setvum((int)ballxy[0], (int)ballxy[1], ballxy[2]);
                 balls.get(i).delay(i*3);
             }
-
             return true;
         }
         return false;
@@ -330,8 +361,10 @@ public class MainGameStage extends Stage {
                 continue;
             if(i == balls.size() - 1){
                 bomb.setBubble(false);
-                if(bBrickCanUpdate)
+                if(bBrickCanUpdate) {
                     updateBrickPos();
+                    updateStaticBallPos();
+                }
                 bBrickCanUpdate = false;
             }
         }
