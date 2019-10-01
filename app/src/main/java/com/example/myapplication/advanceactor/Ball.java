@@ -177,7 +177,7 @@ public class Ball extends Actor {
                 btop=true;
             }
 
-            if(curPosX > Gdx.graphics.getWidth() - spriteball.getWidth()){
+            if(curPosX >= Gdx.graphics.getWidth() - spriteball.getWidth()){
                 asserts.clickSound.play(1);
                 bleft=true;
             }

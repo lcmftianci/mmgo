@@ -27,6 +27,7 @@ public class Floor extends Image {
         this.setPosition(pos_x,pos_y);
         world = aWorld;
         BodyDef groundBodyDef = new BodyDef();
+
         // Set its world position
         groundBodyDef.position.set(new Vector2(pos_x, pos_y));
 

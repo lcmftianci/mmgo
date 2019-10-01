@@ -63,26 +63,21 @@ public class MusicalNote extends Image  {
         // Shape is the only disposable of the lot, so get rid of it
         shape.dispose();
         this.setOrigin(this.getWidth()/2,this.getHeight()/2);
-
-
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         effect.draw(batch);
-
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
         this.setRotation(body.getAngle()*  MathUtils.radiansToDegrees);
-
         this.setPosition(body.getPosition().x-this.getWidth()/2,body.getPosition().y-this.getHeight()/2);
         effect.setPosition(this.getWidth()/2+this.getX(),this.getHeight()/2+this.getY());
         effect.update(delta);
-
     }
 
 

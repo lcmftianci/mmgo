@@ -38,6 +38,8 @@ public class MainGameStage extends Stage {
     Vector2 brickVec;
     float[] ballxy;
     boolean bDrawBall;
+    boolean bOneMoreBall;
+    int nOnes;
     Box2dDetection b2d;
     public final List<Ball> balls;
     public final List<StaticBall> staticballs;
@@ -107,6 +109,8 @@ public class MainGameStage extends Stage {
         //用来生成随机的100个球球，用来供玩家哭泣
         generateAllBall(100);
         generareOneBall();
+        bOneMoreBall = false;
+        nOnes = 0;
         //this.addActor(brick);
         //generaAllBrick();
         brickVec.x = Gdx.graphics.getWidth()/6;
@@ -241,7 +245,7 @@ public class MainGameStage extends Stage {
             bBrickCanUpdate = true;
             for (int i =0; i < balls.size(); i++){
                 balls.get(i).setvum((int)ballxy[0], (int)ballxy[1], ballxy[2]);
-                balls.get(i).delay(i*3);
+                balls.get(i).delay(i*5);
             }
             return true;
         }
@@ -261,19 +265,24 @@ public class MainGameStage extends Stage {
 
     public boolean checkAllBb(){
         for(int i =0; i < this.bricks.size(); i++){
-            checkAllBallBrick(this.bricks.get(i));
+            if(checkAllBallBrick(this.bricks.get(i))){
+                i--;
+            }
         }
         return true;
     }
 
+    //检测静态得分球有效碰撞带来的效果
     public void checkAllSBall(){
         for(int i =0; i < this.staticballs.size(); i++){
             StaticBall sBall = this.staticballs.get(i);
             if(checkStaticBall(sBall)){
                 this.getRoot().removeActor(sBall);
                 this.staticballs.remove(sBall);
-                generareOneBall();
+                bOneMoreBall = true;
                 asserts.clickSound.play(1);
+                i--;
+                nOnes++;
             }
         }
     }
@@ -376,11 +385,12 @@ public class MainGameStage extends Stage {
                 if(mBrick.setNum(0)){
                     this.getRoot().removeActor(mBrick);
                     this.bricks.remove(mBrick);
+                    return true;
                 }
             }
         }
 
-        return true;
+        return false;
     }
 
     public boolean checkAllBallBrick(){
@@ -426,6 +436,7 @@ public class MainGameStage extends Stage {
         return true;
     }
 
+    //检测是否可以向下移动砖块
     public void checkCanTouch(){
         for(int i = 0; i < balls.size(); i++){
             if(balls.get(i).isrun())
@@ -434,6 +445,15 @@ public class MainGameStage extends Stage {
                 bomb.setBubble(false);
                 if(bBrickCanUpdate) {
                     updateBrickPos();
+
+                    if(bOneMoreBall){
+                        for(int num = 0; num < nOnes; num++){
+                            generareOneBall();
+                            bOneMoreBall = false;
+                        }
+                        nOnes = 0;
+                    }
+
                     updateStaticBallPos();
                 }
                 bBrickCanUpdate = false;
