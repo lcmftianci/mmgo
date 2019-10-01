@@ -161,17 +161,54 @@ public class MainGameStage extends Stage {
     public void generalAllBrick(int length, int bw, int bh){
         int inx = 0, jnx = 0;
         for(int i =0;i < length;i++){
-            int[] arr = {10,11,12,13,14};
-            for(int j = 0; j < MathUtils.random(1,5); j++) {
-                arr[j] = MathUtils.random(0, 5);//如果数组中已有指定数值就不在插入
-                //遍历数组查找重复值
-                if(!checkIsRepeat(arr)){
-                    if(arr[j]%3 != 0) {
-                        this.bricks.add(new Brick(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, bw, bh, i + 1, this.asserts.regionBrick));
-                        this.addActor(this.bricks.get(inx++));
-                    }else{
-                        this.staticballs.add(new StaticBall(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, this.asserts));
-                        this.addActor(this.staticballs.get(jnx++));
+            int qy = MathUtils.random(3,5);
+            int[] arr = {10,11,12,13,14,15};
+
+            if(i < 20){
+                for(int j = 0; j < MathUtils.random(1,6); j++) {
+                //for(int j = 0; j < 6; ) {
+                    arr[j] = MathUtils.random(0, 5);//如果数组中已有指定数值就不在插入
+                    //遍历数组查找重复值
+                    if(!checkIsRepeat(arr)){
+                        if(arr[j]%qy != 0) {
+                            this.bricks.add(new Brick(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, bw, bh, i + 1 + arr[j], this.asserts.regionBrick));
+                            this.addActor(this.bricks.get(inx++));
+                        }else{
+                            this.staticballs.add(new StaticBall(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, this.asserts));
+                            this.addActor(this.staticballs.get(jnx++));
+                        }
+                        j++;
+                    }
+                }
+            }else if(20 <= i && i < 50){
+                for(int j = 0; j < MathUtils.random(3,6);) {
+                    arr[j] = MathUtils.random(0, 5);//如果数组中已有指定数值就不在插入
+                    //遍历数组查找重复值
+                    if(!checkIsRepeat(arr)){
+                        if(arr[j]%qy != 0) {
+                            this.bricks.add(new Brick(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, bw, bh, i + 1 + arr[j], this.asserts.regionBrick));
+                            this.addActor(this.bricks.get(inx++));
+                        }else{
+                            this.staticballs.add(new StaticBall(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, this.asserts));
+                            this.addActor(this.staticballs.get(jnx++));
+                        }
+                        j++;
+                    }
+                }
+            }
+            else {
+                for(int j = 0; j < 6;) {
+                    arr[j] = MathUtils.random(0, 5);//如果数组中已有指定数值就不在插入
+                    //遍历数组查找重复值
+                    if(!checkIsRepeat(arr)){
+                        if(arr[j]%qy != 0) {
+                            this.bricks.add(new Brick(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, bw, bh, i + 1 + arr[j], this.asserts.regionBrick));
+                            this.addActor(this.bricks.get(inx++));
+                        }else{
+                            this.staticballs.add(new StaticBall(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, this.asserts));
+                            this.addActor(this.staticballs.get(jnx++));
+                        }
+                        j++;
                     }
                 }
             }
@@ -231,10 +268,12 @@ public class MainGameStage extends Stage {
 
     public void checkAllSBall(){
         for(int i =0; i < this.staticballs.size(); i++){
-            if(checkStaticBall(this.staticballs.get(i))){
-                StaticBall sBall = this.staticballs.get(i);
+            StaticBall sBall = this.staticballs.get(i);
+            if(checkStaticBall(sBall)){
                 this.getRoot().removeActor(sBall);
-                this.bricks.remove(sBall);
+                this.staticballs.remove(sBall);
+                generareOneBall();
+                asserts.clickSound.play(1);
             }
         }
     }
