@@ -246,6 +246,7 @@ public class MainGameStage extends Stage {
             for (int i =0; i < balls.size(); i++){
                 balls.get(i).setvum((int)ballxy[0], (int)ballxy[1], ballxy[2]);
                 balls.get(i).delay(i*5);
+
             }
             return true;
         }
@@ -338,29 +339,30 @@ public class MainGameStage extends Stage {
                 }
             }
 
+            //正面向左或者向右撞击导致的横向移动方向改变
             if((rt == 1 && rb == 1) || (lt == 1 && lb == 1)){
                 balls.get(bi).setReverseHorizenDir();
             }
-
+            //正面向上或者向下撞击造成的移动方向改变
             if((lb == 1 && rb == 1) || (lt == 1 && rt == 1)){
                 balls.get(bi).setReverseVerticalDir();
             }
-
-            if(lt == 0 &&  lb == 0 && rt == 1 && rb == 0) {
-                balls.get(bi).setReverseHorizenDir();
-            }
-
-            if(lt == 1 &&  lb == 0 && rt == 0 && rb == 0) {
-                balls.get(bi).setReverseHorizenDir();
-            }
-
-            if(lt == 0 &&  lb == 1 && rt == 0 && rb == 0) {
-                balls.get(bi).setReverseVerticalDir();
-            }
-
-            if(lt == 0 &&  lb == 0 && rt == 0 && rb == 1) {
-                balls.get(bi).setReverseVerticalDir();
-            }
+//            //右上角的左侧撞击与顶部撞击
+//            if(lt == 0 &&  lb == 0 && rt == 1 && rb == 0) {
+//                balls.get(bi).setReverseHorizenDir();
+//            }
+//
+//            if(lt == 1 &&  lb == 0 && rt == 0 && rb == 0) {
+//                balls.get(bi).setReverseHorizenDir();
+//            }
+//
+//            if(lt == 0 &&  lb == 1 && rt == 0 && rb == 0) {
+//                balls.get(bi).setReverseVerticalDir();
+//            }
+//
+//            if(lt == 0 &&  lb == 0 && rt == 0 && rb == 1) {
+//                balls.get(bi).setReverseVerticalDir();
+//            }
 
             /*
             if(lb == 1 && rb == 1){
@@ -467,7 +469,7 @@ public class MainGameStage extends Stage {
             Vector2[] vec = brick.getRect();
             //Log.d(TAG, "==>> y:" + vec[0].y + " floor y:" + (int)floor.getHeight());
             //if(vec[0].y <= (int)floor.getHeight() + Gdx.graphics.getHeight()/2) {
-            if(vec[0].y <= (int)floor.getHeight()) {
+            if(vec[0].y <= (int)floor.getHeight() + 50) {
                 bomb.setBubble(true);
                 return true;
             }
@@ -542,5 +544,6 @@ public class MainGameStage extends Stage {
         checkAllBb();    //检测导弹与砖块的碰撞
         checkAllSBall();
         checkCanTouch(); //检测是否可以点击
+        bomb.setBubble(balls.size());
     }
 }

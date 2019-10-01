@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Bresenham2;
@@ -35,8 +36,11 @@ public class Bomb extends Actor {
     boolean bCanGet;
     float mTouchX;
     float mTouchY;
+    BitmapFont font;
 
     boolean bBubble;
+
+    int bubbles;
 
     int xPos;
     int yPos;
@@ -55,6 +59,8 @@ public class Bomb extends Actor {
         statetime = 0.0f;
 
         pixmap = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGBA8888);
+        font = new BitmapFont( Gdx.files.internal( "font/bitmap_font.fnt" ), Gdx.files.internal( "font/bitmap_font.png" ), false );
+        font.setColor(Color.RED);
         pixmap.setColor(Color.BLACK);
         bs = new BallSpring();
         result = new Texture(pixmap);
@@ -66,6 +72,7 @@ public class Bomb extends Actor {
         bCanGet = false;
         bBubble = false;
         mWeight = 0;
+        bubbles = 1;
     }
 
     //更改大炮的方向
@@ -154,6 +161,10 @@ public class Bomb extends Actor {
         return bCanGet;
     }
 
+    public void setBubble(int bubbles){
+        this.bubbles = bubbles;
+    }
+
     public boolean getTouchState(){
         return bTouch;
     }
@@ -176,7 +187,15 @@ public class Bomb extends Actor {
 
         //batch.disableBlending();
         batch.draw(result,0,0);
+        String str = "";
+        str += bubbles;
+
         spriteBomb.draw(batch);
+        font.draw(batch, str, this.xPos, this.yPos*7/6);
+        //Log.d(TAG, "==>> y:" + this.yPos + " height/2:" + Gdx.graphics.getHeight()/2);
+        //font.draw(batch, str, Gdx.graphics.getWidth()/2, this.yPos + 100);
+        //font.draw(batch, str, 0, 0);
+
     }
 
     @Override
