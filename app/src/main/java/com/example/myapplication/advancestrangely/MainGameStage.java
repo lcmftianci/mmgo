@@ -175,10 +175,10 @@ public class MainGameStage extends Stage {
                     //遍历数组查找重复值
                     if(!checkIsRepeat(arr)){
                         if(arr[j]%qy != 0) {
-                            this.bricks.add(new Brick(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, bw, bh, i + 1 + arr[j], this.asserts.regionBrick));
+                            this.bricks.add(new Brick(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, bw, bh, i + 1 + arr[j], this.asserts.regionBrick));
                             this.addActor(this.bricks.get(inx++));
                         }else{
-                            this.staticballs.add(new StaticBall(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, this.asserts));
+                            this.staticballs.add(new StaticBall(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, this.asserts));
                             this.addActor(this.staticballs.get(jnx++));
                         }
                         j++;
@@ -190,10 +190,10 @@ public class MainGameStage extends Stage {
                     //遍历数组查找重复值
                     if(!checkIsRepeat(arr)){
                         if(arr[j]%qy != 0) {
-                            this.bricks.add(new Brick(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, bw, bh, i + 1 + arr[j], this.asserts.regionBrick));
+                            this.bricks.add(new Brick(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, bw, bh, i + 1 + arr[j], this.asserts.regionBrick));
                             this.addActor(this.bricks.get(inx++));
                         }else{
-                            this.staticballs.add(new StaticBall(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, this.asserts));
+                            this.staticballs.add(new StaticBall(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, this.asserts));
                             this.addActor(this.staticballs.get(jnx++));
                         }
                         j++;
@@ -342,11 +342,22 @@ public class MainGameStage extends Stage {
             //正面向左或者向右撞击导致的横向移动方向改变
             if((rt == 1 && rb == 1) || (lt == 1 && lb == 1)){
                 balls.get(bi).setReverseHorizenDir();
-            }
-            //正面向上或者向下撞击造成的移动方向改变
-            if((lb == 1 && rb == 1) || (lt == 1 && rt == 1)){
+            }else if((lb == 1 && rb == 1) || (lt == 1 && rt == 1)){//正面向上或者向下撞击造成的移动方向改变
                 balls.get(bi).setReverseVerticalDir();
+            }else if(lb == 1){
+                balls.get(bi).setReverseVerticalDir();
+                balls.get(bi).setReverseHorizenDir();
+            }else if(lt == 1){
+                //balls.get(bi).setReverseVerticalDir();
+                balls.get(bi).setReverseHorizenDir();
+            }else if(rb == 1){
+                balls.get(bi).setReverseVerticalDir();
+                balls.get(bi).setReverseHorizenDir();
+            }else if(rt == 1){
+                //balls.get(bi).setReverseVerticalDir();
+                balls.get(bi).setReverseHorizenDir();
             }
+
 //            //右上角的左侧撞击与顶部撞击
 //            if(lt == 0 &&  lb == 0 && rt == 1 && rb == 0) {
 //                balls.get(bi).setReverseHorizenDir();

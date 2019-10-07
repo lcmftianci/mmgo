@@ -167,7 +167,7 @@ public class Ball extends Actor {
                 curPosY -= yv;
             }
 
-            if(curPosY >= Gdx.graphics.getHeight() - spriteball.getHeight()-10){
+            if(curPosY >= Gdx.graphics.getHeight() - spriteball.getHeight()-100){
                 asserts.clickSound.play(1);
                 btop=false;
             }
