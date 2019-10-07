@@ -7,11 +7,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.example.myapplication.advancestrangely.AdvanceAsserts;
 
-public class Ball extends Actor {
+public class Ball extends Actor implements GameObject{
     Texture texture;
     Sprite spriteball;
     TextureRegion region;
@@ -29,6 +30,8 @@ public class Ball extends Actor {
     Vector2 curPos;
     ConstantRect cr;       //四个角的坐标点
     int inx;
+
+    public Rectangle bounds;
 
     private final static String TAG = "BALL";
 
@@ -48,14 +51,15 @@ public class Ball extends Actor {
         texture = new Texture(Gdx.files.internal("ball.jpg"));
         region = new TextureRegion(texture, 5,5,15,15);
         spriteball = new Sprite(region);
+        spriteball.setSize(Gdx.graphics.getWidth()/20, Gdx.graphics.getWidth()/20);
 
         //spriteball.setScale(100,100);
         spriteball.setSize(Gdx.graphics.getWidth()/22, Gdx.graphics.getWidth()/22);
         xd = -10;
         yd = -10;
-        vul = Gdx.graphics.getHeight()/80;
-        xv = Gdx.graphics.getWidth()/100;
-        yv = Gdx.graphics.getHeight()/40;
+        vul = Gdx.graphics.getHeight()/50;
+        xv = Gdx.graphics.getWidth()/90;
+        yv = Gdx.graphics.getHeight()/35;
 
         brun = false;
         bleft = true;
@@ -71,6 +75,11 @@ public class Ball extends Actor {
         curPos = new Vector2(curPosX, curPosY);
         cr = new ConstantRect();
         cr.setPosRect(curPosX, curPosY, spriteball.getWidth(), spriteball.getHeight());
+        bounds = new Rectangle(0,0,0,0);
+        bounds.x = curPosX;
+        bounds.y = curPosY;
+        bounds.width = spriteball.getWidth();
+        bounds.height = spriteball.getHeight();
     }
 
     public Vector2[] getRect(){
@@ -113,7 +122,7 @@ public class Ball extends Actor {
     }
 
     public void update(int x, int y){
-        spriteball.setPosition(x - Gdx.graphics.getWidth()/13/2, y - Gdx.graphics.getWidth()/13/2);
+        spriteball.setPosition(x - Gdx.graphics.getWidth()/13, y - Gdx.graphics.getWidth()/13);
     }
 
     public Vector2 getCurPos(){
@@ -202,6 +211,15 @@ public class Ball extends Actor {
             curPos.x = curPosX;
             curPos.y = curPosY;
             cr.setPosRect(curPosX, curPosY, spriteball.getWidth(), spriteball.getHeight());
+            bounds.x = curPosX;
+            bounds.y = curPosY;
+            bounds.width = spriteball.getWidth();
+            bounds.height = spriteball.getHeight();
         }
+    }
+
+    //@Override
+    public Rectangle geBounds() {
+        return bounds;
     }
 }

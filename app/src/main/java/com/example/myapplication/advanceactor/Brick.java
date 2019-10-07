@@ -7,13 +7,14 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.example.myapplication.advancestrangely.AdvanceAsserts;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class Brick extends Actor {
+public class Brick extends Actor{
     Sprite brickSprite;         //需要碰撞的砖
     Texture texture;            //砖块精灵
     //AdvanceAsserts asserts;     //精灵图集
@@ -22,6 +23,7 @@ public class Brick extends Actor {
     Vector2 size;
     BitmapFont font;
     ConstantRect cr;
+    public Rectangle bounds;
 
     public Brick(int x, int y, int sw, int sh, int score, TextureRegion region){
         //this.asserts = asserts;
@@ -39,6 +41,11 @@ public class Brick extends Actor {
         font.setColor(Color.BLUE);
         cr = new ConstantRect();
         cr.setPosRect(x, y, size.x, size.y);
+        bounds = new Rectangle(0,0,0,0);
+        bounds.x = x;
+        bounds.y = y;
+        bounds.width = size.x;
+        bounds.height = size.y;
     }
 
     public boolean setNum(int num){
@@ -79,5 +86,15 @@ public class Brick extends Actor {
         str += score;
         font.draw(batch, str, this.pos.x + size.x/3, this.pos.y+size.y);
         cr.setPosRect((int)this.pos.x, (int)this.pos.y, size.x, size.y);
+
+        bounds.x = this.pos.x;
+        bounds.y = this.pos.y;
+        bounds.width = size.x;
+        bounds.height = size.y;
+    }
+
+    //@Override
+    public Rectangle geBounds() {
+        return bounds;
     }
 }

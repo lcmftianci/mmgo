@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -245,7 +246,7 @@ public class MainGameStage extends Stage {
             bBrickCanUpdate = true;
             for (int i =0; i < balls.size(); i++){
                 balls.get(i).setvum((int)ballxy[0], (int)ballxy[1], ballxy[2]);
-                balls.get(i).delay(i*5);
+                balls.get(i).delay(i*3);
 
             }
             return true;
@@ -267,6 +268,15 @@ public class MainGameStage extends Stage {
     public boolean checkAllBb(){
         for(int i =0; i < this.bricks.size(); i++){
             if(checkAllBallBrick(this.bricks.get(i))){
+                i--;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkAllbbc(){
+        for(int i =0; i < this.bricks.size(); i++){
+            if(checkbbc(this.bricks.get(i))){
                 i--;
             }
         }
@@ -307,6 +317,25 @@ public class MainGameStage extends Stage {
                 return true;
         }
         return false;
+    }
+
+    public boolean checkbbc(Brick mBrick){
+        if(!bDrawBall)
+            return false;
+
+        Rectangle rc = mBrick.geBounds();
+        for (int bi = 0; bi < balls.size(); bi++) {
+            Rectangle rcball = balls.get(bi).geBounds();
+            //if(rc.overlaps(balls.get(bi).geBounds())){
+            //    balls.get(bi).setReverseHorizenDir();
+            //    balls.get(bi).setReverseVerticalDir();
+            //}
+
+            Log.d(TAG, "==> x:" + rc.x + " y:" + rc.y + " width:" + rc.width + " height:" + rc.height);
+            Log.d(TAG, "==> ballx:" + rcball.x + " y:" + rcball.y + " width:" + rcball.width + " height:" + rcball.height);
+        }
+
+        return true;
     }
 
 
@@ -553,6 +582,7 @@ public class MainGameStage extends Stage {
         //实现逻辑每点击攻击一次，所有蛋蛋向下拖动一个砖块的高度
         changeAllBall(); //初始化所有导弹
         checkAllBb();    //检测导弹与砖块的碰撞
+        //checkAllbbc();
         checkAllSBall();
         checkCanTouch(); //检测是否可以点击
         bomb.setBubble(balls.size());
