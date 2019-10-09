@@ -594,5 +594,6 @@ public class MainGameStage extends Stage {
         checkAllSBall();
         checkCanTouch(); //检测是否可以点击
         bomb.setBubble(balls.size());
+        world.step(Gdx.graphics.getDeltaTime(), 6, 2);
     }
 }
