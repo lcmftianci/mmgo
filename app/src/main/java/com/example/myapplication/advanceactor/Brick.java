@@ -9,12 +9,19 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.example.myapplication.advancestrangely.AdvanceAsserts;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class Brick extends Actor{
+public class Brick extends Image {
+    World world;
+    Body body;
     Sprite brickSprite;         //需要碰撞的砖
     Texture texture;            //砖块精灵
     //AdvanceAsserts asserts;     //精灵图集
@@ -25,7 +32,31 @@ public class Brick extends Actor{
     ConstantRect cr;
     public Rectangle bounds;
 
-    public Brick(int x, int y, int sw, int sh, int score, TextureRegion region){
+    private void initBody(int pos_x, int pos_y){
+        BodyDef groundBodyDef = new BodyDef();
+        groundBodyDef.type = BodyDef.BodyType.DynamicBody;
+        // Set its world position
+        groundBodyDef.position.set(new Vector2(pos_x, pos_y));
+
+        // Create a body from the defintion and add it to the world
+        body = world.createBody(groundBodyDef);
+
+        // Create a polygon shape
+        PolygonShape groundBox = new PolygonShape();
+        // Set the polygon shape as a box which is twice the size of our view port and 20 high
+
+        // (setAsBox takes half-width and half-height as arguments)
+        groundBox.setAsBox(brickSprite.getWidth(), brickSprite.getHeight());
+        //groundBox.setAsBox(this.getWidth()/2, this.getHeight()/2);
+        //body.setTransform(this.getX()+this.getWidth()/2,this.getY()+this.getHeight()/2, (float)Math.toRadians(angle));
+
+        // Create a fixture from our polygon shape and add it to our ground body
+        body.createFixture(groundBox, 0.0f);
+        // Clean up after ourselves
+        groundBox.dispose();
+    }
+
+    public Brick(World aWorld, int x, int y, int sw, int sh, int score, TextureRegion region){
         //this.asserts = asserts;
         pos = new Vector2();
         size = new Vector2();
@@ -46,6 +77,8 @@ public class Brick extends Actor{
         bounds.y = y;
         bounds.width = size.x;
         bounds.height = size.y;
+        this.world = aWorld;
+        initBody(x,y);
     }
 
     public boolean setNum(int num){

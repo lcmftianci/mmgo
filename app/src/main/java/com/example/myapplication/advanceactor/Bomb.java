@@ -14,13 +14,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Bresenham2;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.example.myapplication.algorithm.BallSpring;
 
 /*
 * 绘制人间大炮，打出去直线并带有反弹效果
 * */
 
-public class Bomb extends Actor {
+public class Bomb extends Image {
     private final static String TAG = "=== Bomb";
     Texture textureBomb;
     Sprite spriteBomb;

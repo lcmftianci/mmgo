@@ -55,7 +55,6 @@ public class GameScreen implements Screen {
         musicalNote.setTouchable(Touchable.enabled);
 
         stage.addActor(new Floor(world,0,Gdx.graphics.getHeight()/3,Gdx.graphics.getWidth()*2/3,Gdx.graphics.getHeight()/10,-30));
-
     }
 
     @Override

@@ -9,10 +9,19 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.example.myapplication.advancestrangely.AdvanceAsserts;
 
-public class Ball extends Actor implements GameObject{
+public class Ball extends Image implements GameObject{
+
+    //创建body
+    private Body body;
+    private World world;
     Texture texture;
     Sprite spriteball;
     TextureRegion region;
@@ -37,10 +46,38 @@ public class Ball extends Actor implements GameObject{
 
     AdvanceAsserts asserts;
 
-    public Ball(int x, int y, AdvanceAsserts asserts){
+    public Ball(World aWorld, int x, int y, AdvanceAsserts asserts){
+        this.world = aWorld;
         inx = 0;
         this.asserts = asserts;
+        //initBody(x,y);
         init(x,y);
+        initBody(x,y);
+    }
+
+    private void initBody(int pos_x, int pos_y){
+        BodyDef groundBodyDef = new BodyDef();
+        groundBodyDef.type = BodyDef.BodyType.DynamicBody;
+
+        // Set its world position
+        groundBodyDef.position.set(new Vector2(pos_x, pos_y));
+
+        // Create a body from the defintion and add it to the world
+        body = world.createBody(groundBodyDef);
+
+        // Create a polygon shape
+        PolygonShape groundBox = new PolygonShape();
+        // Set the polygon shape as a box which is twice the size of our view port and 20 high
+
+        // (setAsBox takes half-width and half-height as arguments)
+        groundBox.setAsBox(spriteball.getWidth(), spriteball.getHeight());
+        //groundBox.setAsBox(this.getWidth()/2, this.getHeight()/2);
+        //body.setTransform(this.getX()+this.getWidth()/2,this.getY()+this.getHeight()/2, (float)Math.toRadians(angle));
+
+        // Create a fixture from our polygon shape and add it to our ground body
+        body.createFixture(groundBox, 0.0f);
+        // Clean up after ourselves
+        groundBox.dispose();
     }
 
     public void delay(int inx){

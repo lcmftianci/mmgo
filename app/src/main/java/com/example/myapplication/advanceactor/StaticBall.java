@@ -7,10 +7,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.example.myapplication.advancestrangely.AdvanceAsserts;
 
 //绘制静态球，撞击一次，子弹增加一个
-public class StaticBall extends Actor {
+public class StaticBall extends Image {
 
     int inx;
     AdvanceAsserts asserts;
