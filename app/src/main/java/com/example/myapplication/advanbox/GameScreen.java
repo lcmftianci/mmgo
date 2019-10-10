@@ -1,5 +1,7 @@
 package com.example.myapplication.advanbox;
 
+import android.util.Log;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -71,7 +73,8 @@ public class GameScreen implements Screen {
         stage.act();
         stage.draw();
         //debugRenderer.render(world, stage.getCamera().combined);
-        world.step(Gdx.graphics.getDeltaTime(), 20, 2);
+        Log.d("GameScreen",  "time:" + Gdx.graphics.getDeltaTime());
+        world.step(1/60.0f, 6, 2);
     }
 
 

@@ -30,10 +30,12 @@ public class Floor extends Image {
         this.setPosition(pos_x,pos_y);
         world = aWorld;
         BodyDef groundBodyDef = new BodyDef();
-        groundBodyDef.type = BodyDef.BodyType.StaticBody;
-        //groundBodyDef.type = BodyDef.BodyType.KinematicBody;
+        //groundBodyDef.type = BodyDef.BodyType.StaticBody;
+        groundBodyDef.type = BodyDef.BodyType.KinematicBody;
         //groundBodyDef.type = BodyDef.BodyType.DynamicBody;
         // Set its world position
+
+        //groundBodyDef.setLinearVelocity(0.0f, 1.0f);
         groundBodyDef.position.set(new Vector2(pos_x, pos_y));
 
         // Create a body from the defintion and add it to the world
@@ -50,6 +52,7 @@ public class Floor extends Image {
 
         // Create a fixture from our polygon shape and add it to our ground body
         body.createFixture(groundBox, 0.0f);
+        body.setLinearVelocity(10.0f, 10.0f);
 
 //        FixtureDef fixtureDef = new FixtureDef();
 //        fixtureDef.shape = groundBox;
@@ -69,10 +72,10 @@ public class Floor extends Image {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        this.setRotation(body.getAngle()*  MathUtils.radiansToDegrees);
+        //this.setRotation(body.getAngle()*  MathUtils.radiansToDegrees);
         //为啥不能用了
-        //this.setPosition(body.getPosition().x-this.getWidth()/2,body.getPosition().y - this.getHeight()/2);
-        this.setPosition(Gdx.input.getX(), Gdx.input.getY());
+        this.setPosition(body.getPosition().x-this.getWidth()/2,body.getPosition().y - this.getHeight()/2);
+        //this.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
     }
 }
 
