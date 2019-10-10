@@ -52,7 +52,7 @@ public class Floor extends Image {
 
         // Create a fixture from our polygon shape and add it to our ground body
         body.createFixture(groundBox, 0.0f);
-        body.setLinearVelocity(10.0f, 10.0f);
+        //body.setLinearVelocity(10.0f, 10.0f);
 
 //        FixtureDef fixtureDef = new FixtureDef();
 //        fixtureDef.shape = groundBox;
@@ -62,6 +62,10 @@ public class Floor extends Image {
 //        Fixture fixture = body.createFixture(fixtureDef);
         // Clean up after ourselves
         groundBox.dispose();
+    }
+
+    public void setActorPos(int x, int y){
+        body.setLinearVelocity(x, y);
     }
 
     @Override
