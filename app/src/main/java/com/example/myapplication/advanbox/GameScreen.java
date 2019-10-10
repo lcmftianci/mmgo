@@ -54,7 +54,7 @@ public class GameScreen implements Screen {
         });
         musicalNote.setTouchable(Touchable.enabled);
 
-        stage.addActor(new Floor(world,0,Gdx.graphics.getHeight()/3,Gdx.graphics.getWidth()*2/3,Gdx.graphics.getHeight()/10,-30));
+        stage.addActor(new Floor(world,0,Gdx.graphics.getHeight()/3,Gdx.graphics.getWidth()*2/3,Gdx.graphics.getHeight()/10,-10));
     }
 
     @Override
@@ -71,7 +71,7 @@ public class GameScreen implements Screen {
         stage.act();
         stage.draw();
         //debugRenderer.render(world, stage.getCamera().combined);
-        world.step(Gdx.graphics.getDeltaTime(), 6, 2);
+        world.step(Gdx.graphics.getDeltaTime(), 20, 2);
     }
 
 

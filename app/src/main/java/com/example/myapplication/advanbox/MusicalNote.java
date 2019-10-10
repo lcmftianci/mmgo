@@ -38,6 +38,7 @@ public class MusicalNote extends Image  {
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
+        //bodyDef.type = BodyDef.BodyType.StaticBody;
         bodyDef.position.set(pos_x, pos_y);
 
         // Create a body in the world using our definition
@@ -79,8 +80,4 @@ public class MusicalNote extends Image  {
         effect.setPosition(this.getWidth()/2+this.getX(),this.getHeight()/2+this.getY());
         effect.update(delta);
     }
-
-
-
-
 }

@@ -50,9 +50,9 @@ public class HelloGameActivity extends AndroidApplication {
 
 //        initialize(new GamePad(), config); //虚拟摇杆
 
-        initialize(new AdvanceGame(), config); //勇往直前
+        //initialize(new AdvanceGame(), config); //勇往直前
 //       initialize(new ActionUser(), config); //勇往直前
         //initialize(new FirstGame(), config); //勇往直前
-        //initialize(new MyGdxGameBox2d(), config);
+        initialize(new MyGdxGameBox2d(), config);
     }
 }

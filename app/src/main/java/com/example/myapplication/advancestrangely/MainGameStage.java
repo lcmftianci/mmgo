@@ -589,7 +589,7 @@ public class MainGameStage extends Stage {
 
         //实现逻辑每点击攻击一次，所有蛋蛋向下拖动一个砖块的高度
         changeAllBall(); //初始化所有导弹
-        checkAllBb();    //检测导弹与砖块的碰撞
+        //checkAllBb();    //检测导弹与砖块的碰撞
         //checkAllbbc();
         checkAllSBall();
         checkCanTouch(); //检测是否可以点击

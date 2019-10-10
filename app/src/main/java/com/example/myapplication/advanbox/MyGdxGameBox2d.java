@@ -25,7 +25,6 @@ public class MyGdxGameBox2d extends Game {
     @Override
     public void render () {
         super.render();
-
     }
 
     public void dispose () {
