@@ -31,32 +31,70 @@ public class GameScreen implements Screen {
 
     public GameScreen(Game aGame) {
         game = aGame;
-        Gdx.input.setInputProcessor(stage);
+
         stage = new Stage(new ScreenViewport());
         debugRenderer = new Box2DDebugRenderer();
         world = new World(new Vector2(0, -1000), true);
 
-        MusicalNote musicalNote = new MusicalNote(world,Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight());
+        Log.d("+++++++>>", "x:" + " y: ");
+        final MusicalNote musicalNote = new MusicalNote(world,Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight());
         stage.addActor(musicalNote);
         musicalNote.addListener(new InputListener() {
 
             public void clicked(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("X:" + x + " Y:" + y);
+                //System.out.println("X:" + x + " Y:" + y);
                 //return true;
             }
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("X:" + x + " Y:" + y);
-                return true;
+                //System.out.println("X:" + x + " Y:" + y);
+                Log.d("down +++++++>>", "x:" +  x + " y: " + y);
+                musicalNote.setActorPos(10000, -10000);
+                return super.touchDown(event,x,y,pointer,button);
             }
 
+            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("touchup");
+                //System.out.println("touchup");
+                Log.d(" up +++++++>>", "x:" +  x + " y: " + y);
+                //musicalNote.setActorPos(0, 0);
             }
         });
         musicalNote.setTouchable(Touchable.enabled);
 
-        stage.addActor(new Floor(world,0,Gdx.graphics.getHeight()/3,Gdx.graphics.getWidth()*2/3,Gdx.graphics.getHeight()/10,-10));
+        final Floor flr = new Floor(world,0,Gdx.graphics.getHeight()/3,Gdx.graphics.getWidth()*2/3,Gdx.graphics.getHeight()/10,-10);
+        stage.addActor(flr);
+        flr.addListener(new InputListener() {
+
+            public void clicked(InputEvent event, float x, float y, int pointer, int button) {
+                //System.out.println("X:" + x + " Y:" + y);
+                Log.d("flv  clieck+++++++>>", "x:" +  x + " y: " + y);
+                //return true;
+            }
+
+            @Override
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                super.touchDragged(event, x, y, pointer);
+                Log.d("touchDragged  +++++++>>", "x:" +  x + " y: " + y);
+
+            }
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                //System.out.println("X:" + x + " Y:" + y);
+                Log.d("flv  +++++++>>", "x:" +  x + " y: " + y);
+                flr.setActorPos(1000, 100);
+                return super.touchDown(event,x,y,pointer,button);
+            }
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                //System.out.println("touchup");
+                Log.d("flv   up +++++++>>", "x:" +  x + " y: " + y);
+                flr.setActorPos(0, 0);
+                super.touchUp(event, x, y, pointer, button);
+            }
+        });
+
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override

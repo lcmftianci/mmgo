@@ -66,6 +66,11 @@ public class MusicalNote extends Image  {
         this.setOrigin(this.getWidth()/2,this.getHeight()/2);
     }
 
+
+    public void setActorPos(int x, int y){
+        body.setLinearVelocity(x, y);
+    }
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
