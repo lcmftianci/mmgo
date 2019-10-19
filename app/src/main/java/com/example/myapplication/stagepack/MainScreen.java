@@ -1,4 +1,4 @@
-package com.example.myapplication.advancestrangely;
+package com.example.myapplication.stagepack;
 
 import android.util.Log;
 
@@ -20,13 +20,14 @@ import com.example.myapplication.advanceactor.Ball;
 import com.example.myapplication.advanceactor.Bomb;
 import com.example.myapplication.advanceactor.Brick;
 import com.example.myapplication.advanceactor.StaticBall;
+import com.example.myapplication.advancestrangely.AdvanceAsserts;
 import com.example.myapplication.algorithm.Box2dDetection;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class MainGameStage extends Stage {
+public class MainScreen extends Stage {
 
     World world;
     SpriteBatch batch;
@@ -79,7 +80,7 @@ public class MainGameStage extends Stage {
         this.addActor(this.balls.get(this.balls.size()-1));
     }
 
-    public MainGameStage(AdvanceAsserts asserts){
+    public MainScreen(AdvanceAsserts asserts){
         //创建房子
         this.world = new World(new Vector2(0, Gdx.graphics.getHeight() + Gdx.graphics.getHeight()/19 * tall - Gdx.graphics.getHeight()/19 - 100), true);
 
@@ -274,6 +275,19 @@ public class MainGameStage extends Stage {
     }
 
     public boolean checkAllBb(){
+        for(int i =0; i < this.bricks.size(); i++){
+            if(checkAllBallBrick(this.bricks.get(i))){
+                i--;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkOneBrickClission(Brick brick){
+        return false;
+    }
+
+    public boolean checkBrickClission(){
         for(int i =0; i < this.bricks.size(); i++){
             if(checkAllBallBrick(this.bricks.get(i))){
                 i--;
@@ -589,7 +603,7 @@ public class MainGameStage extends Stage {
 
         //实现逻辑每点击攻击一次，所有蛋蛋向下拖动一个砖块的高度
         changeAllBall(); //初始化所有导弹
-        //checkAllBb();    //检测导弹与砖块的碰撞
+        checkAllBb();    //检测导弹与砖块的碰撞
         //checkAllbbc();
         checkAllSBall();
         checkCanTouch(); //检测是否可以点击

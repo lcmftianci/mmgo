@@ -1,4 +1,4 @@
-package com.example.myapplication.advancestrangely;
+package com.example.myapplication.stagepack;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 

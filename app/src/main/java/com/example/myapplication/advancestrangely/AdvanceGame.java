@@ -14,6 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.example.myapplication.stagepack.GameOverStage;
+import com.example.myapplication.stagepack.MainGameStage;
+import com.example.myapplication.stagepack.MainScreen;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -21,6 +24,7 @@ public class AdvanceGame implements ApplicationListener {
 
     AdvanceAsserts asserts;
     MainGameStage mainGameStage;
+    MainScreen mainScreen;
     GameOverStage gameOverStage;
 
     //按钮测试例子
@@ -41,9 +45,13 @@ public class AdvanceGame implements ApplicationListener {
             gameOverStage.act();
             gameOverStage.draw();
         }else if(MarioConstants.StageFlag == MarioConstants.StageGameOn){
-            Gdx.input.setInputProcessor(mainGameStage);
-            mainGameStage.act();
-            mainGameStage.draw();
+//            Gdx.input.setInputProcessor(mainGameStage);
+//            mainGameStage.act();
+//            mainGameStage.draw();
+
+            Gdx.input.setInputProcessor(mainScreen);
+            mainScreen.act();
+            mainScreen.draw();
         }
 //        }else if(MarioConstants.StageFlag == MarioConstants.StageShopOn){
 //            Gdx.input.setInputProcessor(shopStage);
@@ -55,7 +63,8 @@ public class AdvanceGame implements ApplicationListener {
     @Override
     public void create() {
         asserts = new AdvanceAsserts();
-        mainGameStage = new MainGameStage(asserts);
+        //mainGameStage = new MainGameStage(asserts);
+        mainScreen = new MainScreen(asserts);
         gameOverStage = new GameOverStage();
 
         //按钮测试例子
@@ -65,9 +74,8 @@ public class AdvanceGame implements ApplicationListener {
         this.setListner();
         this.setWindow();
         this.bGameOver = false;
-        //mainGameStage.addActor(btnShow);
-
-        Gdx.input.setInputProcessor(mainGameStage);
+        //Gdx.input.setInputProcessor(mainGameStage);
+        Gdx.input.setInputProcessor(mainScreen);
     }
 
     public void setButton(){
@@ -100,7 +108,8 @@ public class AdvanceGame implements ApplicationListener {
         btnShow.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                mainGameStage.addActor(dialogWindow);
+                //mainGameStage.addActor(dialogWindow);
+                mainScreen.addActor(dialogWindow);
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
@@ -164,13 +173,21 @@ public class AdvanceGame implements ApplicationListener {
 //        font.draw(batch, "touch me", 100, 100);
 //        batch.end();
 
-        mainGameStage.update();
-        if(mainGameStage.checkGameOver() && bGameOver == false){
+//        mainGameStage.update();
+//        if(mainGameStage.checkGameOver() && bGameOver == false){
+//            bGameOver = true;
+//            mainGameStage.addActor(dialogWindow);
+//        }
+//        mainGameStage.act();
+//        mainGameStage.draw();
+
+        mainScreen.update();
+        if(mainScreen.checkGameOver() && bGameOver == false){
             bGameOver = true;
-            mainGameStage.addActor(dialogWindow);
+            mainScreen.addActor(dialogWindow);
         }
-        mainGameStage.act();
-        mainGameStage.draw();
+        mainScreen.act();
+        mainScreen.draw();
     }
 
     @Override

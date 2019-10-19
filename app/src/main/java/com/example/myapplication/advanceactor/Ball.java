@@ -36,7 +36,8 @@ public class Ball extends Image implements GameObject{
     int staticPosX,staticPosY;  //x,y坐标
     boolean bleft,btop;    //方向标志
     boolean brun;          //是否还在移动
-    Vector2 curPos;
+    Vector2 curPos;        //左下角位置点
+    Vector2 nowPos;        //中心点
     ConstantRect cr;       //四个角的坐标点
     int inx;
 
@@ -110,6 +111,7 @@ public class Ball extends Image implements GameObject{
         staticPosX = curPosX;
         staticPosY = curPosY;
         curPos = new Vector2(curPosX, curPosY);
+        nowPos = new Vector2(curPosX + spriteball.getWidth()/2, curPosY + spriteball.getHeight()/2);
         cr = new ConstantRect();
         cr.setPosRect(curPosX, curPosY, spriteball.getWidth(), spriteball.getHeight());
         bounds = new Rectangle(0,0,0,0);
@@ -164,6 +166,10 @@ public class Ball extends Image implements GameObject{
 
     public Vector2 getCurPos(){
         return curPos;
+    }
+
+    public Vector2 getNowPos(){
+        return  nowPos;
     }
 
     public void setDirection(boolean bleft, boolean btop){
@@ -252,6 +258,8 @@ public class Ball extends Image implements GameObject{
             bounds.y = curPosY;
             bounds.width = spriteball.getWidth();
             bounds.height = spriteball.getHeight();
+            nowPos.x = curPosX + spriteball.getWidth()/2;
+            nowPos.y = curPosY + spriteball.getHeight()/2;
         }
     }
 

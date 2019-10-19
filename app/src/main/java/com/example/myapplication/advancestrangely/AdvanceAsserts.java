@@ -8,18 +8,18 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AdvanceAsserts {
 
-    Texture texture;
-    Texture texturebrick;
+    public Texture texture;
+    public Texture texturebrick;
 
-    TextureRegion regionBrick;
-    TextureRegion regionBack;
-    TextureRegion regionFloor;
-    TextureRegion regionad;
-    TextureRegion regionBundle;
-    TextureRegion regionReverseBundle;
+    public TextureRegion regionBrick;
+    public TextureRegion regionBack;
+    public TextureRegion regionFloor;
+    public TextureRegion regionad;
+    public TextureRegion regionBundle;
+    public TextureRegion regionReverseBundle;
 
     public TextureRegion regionBall;
-    Texture textureBall;
+    public Texture textureBall;
 
     public Sound bitSound;
     public Sound clickSound;
