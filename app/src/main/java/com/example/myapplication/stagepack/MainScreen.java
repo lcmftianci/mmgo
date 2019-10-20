@@ -22,6 +22,7 @@ import com.example.myapplication.advanceactor.Brick;
 import com.example.myapplication.advanceactor.StaticBall;
 import com.example.myapplication.advancestrangely.AdvanceAsserts;
 import com.example.myapplication.algorithm.Box2dDetection;
+import com.example.myapplication.algorithm.BoxClick;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -51,8 +52,12 @@ public class MainScreen extends Stage {
     Camera cam;
     boolean bBrickCanUpdate;
     private final static String TAG = "MainGameStage";
-
     private final static int tall = 100;
+
+    int ballWidth;
+    int ballHeight;
+    int brickWidth;
+    int brickHeight;
 
 //    public MainGameStage() {
 //        super();
@@ -76,11 +81,17 @@ public class MainScreen extends Stage {
     }
 
     private void generareOneBall(World aWorld){
-        this.balls.add(new Ball(aWorld,Gdx.graphics.getWidth()/2, (int)floor.getHeight(), this.asserts));
+        this.balls.add(new Ball(aWorld,Gdx.graphics.getWidth()/2, (int)floor.getHeight(),ballWidth, ballWidth, this.asserts));
         this.addActor(this.balls.get(this.balls.size()-1));
     }
 
     public MainScreen(AdvanceAsserts asserts){
+
+        ballWidth = Gdx.graphics.getWidth()/22;
+        ballHeight = Gdx.graphics.getHeight()/22;
+        brickWidth = Gdx.graphics.getWidth()/6;
+        brickHeight = Gdx.graphics.getHeight()/19;
+
         //创建房子
         this.world = new World(new Vector2(0, Gdx.graphics.getHeight() + Gdx.graphics.getHeight()/19 * tall - Gdx.graphics.getHeight()/19 - 100), true);
 
@@ -95,8 +106,7 @@ public class MainScreen extends Stage {
         floor.setHeight(Gdx.graphics.getHeight()/4);
         brickVec = new Vector2();
         bomb = new Bomb(Gdx.graphics.getWidth()/2, (int)floor.getHeight());
-        ball = new Ball(world,Gdx.graphics.getWidth()/2, 0, this.asserts);
-        brick = new Brick(this.world, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/10*9, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10, 100, asserts.regionBrick);
+        ball = new Ball(world,Gdx.graphics.getWidth()/2, 0, ballWidth, ballWidth, this.asserts);
         b2d = new Box2dDetection();
 
         this.bricks = new ArrayList<Brick>();
@@ -120,11 +130,14 @@ public class MainScreen extends Stage {
         generareOneBall(this.world);
         bOneMoreBall = false;
         nOnes = 0;
+
+        //brick = new Brick(this.world, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/10*9, brickHeight, brickWidth, 100, asserts.regionBrick);
         //this.addActor(brick);
         //generaAllBrick();
+
         brickVec.x = Gdx.graphics.getWidth()/6;
         brickVec.y = Gdx.graphics.getHeight()/19;
-        generalAllBrick(100, Gdx.graphics.getWidth()/6, Gdx.graphics.getHeight()/19);
+        generalAllBrick(100, brickWidth, brickWidth);
         this.addActor(bomb);
         this.addActor(floor);
 
@@ -283,10 +296,18 @@ public class MainScreen extends Stage {
         return true;
     }
 
+    //检测一个球与砖块的距离
     public boolean checkOneBrickClission(Brick brick){
+        for(int i = 0; i < this.balls.size(); i++){
+            Ball oBall = this.balls.get(i);
+            Vector2 oPos = oBall.getNowPos();
+            Vector2 bPos = brick.getNowPos();
+            BoxClick.isClick(oPos.x, oPos.y, bPos.x, bPos.y, ballWidth, ballWidth, brickWidth, brickWidth);
+        }
         return false;
     }
 
+    //检测球与砖块的距离
     public boolean checkBrickClission(){
         for(int i =0; i < this.bricks.size(); i++){
             if(checkAllBallBrick(this.bricks.get(i))){
@@ -603,7 +624,7 @@ public class MainScreen extends Stage {
 
         //实现逻辑每点击攻击一次，所有蛋蛋向下拖动一个砖块的高度
         changeAllBall(); //初始化所有导弹
-        checkAllBb();    //检测导弹与砖块的碰撞
+        //checkAllBb();    //检测导弹与砖块的碰撞
         //checkAllbbc();
         checkAllSBall();
         checkCanTouch(); //检测是否可以点击

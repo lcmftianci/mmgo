@@ -47,13 +47,12 @@ public class Ball extends Image implements GameObject{
 
     AdvanceAsserts asserts;
 
-    public Ball(World aWorld, int x, int y, AdvanceAsserts asserts){
+    public Ball(World aWorld, int x, int y, int width, int height, AdvanceAsserts asserts){
         this.world = aWorld;
         inx = 0;
         this.asserts = asserts;
+        init(x,y, width, height);
         //initBody(x,y);
-        init(x,y);
-        initBody(x,y);
     }
 
     private void initBody(int pos_x, int pos_y){
@@ -85,14 +84,14 @@ public class Ball extends Image implements GameObject{
         this.inx = inx;
     }
 
-    public void init(int x, int y){
+    public void init(int x, int y, int width, int height){
         texture = new Texture(Gdx.files.internal("ball.jpg"));
         region = new TextureRegion(texture, 5,5,15,15);
         spriteball = new Sprite(region);
-        spriteball.setSize(Gdx.graphics.getWidth()/20, Gdx.graphics.getWidth()/20);
-
+        //spriteball.setSize(Gdx.graphics.getWidth()/20, Gdx.graphics.getWidth()/20);
         //spriteball.setScale(100,100);
-        spriteball.setSize(Gdx.graphics.getWidth()/22, Gdx.graphics.getWidth()/22);
+
+        spriteball.setSize(width, height);
         xd = -10;
         yd = -10;
         vul = Gdx.graphics.getHeight()/50;

@@ -19,7 +19,7 @@ import com.example.myapplication.advancestrangely.AdvanceAsserts;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class Brick extends Image {
+public class Brick extends Image implements GameObject{
     World world;
     Body body;
     Sprite brickSprite;         //需要碰撞的砖
@@ -78,7 +78,11 @@ public class Brick extends Image {
         bounds.width = size.x;
         bounds.height = size.y;
         this.world = aWorld;
-        initBody(x,y);
+
+        position.x = bounds.x + bounds.width/2;
+        position.y = bounds.y + bounds.height/2;
+
+        //initBody(x,y);
     }
 
     public boolean setNum(int num){
@@ -124,10 +128,14 @@ public class Brick extends Image {
         bounds.y = this.pos.y;
         bounds.width = size.x;
         bounds.height = size.y;
+        position.x = bounds.x + bounds.width/2;
+        position.y = bounds.y + bounds.height/2;
     }
 
     //@Override
     public Rectangle geBounds() {
         return bounds;
     }
+
+    public Vector2 getNowPos(){return position;}
 }

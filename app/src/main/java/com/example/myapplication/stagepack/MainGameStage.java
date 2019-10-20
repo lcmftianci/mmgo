@@ -76,7 +76,7 @@ public class MainGameStage extends Stage {
     }
 
     private void generareOneBall(World aWorld){
-        this.balls.add(new Ball(aWorld,Gdx.graphics.getWidth()/2, (int)floor.getHeight(), this.asserts));
+        this.balls.add(new Ball(aWorld,Gdx.graphics.getWidth()/2, (int)floor.getHeight(), Gdx.graphics.getWidth()/22, Gdx.graphics.getWidth()/22, this.asserts));
         this.addActor(this.balls.get(this.balls.size()-1));
     }
 
@@ -95,7 +95,7 @@ public class MainGameStage extends Stage {
         floor.setHeight(Gdx.graphics.getHeight()/4);
         brickVec = new Vector2();
         bomb = new Bomb(Gdx.graphics.getWidth()/2, (int)floor.getHeight());
-        ball = new Ball(world,Gdx.graphics.getWidth()/2, 0, this.asserts);
+        ball = new Ball(world,Gdx.graphics.getWidth()/2, 0, Gdx.graphics.getWidth()/22, Gdx.graphics.getWidth()/22, this.asserts);
         brick = new Brick(this.world, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/10*9, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10, 100, asserts.regionBrick);
         b2d = new Box2dDetection();
 
