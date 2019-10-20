@@ -152,17 +152,17 @@ public class MainScreen extends Stage {
             if(i < 10)
                 this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5),
                         Gdx.graphics.getHeight()/10 * MathUtils.random(i,10) + (int)floor.getHeight(),
-                        Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i+1, this.asserts.regionBrick));
+                        Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10,ballWidth, ballWidth, i+1, this.asserts.regionBrick));
             else if(i >= 10 && i < 20)
                 this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5),
                         Gdx.graphics.getHeight()/10 * MathUtils.random(i,20) + (int)floor.getHeight(),
-                        Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
+                        Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, ballWidth, ballWidth,i, this.asserts.regionBrick));
             else if(i >= 20 && i < 30)
-                this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,30) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
+                this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,30) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, ballWidth, ballWidth, i, this.asserts.regionBrick));
             else if(i >= 30 && i < 40)
-                this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,40) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
+                this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,40) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, ballWidth, ballWidth, i, this.asserts.regionBrick));
             else if(i >= 40 && i < 50)
-                this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,50) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
+                this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,50) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, ballWidth, ballWidth, i, this.asserts.regionBrick));
 
             this.addActor(this.bricks.get(i));
         }
@@ -198,7 +198,7 @@ public class MainScreen extends Stage {
                     //遍历数组查找重复值
                     if(!checkIsRepeat(arr)){
                         if(arr[j]%qy != 0) {
-                            this.bricks.add(new Brick(this.world, bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, bw, bh, i + 1 + arr[j], this.asserts.regionBrick));
+                            this.bricks.add(new Brick(this.world, bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, bw, bh, ballWidth, ballWidth,i + 1 + arr[j], this.asserts.regionBrick));
                             this.addActor(this.bricks.get(inx++));
                         }else{
                             this.staticballs.add(new StaticBall(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, this.asserts));
@@ -213,7 +213,7 @@ public class MainScreen extends Stage {
                     //遍历数组查找重复值
                     if(!checkIsRepeat(arr)){
                         if(arr[j]%qy != 0) {
-                            this.bricks.add(new Brick(this.world, bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, bw, bh, i + 1 + arr[j], this.asserts.regionBrick));
+                            this.bricks.add(new Brick(this.world, bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, bw, bh, ballWidth, ballWidth,i + 1 + arr[j], this.asserts.regionBrick));
                             this.addActor(this.bricks.get(inx++));
                         }else{
                             this.staticballs.add(new StaticBall(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, this.asserts));
@@ -229,7 +229,7 @@ public class MainScreen extends Stage {
                     //遍历数组查找重复值
                     if(!checkIsRepeat(arr)){
                         if(arr[j]%qy != 0) {
-                            this.bricks.add(new Brick(this.world, bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, bw, bh, i + 1 + arr[j], this.asserts.regionBrick));
+                            this.bricks.add(new Brick(this.world, bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, bw, bh, ballWidth, ballWidth,i + 1 + arr[j], this.asserts.regionBrick));
                             this.addActor(this.bricks.get(inx++));
                         }else{
                             this.staticballs.add(new StaticBall(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, this.asserts));
@@ -297,12 +297,35 @@ public class MainScreen extends Stage {
     }
 
     //检测一个球与砖块的距离
-    public boolean checkOneBrickClission(Brick brick){
+    public boolean checkOneBrickClission(Brick tBrick){
         for(int i = 0; i < this.balls.size(); i++){
             Ball oBall = this.balls.get(i);
             Vector2 oPos = oBall.getNowPos();
-            Vector2 bPos = brick.getNowPos();
-            BoxClick.isClick(oPos.x, oPos.y, bPos.x, bPos.y, ballWidth, ballWidth, brickWidth, brickWidth);
+            Vector2 bPos = tBrick.getNowPos();
+            Vector2[] arrRect = tBrick.getBrickRect();
+            Log.d(TAG, "-=-=>> x:" + oPos.x + " y:" + oPos.y + " x:" + bPos.x + " y:" + bPos.y);
+            if(BoxClick.isClick(oPos.x, oPos.y, bPos.x, bPos.y, ballWidth, ballWidth, brickWidth, brickWidth)) {
+                //Log.d(TAG, "-=-=>> x:" + oPos.x + " y:" + oPos.y + "x:" + bPos.x + " y:" + bPos.y);
+                if (BoxClick.isInsideSector(oPos, bPos, arrRect[0], arrRect[1], Math.PI / 2)) {
+                    //下
+                    oBall.setReverseVerticalDir();
+                } else if (BoxClick.isInsideSector(oPos, bPos, arrRect[1], arrRect[2], Math.PI / 2)) {
+                    //右
+                    oBall.setReverseHorizenDir();
+                } else if (BoxClick.isInsideSector(oPos, bPos, arrRect[2], arrRect[3], Math.PI / 2)) {
+                    //上
+                    oBall.setReverseVerticalDir();
+                } else if (BoxClick.isInsideSector(oPos, bPos, arrRect[3], arrRect[0], Math.PI / 2)) {
+                    //左
+                    oBall.setReverseHorizenDir();
+                }
+                asserts.bitSound.play(1);
+                if (tBrick.setNum(0)) {
+                    this.getRoot().removeActor(tBrick);
+                    this.bricks.remove(tBrick);
+                    return true;
+                }
+            }
         }
         return false;
     }
@@ -310,7 +333,7 @@ public class MainScreen extends Stage {
     //检测球与砖块的距离
     public boolean checkBrickClission(){
         for(int i =0; i < this.bricks.size(); i++){
-            if(checkAllBallBrick(this.bricks.get(i))){
+            if(checkOneBrickClission(this.bricks.get(i))){
                 i--;
             }
         }
@@ -626,6 +649,7 @@ public class MainScreen extends Stage {
         changeAllBall(); //初始化所有导弹
         //checkAllBb();    //检测导弹与砖块的碰撞
         //checkAllbbc();
+        checkBrickClission();
         checkAllSBall();
         checkCanTouch(); //检测是否可以点击
         bomb.setBubble(balls.size());

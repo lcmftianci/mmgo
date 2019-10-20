@@ -32,6 +32,18 @@ public class Brick extends Image implements GameObject{
     ConstantRect cr;
     public Rectangle bounds;
 
+    Vector2 ltPos;
+    Vector2 lbPos;
+    Vector2 rtPos;
+    Vector2 rbPos;
+
+    int iBrickWidth;
+    int iBrickHeight;
+
+    public Vector2[] getBrickRect(){
+        return new Vector2[]{lbPos,rbPos,rtPos,ltPos};
+    }
+
     private void initBody(int pos_x, int pos_y){
         BodyDef groundBodyDef = new BodyDef();
         groundBodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -56,7 +68,18 @@ public class Brick extends Image implements GameObject{
         groundBox.dispose();
     }
 
-    public Brick(World aWorld, int x, int y, int sw, int sh, int score, TextureRegion region){
+    /**
+     * @param aWorld
+     * @param x   砖左下角x
+     * @param y   砖左下角y
+     * @param sw  砖的宽
+     * @param sh  砖的高
+     * @param bw  球的宽
+     * @param bh  球的高
+     * @param score 砖的分数
+     * @param region 砖的图片
+     */
+    public Brick(World aWorld, int x, int y, int sw, int sh, int bw, int bh, int score, TextureRegion region){
         //this.asserts = asserts;
         pos = new Vector2();
         size = new Vector2();
@@ -83,6 +106,12 @@ public class Brick extends Image implements GameObject{
         position.y = bounds.y + bounds.height/2;
 
         //initBody(x,y);
+        ltPos = new Vector2(x - bw/2, y + bh/2 + bounds.height);
+        lbPos = new Vector2(x - bw/2, y - bh/2);
+        rbPos = new Vector2(x + bw/2 + bounds.width, y - bh/2);
+        rtPos = new Vector2(x + bw/2 + bounds.width, y + bh/2 + bounds.height);
+        iBrickWidth = bw;
+        iBrickHeight = bh;
     }
 
     public boolean setNum(int num){
@@ -128,8 +157,22 @@ public class Brick extends Image implements GameObject{
         bounds.y = this.pos.y;
         bounds.width = size.x;
         bounds.height = size.y;
+
         position.x = bounds.x + bounds.width/2;
         position.y = bounds.y + bounds.height/2;
+
+        //更新外围图框
+        ltPos.x = bounds.x - iBrickWidth/2;
+        ltPos.y = bounds.y + iBrickHeight/2 + bounds.height;
+
+        lbPos.x = bounds.x - iBrickWidth/2;
+        lbPos.y = bounds.y - iBrickHeight/2;
+
+        rbPos.x = bounds.x + iBrickWidth/2 + bounds.width;
+        rbPos.y = bounds.y - iBrickHeight/2;
+
+        rtPos.x = bounds.x + iBrickWidth/2 + bounds.width;
+        rtPos.y = bounds.y + iBrickHeight/2 + bounds.height;
     }
 
     //@Override

@@ -54,6 +54,11 @@ public class MainGameStage extends Stage {
 
     private final static int tall = 100;
 
+    int ballWidth;
+    int ballHeight;
+    int brickWidth;
+    int brickHeight;
+
 //    public MainGameStage() {
 //        super();
 //        texture = new Texture(Gdx.files.internal("atlas/images.png"));
@@ -96,7 +101,7 @@ public class MainGameStage extends Stage {
         brickVec = new Vector2();
         bomb = new Bomb(Gdx.graphics.getWidth()/2, (int)floor.getHeight());
         ball = new Ball(world,Gdx.graphics.getWidth()/2, 0, Gdx.graphics.getWidth()/22, Gdx.graphics.getWidth()/22, this.asserts);
-        brick = new Brick(this.world, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/10*9, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10, 100, asserts.regionBrick);
+
         b2d = new Box2dDetection();
 
         this.bricks = new ArrayList<Brick>();
@@ -120,11 +125,14 @@ public class MainGameStage extends Stage {
         generareOneBall(this.world);
         bOneMoreBall = false;
         nOnes = 0;
+
+        //brick = new Brick(this.world, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/10*9, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10, 100, asserts.regionBrick);
         //this.addActor(brick);
         //generaAllBrick();
+
         brickVec.x = Gdx.graphics.getWidth()/6;
         brickVec.y = Gdx.graphics.getHeight()/19;
-        generalAllBrick(100, Gdx.graphics.getWidth()/6, Gdx.graphics.getHeight()/19);
+        generalAllBrick(100, Gdx.graphics.getWidth()/6, Gdx.graphics.getHeight()/19, Gdx.graphics.getWidth()/20, Gdx.graphics.getWidth()/20);
         this.addActor(bomb);
         this.addActor(floor);
 
@@ -134,22 +142,22 @@ public class MainGameStage extends Stage {
     /*
     * 根据行来生成数据，每行必须有数据，数据的量可以随机取得
     * */
-    public void generaAllBrick(){
+    public void generaAllBrick(int oWidth, int oHeight){
         for(int i =0; i < 50; i++){
             if(i < 10)
                 this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5),
                         Gdx.graphics.getHeight()/10 * MathUtils.random(i,10) + (int)floor.getHeight(),
-                        Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i+1, this.asserts.regionBrick));
+                        Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, oWidth, oHeight,i+1, this.asserts.regionBrick));
             else if(i >= 10 && i < 20)
                 this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5),
                         Gdx.graphics.getHeight()/10 * MathUtils.random(i,20) + (int)floor.getHeight(),
-                        Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
+                        Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, oWidth, oHeight,i, this.asserts.regionBrick));
             else if(i >= 20 && i < 30)
-                this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,30) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
+                this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,30) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, oWidth, oHeight, i, this.asserts.regionBrick));
             else if(i >= 30 && i < 40)
-                this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,40) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
+                this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,40) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, oWidth, oHeight,i, this.asserts.regionBrick));
             else if(i >= 40 && i < 50)
-                this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,50) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, i, this.asserts.regionBrick));
+                this.bricks.add(new Brick(this.world, Gdx.graphics.getWidth()/10 * MathUtils.random(1,5), Gdx.graphics.getHeight()/10 * MathUtils.random(i,50) + (int)floor.getHeight(), Gdx.graphics.getHeight()/10, Gdx.graphics.getWidth()/10, oWidth, oHeight,i, this.asserts.regionBrick));
 
             this.addActor(this.bricks.get(i));
         }
@@ -172,7 +180,7 @@ public class MainGameStage extends Stage {
 
     //生成砖块算法,
     //生成砖块的层数
-    public void generalAllBrick(int length, int bw, int bh){
+    public void generalAllBrick(int length, int bw, int bh, int oWidth, int oHeight){
         int inx = 0, jnx = 0;
         for(int i =0;i < length;i++){
             int qy = MathUtils.random(3,5);
@@ -185,7 +193,7 @@ public class MainGameStage extends Stage {
                     //遍历数组查找重复值
                     if(!checkIsRepeat(arr)){
                         if(arr[j]%qy != 0) {
-                            this.bricks.add(new Brick(this.world, bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, bw, bh, i + 1 + arr[j], this.asserts.regionBrick));
+                            this.bricks.add(new Brick(this.world, bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, bw, bh, oWidth, oHeight, i + 1 + arr[j], this.asserts.regionBrick));
                             this.addActor(this.bricks.get(inx++));
                         }else{
                             this.staticballs.add(new StaticBall(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, this.asserts));
@@ -200,7 +208,7 @@ public class MainGameStage extends Stage {
                     //遍历数组查找重复值
                     if(!checkIsRepeat(arr)){
                         if(arr[j]%qy != 0) {
-                            this.bricks.add(new Brick(this.world, bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, bw, bh, i + 1 + arr[j], this.asserts.regionBrick));
+                            this.bricks.add(new Brick(this.world, bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, bw, bh,  oWidth, oHeight, i + 1 + arr[j], this.asserts.regionBrick));
                             this.addActor(this.bricks.get(inx++));
                         }else{
                             this.staticballs.add(new StaticBall(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh - 100, this.asserts));
@@ -216,7 +224,7 @@ public class MainGameStage extends Stage {
                     //遍历数组查找重复值
                     if(!checkIsRepeat(arr)){
                         if(arr[j]%qy != 0) {
-                            this.bricks.add(new Brick(this.world, bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, bw, bh, i + 1 + arr[j], this.asserts.regionBrick));
+                            this.bricks.add(new Brick(this.world, bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, bw, bh,  oWidth, oHeight, i + 1 + arr[j], this.asserts.regionBrick));
                             this.addActor(this.bricks.get(inx++));
                         }else{
                             this.staticballs.add(new StaticBall(bw * arr[j], Gdx.graphics.getHeight() + bh * i - bh, this.asserts));
