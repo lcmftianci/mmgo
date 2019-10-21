@@ -303,21 +303,25 @@ public class MainScreen extends Stage {
             Vector2 oPos = oBall.getNowPos();
             Vector2 bPos = tBrick.getNowPos();
             Vector2[] arrRect = tBrick.getBrickRect();
-            Log.d(TAG, "-=-=>> x:" + oPos.x + " y:" + oPos.y + " x:" + bPos.x + " y:" + bPos.y);
+            //Log.d(TAG, "-=-=>> x:" + oPos.x + " y:" + oPos.y + " x:" + bPos.x + " y:" + bPos.y);
             if(BoxClick.isClick(oPos.x, oPos.y, bPos.x, bPos.y, ballWidth, ballWidth, brickWidth, brickWidth)) {
-                //Log.d(TAG, "-=-=>> x:" + oPos.x + " y:" + oPos.y + "x:" + bPos.x + " y:" + bPos.y);
+                Log.d(TAG, "-=-=>> 23 x:" + oPos.x + " y:" + oPos.y + "x:" + bPos.x + " y:" + bPos.y);
                 if (BoxClick.isInsideSector(oPos, bPos, arrRect[0], arrRect[1], Math.PI / 2)) {
                     //下
                     oBall.setReverseVerticalDir();
+                    Log.d(TAG, "-=-=>> bottom");
                 } else if (BoxClick.isInsideSector(oPos, bPos, arrRect[1], arrRect[2], Math.PI / 2)) {
                     //右
                     oBall.setReverseHorizenDir();
+                    Log.d(TAG, "-=-=>> right");
                 } else if (BoxClick.isInsideSector(oPos, bPos, arrRect[2], arrRect[3], Math.PI / 2)) {
                     //上
                     oBall.setReverseVerticalDir();
+                    Log.d(TAG, "-=-=>> top");
                 } else if (BoxClick.isInsideSector(oPos, bPos, arrRect[3], arrRect[0], Math.PI / 2)) {
                     //左
                     oBall.setReverseHorizenDir();
+                    Log.d(TAG, "-=-=>> left");
                 }
                 asserts.bitSound.play(1);
                 if (tBrick.setNum(0)) {
@@ -334,6 +338,7 @@ public class MainScreen extends Stage {
     public boolean checkBrickClission(){
         for(int i =0; i < this.bricks.size(); i++){
             if(checkOneBrickClission(this.bricks.get(i))){
+                Log.d(TAG, "-=-=>>delete one ro");
                 i--;
             }
         }

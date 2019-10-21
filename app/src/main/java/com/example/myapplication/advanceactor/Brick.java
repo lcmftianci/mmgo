@@ -31,6 +31,7 @@ public class Brick extends Image implements GameObject{
     BitmapFont font;
     ConstantRect cr;
     public Rectangle bounds;
+    Vector2 nowPos;        //中心点
 
     Vector2 ltPos;
     Vector2 lbPos;
@@ -112,6 +113,8 @@ public class Brick extends Image implements GameObject{
         rtPos = new Vector2(x + bw/2 + bounds.width, y + bh/2 + bounds.height);
         iBrickWidth = bw;
         iBrickHeight = bh;
+
+        nowPos = new Vector2(bounds.x + bounds.width/2,  bounds.y + bounds.height/2);
     }
 
     public boolean setNum(int num){
@@ -173,6 +176,9 @@ public class Brick extends Image implements GameObject{
 
         rtPos.x = bounds.x + iBrickWidth/2 + bounds.width;
         rtPos.y = bounds.y + iBrickHeight/2 + bounds.height;
+
+        nowPos.x = bounds.x + bounds.width/2;
+        nowPos.y = bounds.y + bounds.height/2;
     }
 
     //@Override
@@ -180,5 +186,5 @@ public class Brick extends Image implements GameObject{
         return bounds;
     }
 
-    public Vector2 getNowPos(){return position;}
+    public Vector2 getNowPos(){return nowPos;}
 }

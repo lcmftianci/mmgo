@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="小精灵"
+            android:text="虫虫炮"
             android:textColor="#b3ffffff"
             android:textSize="20sp" />
     </LinearLayout>
@@ -48,7 +48,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="17dp"
         android:gravity="center_horizontal"
-        android:text="Happy EveryDay"
+        android:text="踢踏网出品"
         android:textColor="#b3ffffff"
         android:textSize="12sp" />
 

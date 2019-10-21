@@ -31,9 +31,7 @@ public class BoxClick {
 
     public static boolean isInsideSector(Vector2 pot, Vector2 center, Vector2 sectorStart, Vector2 sectorEnd, double radiusSquared) {
         Vector2 relPoint = new Vector2(pot.x - center.x, pot.y - center.y);
-        return !areClockwise(sectorStart, relPoint) &&
-                areClockwise(sectorEnd, relPoint) &&
-                isWithinRadius(relPoint, radiusSquared);
+        return !areClockwise(sectorStart, relPoint) && areClockwise(sectorEnd, relPoint) && isWithinRadius(relPoint, radiusSquared);
     }
 
     private static boolean  areClockwise(Vector2 v1, Vector2 v2) {
