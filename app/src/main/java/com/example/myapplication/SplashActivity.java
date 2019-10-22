@@ -15,6 +15,8 @@ import android.widget.ImageView;
 
 import java.util.Random;
 
+import cdc.sed.yff.AdManager;
+
 public class SplashActivity extends Activity {
     private final String TAG = "---SplashActivity---";
 
@@ -32,13 +34,11 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AdManager.getInstance(this.getApplicationContext()).init("98b79534d27dd504", "a44a477c4f5c8b0a", true);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.splash);
-
         mImageView = (ImageView)findViewById(R.id.image);
         //mView = (View)findViewById(R.id.idview);
-
-
         int[] arrImage = {
                 R.drawable.cake,
                 R.drawable.entrance3,
