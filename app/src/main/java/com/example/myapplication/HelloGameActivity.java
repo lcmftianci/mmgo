@@ -2,7 +2,7 @@ package com.example.myapplication;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.baidu.mobstat.StatService;
+//import com.baidu.mobstat.StatService;
 import com.example.myapplication.advanbox.MyGdxGameBox2d;
 import com.example.myapplication.advancestrangely.ActionUser;
 import com.example.myapplication.advancestrangely.AdvanceGame;
@@ -18,9 +18,9 @@ public class HelloGameActivity extends AndroidApplication {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "Login Main");
-//        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
 //        initialize(new FirstGame());
-        StatService.start(this);
+//        StatService.start(this);
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         config.useWakelock = true;
 //        initialize(new MyGdxGameCamera(), config);
@@ -48,7 +48,7 @@ public class HelloGameActivity extends AndroidApplication {
 //        initialize(new Lib004_Actor(), config);       //Actor
 //        initialize(new Lib004_Actor(), config);       //Actor
 
-//        initialize(new GamePad(), config); //虚拟摇杆
+        //initialize(new GamePad(), config); //虚拟摇杆
 
         initialize(new AdvanceGame(), config); //勇往直前
 //       initialize(new ActionUser(), config); //勇往直前
