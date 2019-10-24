@@ -305,7 +305,8 @@ public class MainScreen extends Stage {
             Vector2[] arrRect = tBrick.getBrickRect();
             //Log.d(TAG, "-=-=>> x:" + oPos.x + " y:" + oPos.y + " x:" + bPos.x + " y:" + bPos.y);
             if(BoxClick.isClick(oPos.x, oPos.y, bPos.x, bPos.y, ballWidth, ballWidth, brickWidth, brickWidth)) {
-                Log.d(TAG, "-=-=>> 23 x:" + oPos.x + " y:" + oPos.y + "x:" + bPos.x + " y:" + bPos.y);
+                Log.d(TAG, "-=-=>> 23 x:" + oPos.x + " y:" + oPos.y + " x:" + bPos.x + " y:" + bPos.y
+                + " lb x:" + arrRect[0].x + " lb y:" + arrRect[0].y + " rb x:" + arrRect[1].x + " rb y:" + arrRect[1].y);
                 if (BoxClick.isInsideSector(oPos, bPos, arrRect[0], arrRect[1], Math.PI / 2)) {
                     //下
                     oBall.setReverseVerticalDir();

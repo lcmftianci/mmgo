@@ -38,8 +38,8 @@ public class Brick extends Image implements GameObject{
     Vector2 rtPos;
     Vector2 rbPos;
 
-    int iBrickWidth;
-    int iBrickHeight;
+    int iBallWidth;
+    int iBallHeight;
 
     public Vector2[] getBrickRect(){
         return new Vector2[]{lbPos,rbPos,rtPos,ltPos};
@@ -107,12 +107,12 @@ public class Brick extends Image implements GameObject{
         position.y = bounds.y + bounds.height/2;
 
         //initBody(x,y);
-        ltPos = new Vector2(x - bw/2, y + bh/2 + bounds.height);
-        lbPos = new Vector2(x - bw/2, y - bh/2);
-        rbPos = new Vector2(x + bw/2 + bounds.width, y - bh/2);
-        rtPos = new Vector2(x + bw/2 + bounds.width, y + bh/2 + bounds.height);
-        iBrickWidth = bw;
-        iBrickHeight = bh;
+        iBallWidth = bw;
+        iBallHeight = bh;
+        ltPos = new Vector2(x - iBallWidth/2, y + iBallHeight/2 + bounds.height);
+        lbPos = new Vector2(x - iBallWidth/2, y - iBallHeight/2);
+        rbPos = new Vector2(x + iBallWidth/2 + bounds.width, y - iBallHeight/2);
+        rtPos = new Vector2(x + iBallWidth/2 + bounds.width, y + iBallHeight/2 + bounds.height);
 
         nowPos = new Vector2(bounds.x + bounds.width/2,  bounds.y + bounds.height/2);
     }
@@ -165,17 +165,17 @@ public class Brick extends Image implements GameObject{
         position.y = bounds.y + bounds.height/2;
 
         //更新外围图框
-        ltPos.x = bounds.x - iBrickWidth/2;
-        ltPos.y = bounds.y + iBrickHeight/2 + bounds.height;
+        ltPos.x = bounds.x - iBallWidth/2;
+        ltPos.y = bounds.y + iBallHeight/2 + bounds.height;
 
-        lbPos.x = bounds.x - iBrickWidth/2;
-        lbPos.y = bounds.y - iBrickHeight/2;
+        lbPos.x = bounds.x - iBallWidth/2;
+        lbPos.y = bounds.y - iBallHeight/2;
 
-        rbPos.x = bounds.x + iBrickWidth/2 + bounds.width;
-        rbPos.y = bounds.y - iBrickHeight/2;
+        rbPos.x = bounds.x + iBallWidth/2 + bounds.width;
+        rbPos.y = bounds.y - iBallHeight/2;
 
-        rtPos.x = bounds.x + iBrickWidth/2 + bounds.width;
-        rtPos.y = bounds.y + iBrickHeight/2 + bounds.height;
+        rtPos.x = bounds.x + iBallWidth/2 + bounds.width;
+        rtPos.y = bounds.y + iBallHeight/2 + bounds.height;
 
         nowPos.x = bounds.x + bounds.width/2;
         nowPos.y = bounds.y + bounds.height/2;

@@ -23,12 +23,14 @@ public class BoxClick {
         return (Math.sqrt(Math.pow(width1/2, 2.0f) + Math.pow(height1/2, 2.0f)) + Math.sqrt(Math.pow(width2/2, 2.0f) + Math.pow(height2/2, 2.0f)));
     }
 
+    //两个正方形的中心点之间的距离
     public static boolean isClick(float x1, float y1, float x2, float y2, float width1, float height1, float width2, float height2){
         if(distance(x1,y1,x2,y2) > (rectagle(width1,height1,width2,height2) - 10))
             return false;
         return true;
     }
 
+    //判断一个动态点是否在扇形内部
     public static boolean isInsideSector(Vector2 pot, Vector2 center, Vector2 sectorStart, Vector2 sectorEnd, double radiusSquared) {
         Vector2 relPoint = new Vector2(pot.x - center.x, pot.y - center.y);
         return !areClockwise(sectorStart, relPoint) && areClockwise(sectorEnd, relPoint) && isWithinRadius(relPoint, radiusSquared);
