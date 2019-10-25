@@ -25,7 +25,7 @@ public class BoxClick {
 
     //两个正方形的中心点之间的距离
     public static boolean isClick(float x1, float y1, float x2, float y2, float width1, float height1, float width2, float height2){
-        if(distance(x1,y1,x2,y2) > (rectagle(width1,height1,width2,height2) - 10))
+        if(distance(x1,y1,x2,y2) > (rectagle(width1,height1,width2,height2) + 10))
             return false;
         return true;
     }
