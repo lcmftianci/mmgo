@@ -47,4 +47,22 @@ public class BoxClick {
     public static BxoPos ClickPos(){
         return BxoPos.BOTTOM;
     }
+
+
+    //用向量锐角判断点在夹角内，并根据在半径内判断圆内
+    public static boolean isInSelect(Vector2 pot, Vector2 center, Vector2 sectorStart, Vector2 sectorEnd){
+        if(isCosPlus(pot, center, sectorStart) > 0 && isCosPlus(pot, center, sectorEnd) > 0)
+            return true;
+        return false;
+    }
+
+    public static double isCosPlus(Vector2 pot, Vector2 center, Vector2 selectStart){
+        double vecX = selectStart.x - center.x;
+        double vecY = selectStart.y - center.y;
+
+        double potX = pot.x - center.x;
+        double potY = pot.y - center.y;
+
+        return (vecX*potX + vecY*potY)/Math.sqrt((Math.pow(vecX, 2.0f) + Math.pow(vecY, 2.0f))*(Math.pow(potX, 2.0f) + Math.pow(potY, 2.0f)));
+    }
 }

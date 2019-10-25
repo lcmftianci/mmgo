@@ -34,7 +34,7 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AdManager.getInstance(SplashActivity.this.getApplicationContext()).init("98b79534d27dd504", "a44a477c4f5c8b0a", true);
+        //AdManager.getInstance(SplashActivity.this.getApplicationContext()).init("98b79534d27dd504", "a44a477c4f5c8b0a", true);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.splash);
         mImageView = (ImageView)findViewById(R.id.image);

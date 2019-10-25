@@ -307,19 +307,19 @@ public class MainScreen extends Stage {
             if(BoxClick.isClick(oPos.x, oPos.y, bPos.x, bPos.y, ballWidth, ballWidth, brickWidth, brickWidth)) {
                 Log.d(TAG, "-=-=>> 23 x:" + oPos.x + " y:" + oPos.y + " x:" + bPos.x + " y:" + bPos.y
                 + " lb x:" + arrRect[0].x + " lb y:" + arrRect[0].y + " rb x:" + arrRect[1].x + " rb y:" + arrRect[1].y);
-                if (BoxClick.isInsideSector(oPos, bPos, arrRect[0], arrRect[1], Math.PI / 2)) {
+                if (BoxClick.isInSelect(oPos, bPos, arrRect[0], arrRect[1])) {
                     //下
                     oBall.setReverseVerticalDir();
                     Log.d(TAG, "-=-=>> bottom");
-                } else if (BoxClick.isInsideSector(oPos, bPos, arrRect[1], arrRect[2], Math.PI / 2)) {
+                } else if (BoxClick.isInSelect(oPos, bPos, arrRect[1], arrRect[2])) {
                     //右
                     oBall.setReverseHorizenDir();
                     Log.d(TAG, "-=-=>> right");
-                } else if (BoxClick.isInsideSector(oPos, bPos, arrRect[2], arrRect[3], Math.PI / 2)) {
+                } else if (BoxClick.isInSelect(oPos, bPos, arrRect[2], arrRect[3])) {
                     //上
                     oBall.setReverseVerticalDir();
                     Log.d(TAG, "-=-=>> top");
-                } else if (BoxClick.isInsideSector(oPos, bPos, arrRect[3], arrRect[0], Math.PI / 2)) {
+                } else if (BoxClick.isInSelect(oPos, bPos, arrRect[3], arrRect[0])) {
                     //左
                     oBall.setReverseHorizenDir();
                     Log.d(TAG, "-=-=>> left");
