@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myapplication">
+    package="com.lcmf.mmgo">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -35,7 +35,7 @@
         <!--<activity android:name=".HelloGameActivity"-->
             <!--android:screenOrientation="landscape"-->
             <!--android:configChanges="keyboard|keyboardHidden|orientation|screenSize"></activity>-->
-        <activity android:name=".HelloGameActivity"></activity>
+        <activity android:name="com.lcmf.mmgo.HelloGameActivity"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
