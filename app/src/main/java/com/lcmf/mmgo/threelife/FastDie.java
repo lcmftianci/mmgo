@@ -28,6 +28,7 @@ public class FastDie implements ApplicationListener {
 
         sprite = new Sprite(airPlane, 0,0,49,37);
         sprite.setSize(Gdx.graphics.getWidth()/15*4/3, Gdx.graphics.getWidth()/15);
+        sprite.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
     }
 
     @Override
@@ -35,13 +36,18 @@ public class FastDie implements ApplicationListener {
 
     }
 
+    public void updateAipPlaneInfo(){
+        sprite.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
+    }
+
     @Override
     public void render() {
         Gdx.gl.glClearColor(1,1,1,1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+        updateAipPlaneInfo();
         spriteBatch.begin();
         spriteBatch.draw(background,0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        sprite.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+
         sprite.draw(spriteBatch);
         spriteBatch.end();
     }
