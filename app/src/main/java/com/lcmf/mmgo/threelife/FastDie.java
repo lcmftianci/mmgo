@@ -25,7 +25,8 @@ public class FastDie implements ApplicationListener {
     Touchpad.TouchpadStyle touchpadStyle;
     TextureRegionDrawable knobRegion;
     TextureRegionDrawable touchBackground;
-    Texture texture;
+    Texture textureBack;
+    Texture textureFront;
     Texture killer;     //精灵
     int speed;
     int x = 150;
@@ -44,15 +45,18 @@ public class FastDie implements ApplicationListener {
         sprite.setSize(Gdx.graphics.getWidth()/15*4/3, Gdx.graphics.getWidth()/15);
         sprite.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
 
-        texture = new Texture(Gdx.files.internal(""));
-        killer = new Texture(Gdx.files.internal(""));
+        textureBack = new Texture(Gdx.files.internal("controller/panzi.jpg"));
+        textureFront = new Texture(Gdx.files.internal("controller/pn.jpg"));
+        killer = new Texture(Gdx.files.internal("shoot/bomb.png"));
 
-        touchBackground = new TextureRegionDrawable(new TextureRegion(texture, 0, 0, 128,128));
-        knobRegion = new TextureRegionDrawable(new TextureRegion(texture, 128, 0, 128,128));
+        touchBackground = new TextureRegionDrawable(new TextureRegion(textureBack, 50, 50, 400,400));
+        knobRegion = new TextureRegionDrawable(new TextureRegion(textureFront, 170, 170, 155,155));
         touchpadStyle = new Touchpad.TouchpadStyle(touchBackground, knobRegion);
         touchpad = new Touchpad(15, touchpadStyle);
-        speed = 2;
+        touchpad.setBounds(0,0, 300,300);
+        speed = 10;
         stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
         stage.addActor(touchpad);
     }
 
@@ -62,13 +66,27 @@ public class FastDie implements ApplicationListener {
     }
 
     public void updateAipPlaneInfo(){
-        sprite.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
+        //sprite.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
+        sprite.setPosition(x, y);
     }
 
     public void update(){
         if(touchpad.isTouched()){
             x += touchpad.getKnobPercentX()*speed;
             y += touchpad.getKnobPercentY()*speed;
+
+            if(x > Gdx.graphics.getWidth()){
+                x = Gdx.graphics.getWidth();
+            }
+            if(x < 0){
+                x = 0;
+            }
+            if(y > Gdx.graphics.getHeight()){
+                y = Gdx.graphics.getHeight();
+            }
+            if(y < 0){
+                y = 0;
+            }
         }
     }
 
@@ -78,11 +96,12 @@ public class FastDie implements ApplicationListener {
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
         this.update();
         updateAipPlaneInfo();
+
         spriteBatch.begin();
         spriteBatch.draw(background,0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
         sprite.draw(spriteBatch);
         spriteBatch.end();
+
         stage.act();
         stage.draw();
     }
