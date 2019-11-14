@@ -40,8 +40,8 @@ public class SplashActivity extends Activity {
         mImageView = (ImageView)findViewById(R.id.image);
         //mView = (View)findViewById(R.id.idview);
         int[] arrImage = {
-                R.drawable.lyq1,
                 R.drawable.cake,
+                R.drawable.lyq1,
                 R.drawable.entrance3,
                 R.drawable.sky,
                 R.drawable.snow,
@@ -53,7 +53,7 @@ public class SplashActivity extends Activity {
         Random r = new Random();
         int ran1 = r.nextInt(arrImage.length);
         Log.v(TAG, "number:" + String.valueOf(ran1));
-        mImageView.setImageResource(arrImage[0]);
+        mImageView.setImageResource(arrImage[1]);
 
         //1、先判断版本是不是首次运行
         SharedPreferences mVersion = getSharedPreferences("version", MODE_PRIVATE);
