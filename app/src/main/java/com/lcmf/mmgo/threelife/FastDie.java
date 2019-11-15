@@ -105,6 +105,19 @@ public class FastDie implements ApplicationListener {
         }else{
             x += vtThread.getVulX();
             y += vtThread.getVulY();
+
+            if(x > Gdx.graphics.getWidth() - (int)sprite.getWidth()){
+                x = Gdx.graphics.getWidth() - (int)sprite.getWidth();
+            }
+            if(x < 0){
+                x = 0;
+            }
+            if(y > Gdx.graphics.getHeight() - (int)sprite.getHeight()){
+                y = Gdx.graphics.getHeight() - (int)sprite.getHeight();
+            }
+            if(y < 0){
+                y = 0;
+            }
         }
     }
 
