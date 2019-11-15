@@ -1,5 +1,7 @@
 package com.lcmf.mmgo.threelife;
 
+import android.util.Log;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,6 +17,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class FastDie implements ApplicationListener {
 
+    private static String TAG = "FastDie";
     Stage stage;
     Sprite sprite;
     SpriteBatch spriteBatch;
@@ -33,6 +36,7 @@ public class FastDie implements ApplicationListener {
     int speedY;
     int x = 150;
     int y = 150;
+    VulThread vtThread;
 
     @Override
     public void create() {
@@ -61,6 +65,8 @@ public class FastDie implements ApplicationListener {
         Gdx.input.setInputProcessor(stage);
         stage.addActor(touchpad);
         speedX = 0;
+        vtThread = new VulThread();
+        vtThread.start();
     }
 
     @Override
@@ -78,33 +84,27 @@ public class FastDie implements ApplicationListener {
             x += touchpad.getKnobPercentX()*speed;
             y += touchpad.getKnobPercentY()*speed;
 
-            speedX = (int)touchpad.getKnobPercentX()*speed;
-            speedY = (int)touchpad.getKnobPercentY()*speed;
+            speedX = (int)(touchpad.getKnobPercentX()*speed);
+            speedY = (int)(touchpad.getKnobPercentY()*speed);
+            vtThread.setVulX(speedX);
+            vtThread.setVulY(speedY);
+            Log.d(TAG, " speedX: " + speedX + " speedY:" + speedY);
 
-            if(x > Gdx.graphics.getWidth()){
-                x = Gdx.graphics.getWidth();
+            if(x > Gdx.graphics.getWidth() - (int)sprite.getWidth()){
+                x = Gdx.graphics.getWidth() - (int)sprite.getWidth();
             }
             if(x < 0){
                 x = 0;
             }
-            if(y > Gdx.graphics.getHeight()){
-                y = Gdx.graphics.getHeight();
+            if(y > Gdx.graphics.getHeight() - (int)sprite.getHeight()){
+                y = Gdx.graphics.getHeight() - (int)sprite.getHeight();
             }
             if(y < 0){
                 y = 0;
             }
         }else{
-            if(speedX > 0)
-                x += (speedX--);
-
-            if(speedX < 0)
-                x += (speedX++);
-
-            if(speedY > 0)
-                y += (speedY--);
-
-            if(speedY < 0)
-                y += (speedY++);
+            x += vtThread.getVulX();
+            y += vtThread.getVulY();
         }
     }
 
