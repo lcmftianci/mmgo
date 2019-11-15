@@ -29,6 +29,8 @@ public class FastDie implements ApplicationListener {
     Texture textureFront;
     Texture killer;     //精灵
     int speed;
+    int speedX;
+    int speedY;
     int x = 150;
     int y = 150;
 
@@ -58,6 +60,7 @@ public class FastDie implements ApplicationListener {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         stage.addActor(touchpad);
+        speedX = 0;
     }
 
     @Override
@@ -75,6 +78,9 @@ public class FastDie implements ApplicationListener {
             x += touchpad.getKnobPercentX()*speed;
             y += touchpad.getKnobPercentY()*speed;
 
+            speedX = (int)touchpad.getKnobPercentX()*speed;
+            speedY = (int)touchpad.getKnobPercentY()*speed;
+
             if(x > Gdx.graphics.getWidth()){
                 x = Gdx.graphics.getWidth();
             }
@@ -87,6 +93,18 @@ public class FastDie implements ApplicationListener {
             if(y < 0){
                 y = 0;
             }
+        }else{
+            if(speedX > 0)
+                x += (speedX--);
+
+            if(speedX < 0)
+                x += (speedX++);
+
+            if(speedY > 0)
+                y += (speedY--);
+
+            if(speedY < 0)
+                y += (speedY++);
         }
     }
 
