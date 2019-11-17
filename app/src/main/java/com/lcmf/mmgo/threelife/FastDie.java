@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
@@ -101,8 +102,7 @@ public class FastDie implements ApplicationListener {
         touchbtn.setBounds(0,0,300,300);
 
 
-        touchbtn.addListener(new InputListener(){
-
+        touchbtn.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 speed = 20;
@@ -111,19 +111,42 @@ public class FastDie implements ApplicationListener {
             }
 
             @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                speed = 10;
-                Log.d(TAG, "up speed:" + speed);
-                super.touchUp(event, x, y, pointer, button);
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                super.touchDragged(event, x, y, pointer);
             }
 
             @Override
-            public boolean keyUp(InputEvent event, int keycode) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
                 speed = 10;
                 Log.d(TAG, "up speed:" + speed);
-                return super.keyUp(event, keycode);
             }
         });
+
+
+//        touchbtn.addListener(new InputListener(){
+//
+//            @Override
+//            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+//                speed = 20;
+//                Log.d(TAG, "down speed:" + speed);
+//                return super.touchDown(event, x, y, pointer, button);
+//            }
+//
+//            @Override
+//            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+//                speed = 10;
+//                Log.d(TAG, "up speed:" + speed);
+//                super.touchUp(event, x, y, pointer, button);
+//            }
+//
+//            @Override
+//            public boolean keyUp(InputEvent event, int keycode) {
+//                speed = 10;
+//                Log.d(TAG, "up speed:" + speed);
+//                return super.keyUp(event, keycode);
+//            }
+//        });
 
         speed = 10;
         stage = new Stage();
