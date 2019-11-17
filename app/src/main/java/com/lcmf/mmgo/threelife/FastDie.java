@@ -123,31 +123,6 @@ public class FastDie implements ApplicationListener {
             }
         });
 
-
-//        touchbtn.addListener(new InputListener(){
-//
-//            @Override
-//            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-//                speed = 20;
-//                Log.d(TAG, "down speed:" + speed);
-//                return super.touchDown(event, x, y, pointer, button);
-//            }
-//
-//            @Override
-//            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-//                speed = 10;
-//                Log.d(TAG, "up speed:" + speed);
-//                super.touchUp(event, x, y, pointer, button);
-//            }
-//
-//            @Override
-//            public boolean keyUp(InputEvent event, int keycode) {
-//                speed = 10;
-//                Log.d(TAG, "up speed:" + speed);
-//                return super.keyUp(event, keycode);
-//            }
-//        });
-
         speed = 10;
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
