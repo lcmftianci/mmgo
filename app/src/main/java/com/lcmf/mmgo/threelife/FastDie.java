@@ -5,12 +5,15 @@ import android.util.Log;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -20,11 +23,20 @@ public class FastDie implements ApplicationListener {
     private static String TAG = "FastDie";
     Stage stage;
     Sprite sprite;
+    Sprite spriteUpper;
+    Sprite spriteDown;
     SpriteBatch spriteBatch;
     Texture background;
+
+    Texture backUpper;
+    //Texture backDown;
+
     Texture airPlane;
     TextureAtlas atlas;
     Touchpad touchpad;  //控制面板
+    Button   touchbtn;  //加速按钮
+    TextureRegion btntr; //按钮背景
+
     Touchpad.TouchpadStyle touchpadStyle;
     TextureRegionDrawable knobRegion;
     TextureRegionDrawable touchBackground;
@@ -43,6 +55,17 @@ public class FastDie implements ApplicationListener {
         spriteBatch = new SpriteBatch();
         background = new Texture(Gdx.files.internal("mubu/mubu.jpg"));
         airPlane = new Texture(Gdx.files.internal("shoot/enemy1.png"));
+
+        backUpper = new Texture(Gdx.files.internal("backer/backer.jpg"));
+        spriteDown = new Sprite(backUpper, 0,0, 100,100);
+        spriteUpper = new Sprite(backUpper, 0,0, 100,100);
+
+        spriteUpper.setSize(Gdx.graphics.getWidth(), 300);
+        spriteDown.setSize(Gdx.graphics.getWidth(), 300);
+
+        spriteUpper.setPosition(0,0);
+        spriteDown.setPosition(0,Gdx.graphics.getHeight() - 300);
+
         //atlas = new TextureAtlas(Gdx.files.internal(""));
         //sprite = atlas.createSprite("");
         //sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -55,18 +78,94 @@ public class FastDie implements ApplicationListener {
         textureFront = new Texture(Gdx.files.internal("controller/pn.jpg"));
         killer = new Texture(Gdx.files.internal("shoot/bomb.png"));
 
+
         touchBackground = new TextureRegionDrawable(new TextureRegion(textureBack, 50, 50, 400,400));
         knobRegion = new TextureRegionDrawable(new TextureRegion(textureFront, 170, 170, 155,155));
         touchpadStyle = new Touchpad.TouchpadStyle(touchBackground, knobRegion);
         touchpad = new Touchpad(15, touchpadStyle);
-        touchpad.setBounds(0,0, 300,300);
+        touchpad.setBounds(0,Gdx.graphics.getHeight() - 300, 300,300);
+        touchbtn = new Button();
+        btntr = new TextureRegion();
+        btntr.setRegion(new Texture(Gdx.files.internal("bubble.png")));
+        Drawable db = new Drawable() {
+            @Override
+            public void draw(Batch batch, float v, float v1, float v2, float v3) {
+
+            }
+
+            @Override
+            public float getLeftWidth() {
+                return 0;
+            }
+
+            @Override
+            public void setLeftWidth(float v) {
+
+            }
+
+            @Override
+            public float getRightWidth() {
+                return 0;
+            }
+
+            @Override
+            public void setRightWidth(float v) {
+
+            }
+
+            @Override
+            public float getTopHeight() {
+                return 0;
+            }
+
+            @Override
+            public void setTopHeight(float v) {
+
+            }
+
+            @Override
+            public float getBottomHeight() {
+                return 0;
+            }
+
+            @Override
+            public void setBottomHeight(float v) {
+
+            }
+
+            @Override
+            public float getMinWidth() {
+                return 0;
+            }
+
+            @Override
+            public void setMinWidth(float v) {
+
+            }
+
+            @Override
+            public float getMinHeight() {
+                return 0;
+            }
+
+            @Override
+            public void setMinHeight(float v) {
+
+            }
+        };
+        touchbtn.setBackground(db);
+
         speed = 10;
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         stage.addActor(touchpad);
+        stage.addActor(touchbtn);
+
         speedX = 0;
         vtThread = new VulThread();
         vtThread.start();
+        y = Gdx.graphics.getHeight()/2;
+        x = Gdx.graphics.getWidth()/2;
     }
 
     @Override
@@ -96,11 +195,11 @@ public class FastDie implements ApplicationListener {
             if(x < 0){
                 x = 0;
             }
-            if(y > Gdx.graphics.getHeight() - (int)sprite.getHeight()){
-                y = Gdx.graphics.getHeight() - (int)sprite.getHeight();
+            if(y > Gdx.graphics.getHeight() - (int)sprite.getHeight() - 300){
+                y = Gdx.graphics.getHeight() - (int)sprite.getHeight() - 300;
             }
-            if(y < 0){
-                y = 0;
+            if(y < 300){
+                y = 300;
             }
         }else{
             x += vtThread.getVulX();
@@ -112,11 +211,11 @@ public class FastDie implements ApplicationListener {
             if(x < 0){
                 x = 0;
             }
-            if(y > Gdx.graphics.getHeight() - (int)sprite.getHeight()){
-                y = Gdx.graphics.getHeight() - (int)sprite.getHeight();
+            if(y > Gdx.graphics.getHeight() - (int)sprite.getHeight()- 300){
+                y = Gdx.graphics.getHeight() - (int)sprite.getHeight()- 300;
             }
-            if(y < 0){
-                y = 0;
+            if(y < 300){
+                y = 300;
             }
         }
     }
@@ -131,6 +230,8 @@ public class FastDie implements ApplicationListener {
         spriteBatch.begin();
         spriteBatch.draw(background,0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sprite.draw(spriteBatch);
+        spriteDown.draw(spriteBatch);
+        spriteUpper.draw(spriteBatch);
         spriteBatch.end();
 
         stage.act();
