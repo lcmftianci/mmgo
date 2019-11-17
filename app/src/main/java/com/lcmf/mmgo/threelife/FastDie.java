@@ -10,8 +10,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -36,6 +39,9 @@ public class FastDie implements ApplicationListener {
     Touchpad touchpad;  //控制面板
     Button   touchbtn;  //加速按钮
     TextureRegion btntr; //按钮背景
+    TextureRegionDrawable txup;
+    TextureRegionDrawable txdown;
+    Texture  btnbn;     //背景图片
 
     Touchpad.TouchpadStyle touchpadStyle;
     TextureRegionDrawable knobRegion;
@@ -78,7 +84,6 @@ public class FastDie implements ApplicationListener {
         textureFront = new Texture(Gdx.files.internal("controller/pn.jpg"));
         killer = new Texture(Gdx.files.internal("shoot/bomb.png"));
 
-
         touchBackground = new TextureRegionDrawable(new TextureRegion(textureBack, 50, 50, 400,400));
         knobRegion = new TextureRegionDrawable(new TextureRegion(textureFront, 170, 170, 155,155));
         touchpadStyle = new Touchpad.TouchpadStyle(touchBackground, knobRegion);
@@ -86,74 +91,39 @@ public class FastDie implements ApplicationListener {
         touchpad.setBounds(0,Gdx.graphics.getHeight() - 300, 300,300);
         touchbtn = new Button();
         btntr = new TextureRegion();
-        btntr.setRegion(new Texture(Gdx.files.internal("bubble.png")));
-        Drawable db = new Drawable() {
-            @Override
-            public void draw(Batch batch, float v, float v1, float v2, float v3) {
+        btnbn = new Texture(Gdx.files.internal("bubble.png"));
+        btntr.setRegion(btnbn);
 
+        //btntr.setRegion(0,0,100,100);
+        txdown = new TextureRegionDrawable(btntr);
+        txup = new TextureRegionDrawable(btntr);
+        touchbtn = new ImageButton(txup, txdown);
+        touchbtn.setBounds(0,0,300,300);
+
+
+        touchbtn.addListener(new InputListener(){
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                speed = 20;
+                Log.d(TAG, "down speed:" + speed);
+                return super.touchDown(event, x, y, pointer, button);
             }
 
             @Override
-            public float getLeftWidth() {
-                return 0;
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                speed = 10;
+                Log.d(TAG, "up speed:" + speed);
+                super.touchUp(event, x, y, pointer, button);
             }
 
             @Override
-            public void setLeftWidth(float v) {
-
+            public boolean keyUp(InputEvent event, int keycode) {
+                speed = 10;
+                Log.d(TAG, "up speed:" + speed);
+                return super.keyUp(event, keycode);
             }
-
-            @Override
-            public float getRightWidth() {
-                return 0;
-            }
-
-            @Override
-            public void setRightWidth(float v) {
-
-            }
-
-            @Override
-            public float getTopHeight() {
-                return 0;
-            }
-
-            @Override
-            public void setTopHeight(float v) {
-
-            }
-
-            @Override
-            public float getBottomHeight() {
-                return 0;
-            }
-
-            @Override
-            public void setBottomHeight(float v) {
-
-            }
-
-            @Override
-            public float getMinWidth() {
-                return 0;
-            }
-
-            @Override
-            public void setMinWidth(float v) {
-
-            }
-
-            @Override
-            public float getMinHeight() {
-                return 0;
-            }
-
-            @Override
-            public void setMinHeight(float v) {
-
-            }
-        };
-        touchbtn.setBackground(db);
+        });
 
         speed = 10;
         stage = new Stage();
