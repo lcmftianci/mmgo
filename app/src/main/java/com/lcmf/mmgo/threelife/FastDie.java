@@ -1,5 +1,6 @@
 package com.lcmf.mmgo.threelife;
 
+import android.icu.util.LocaleData;
 import android.util.Log;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -15,10 +16,14 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+//import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -57,13 +62,19 @@ public class FastDie implements ApplicationListener {
     int y = 150;
     VulThread vtThread;
 
+    List<Sprite> arrBomb;
+    Texture bomb;
+    TextureRegion bombRegion;
+
     @Override
     public void create() {
         spriteBatch = new SpriteBatch();
         background = new Texture(Gdx.files.internal("mubu/mubu.jpg"));
         airPlane = new Texture(Gdx.files.internal("shoot/enemy1.png"));
-
         backUpper = new Texture(Gdx.files.internal("backer/backer.jpg"));
+        bomb = new Texture(Gdx.files.internal("backer/rock.png"));
+        bombRegion = new TextureRegion(bomb, 13,13, 45,45);
+
         spriteDown = new Sprite(backUpper, 0,0, 100,100);
         spriteUpper = new Sprite(backUpper, 0,0, 100,100);
 
@@ -72,6 +83,10 @@ public class FastDie implements ApplicationListener {
 
         spriteUpper.setPosition(0,0);
         spriteDown.setPosition(0,Gdx.graphics.getHeight() - 300);
+
+        arrBomb = new ArrayList<Sprite>();
+
+        arrBomb.add(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20));
 
         //atlas = new TextureAtlas(Gdx.files.internal(""));
         //sprite = atlas.createSprite("");
@@ -144,6 +159,13 @@ public class FastDie implements ApplicationListener {
     public void updateAipPlaneInfo(){
         //sprite.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
         sprite.setPosition(x, y);
+
+        for(Sprite s:arrBomb){
+            Log.d(TAG, "===>> >> Bomb " + s.getHeight() + " " + s.getWidth() + " " + s.getOriginX() + " " + s.getOriginY());
+            //s.draw(spriteBatch);
+            s.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+            s.setSize(Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10);
+        }
     }
 
     public void update(){
@@ -200,6 +222,11 @@ public class FastDie implements ApplicationListener {
         sprite.draw(spriteBatch);
         spriteDown.draw(spriteBatch);
         spriteUpper.draw(spriteBatch);
+
+        for(Sprite s:arrBomb){
+            Log.d(TAG, "===>> >> Bomb " + s.getHeight() + " " + s.getWidth() + " " + s.getOriginX() + " " + s.getOriginY());
+            s.draw(spriteBatch);
+        }
         spriteBatch.end();
 
         stage.act();
