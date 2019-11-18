@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -62,7 +63,8 @@ public class FastDie implements ApplicationListener {
     int y = 150;
     VulThread vtThread;
 
-    List<Sprite> arrBomb;
+    //List<Sprite> arrBomb;
+    List<BombBlock> arrBomb;
     Texture bomb;
     TextureRegion bombRegion;
 
@@ -84,9 +86,9 @@ public class FastDie implements ApplicationListener {
         spriteUpper.setPosition(0,0);
         spriteDown.setPosition(0,Gdx.graphics.getHeight() - 300);
 
-        arrBomb = new ArrayList<Sprite>();
-
-        arrBomb.add(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20));
+        arrBomb = new ArrayList<BombBlock>();
+        for(int i = 0 ;i < 50; i++)
+            arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),Gdx.graphics.getWidth()/ MathUtils.random(i,50), Gdx.graphics.getWidth()/MathUtils.random(i,50), Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
 
         //atlas = new TextureAtlas(Gdx.files.internal(""));
         //sprite = atlas.createSprite("");
@@ -156,16 +158,17 @@ public class FastDie implements ApplicationListener {
 
     }
 
+    public void updateBombInfo(){
+        for(BombBlock s:arrBomb){
+            //s.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+            //s.setSize(Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10);
+            s.update();
+        }
+    }
+
     public void updateAipPlaneInfo(){
         //sprite.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
         sprite.setPosition(x, y);
-
-        for(Sprite s:arrBomb){
-            Log.d(TAG, "===>> >> Bomb " + s.getHeight() + " " + s.getWidth() + " " + s.getOriginX() + " " + s.getOriginY());
-            //s.draw(spriteBatch);
-            s.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
-            s.setSize(Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10);
-        }
     }
 
     public void update(){
@@ -216,6 +219,7 @@ public class FastDie implements ApplicationListener {
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
         this.update();
         updateAipPlaneInfo();
+        updateBombInfo();
 
         spriteBatch.begin();
         spriteBatch.draw(background,0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -223,9 +227,8 @@ public class FastDie implements ApplicationListener {
         spriteDown.draw(spriteBatch);
         spriteUpper.draw(spriteBatch);
 
-        for(Sprite s:arrBomb){
-            Log.d(TAG, "===>> >> Bomb " + s.getHeight() + " " + s.getWidth() + " " + s.getOriginX() + " " + s.getOriginY());
-            s.draw(spriteBatch);
+        for(BombBlock s:arrBomb){
+            s.getSprite().draw(spriteBatch);
         }
         spriteBatch.end();
 
