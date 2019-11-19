@@ -87,9 +87,18 @@ public class FastDie implements ApplicationListener {
         spriteDown.setPosition(0,Gdx.graphics.getHeight() - 300);
 
         arrBomb = new ArrayList<BombBlock>();
-        for(int i = 0 ;i < 50; i++)
-            arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),Gdx.graphics.getWidth()/ MathUtils.random(i,50), Gdx.graphics.getWidth()/MathUtils.random(i,50), Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
-
+        for(int i = 0 ;i < 50; i++){
+            if(i < 10)
+            arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),
+                    Gdx.graphics.getWidth()/ MathUtils.random(i,10), Gdx.graphics.getWidth()/MathUtils.random(i,10), Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
+            else if(i > 10 && i < 20){
+                arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),
+                        Gdx.graphics.getWidth()/ MathUtils.random(i,20), Gdx.graphics.getWidth()/MathUtils.random(i,20), Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
+            }else{
+                arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),
+                        Gdx.graphics.getWidth()/ MathUtils.random(i,50), Gdx.graphics.getWidth()/MathUtils.random(i,50), Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
+            }
+        }
         //atlas = new TextureAtlas(Gdx.files.internal(""));
         //sprite = atlas.createSprite("");
         //sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
