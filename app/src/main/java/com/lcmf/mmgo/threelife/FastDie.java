@@ -87,6 +87,9 @@ public class FastDie implements ApplicationListener {
         spriteDown.setPosition(0,Gdx.graphics.getHeight() - 300);
 
         arrBomb = new ArrayList<BombBlock>();
+
+        //初始化陨石时，需要将陨石一个一个的从边界处释放，并且跟随时间戳变化增多
+        //打算，一个石头消失就生成两个石头，或者是每两秒增加一个石头
         for(int i = 0 ;i < 50; i++){
             if(i < 10)
             arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),
