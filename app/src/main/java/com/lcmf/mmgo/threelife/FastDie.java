@@ -67,9 +67,49 @@ public class FastDie implements ApplicationListener {
     List<BombBlock> arrBomb;
     Texture bomb;
     TextureRegion bombRegion;
+    float fStart;
+
+
+    private int randomGenerateBlock(){
+        //float fEnd = Gdx.graphics.getDeltaTime();  //只是距离上一帧的时间值
+        float fEnd = Gdx.graphics.getRawDeltaTime();
+        Log.d(TAG, "delta time:" + fEnd + "s");
+        if(Math.abs(fEnd - fStart) > 0.01f)
+        {
+            fStart = fEnd;
+
+            int option = MathUtils.random(0,3);
+            switch (option){
+                case 0:
+                    arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),
+                            0, Gdx.graphics.getHeight()/MathUtils.random(1,10), Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
+                    break;
+                case 1:
+                    arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),
+                            Gdx.graphics.getWidth()/MathUtils.random(1,10), 0, Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
+                    break;
+                case 2:
+                    arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),
+                            Gdx.graphics.getWidth(), Gdx.graphics.getHeight()/MathUtils.random(1,10), Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
+                    break;
+                case 3:
+                    arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),
+                            Gdx.graphics.getWidth()/MathUtils.random(1,10), Gdx.graphics.getHeight(), Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
+                    break;
+                default:
+                        arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),
+                                Gdx.graphics.getWidth()/MathUtils.random(1,10), 0, Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
+                        break;
+            }
+
+        }
+
+        return arrBomb.size();
+    }
 
     @Override
     public void create() {
+        fStart = Gdx.graphics.getDeltaTime();
         spriteBatch = new SpriteBatch();
         background = new Texture(Gdx.files.internal("mubu/mubu.jpg"));
         airPlane = new Texture(Gdx.files.internal("shoot/enemy1.png"));
@@ -90,18 +130,18 @@ public class FastDie implements ApplicationListener {
 
         //初始化陨石时，需要将陨石一个一个的从边界处释放，并且跟随时间戳变化增多
         //打算，一个石头消失就生成两个石头，或者是每两秒增加一个石头
-        for(int i = 0 ;i < 50; i++){
-            if(i < 10)
-            arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),
-                    Gdx.graphics.getWidth()/ MathUtils.random(i,10), Gdx.graphics.getWidth()/MathUtils.random(i,10), Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
-            else if(i > 10 && i < 20){
-                arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),
-                        Gdx.graphics.getWidth()/ MathUtils.random(i,20), Gdx.graphics.getWidth()/MathUtils.random(i,20), Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
-            }else{
-                arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),
-                        Gdx.graphics.getWidth()/ MathUtils.random(i,50), Gdx.graphics.getWidth()/MathUtils.random(i,50), Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
-            }
-        }
+//        for(int i = 0 ;i < 50; i++){
+//            if(i < 10)
+//            arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),
+//                    Gdx.graphics.getWidth()/ MathUtils.random(i,10), Gdx.graphics.getWidth()/MathUtils.random(i,10), Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
+//            else if(i > 10 && i < 20){
+//                arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),
+//                        Gdx.graphics.getWidth()/ MathUtils.random(i,20), Gdx.graphics.getWidth()/MathUtils.random(i,20), Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
+//            }else{
+//                arrBomb.add(new BombBlock(new Sprite(bombRegion,0,0,Gdx.graphics.getWidth()/20,Gdx.graphics.getWidth()/20),
+//                        Gdx.graphics.getWidth()/ MathUtils.random(i,50), Gdx.graphics.getWidth()/MathUtils.random(i,50), Gdx.graphics.getWidth()/10, Gdx.graphics.getWidth()/10));
+//            }
+//        }
         //atlas = new TextureAtlas(Gdx.files.internal(""));
         //sprite = atlas.createSprite("");
         //sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -230,6 +270,7 @@ public class FastDie implements ApplicationListener {
         Gdx.gl.glClearColor(1,1,1,1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
         this.update();
+        randomGenerateBlock();
         updateAipPlaneInfo();
         updateBombInfo();
 
