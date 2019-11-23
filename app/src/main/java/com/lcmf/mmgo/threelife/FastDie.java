@@ -1,27 +1,27 @@
 package com.lcmf.mmgo.threelife;
 
-import android.icu.util.LocaleData;
 import android.util.Log;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 //import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.lcmf.mmgo.threelife.PhysicsUtil.BombCollision;
+import com.lcmf.mmgo.threelife.music.TLAssetManager;
+import com.lcmf.mmgo.threelife.sprite.AirPlane;
+import com.lcmf.mmgo.threelife.sprite.BombBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +68,8 @@ public class FastDie implements ApplicationListener {
     Texture bomb;
     TextureRegion bombRegion;
     float fStart;
+
+    TLAssetManager assetManager;
 
 
     private int randomGenerateBlock(){
@@ -127,6 +129,10 @@ public class FastDie implements ApplicationListener {
         spriteDown.setPosition(0,Gdx.graphics.getHeight() - 300);
 
         arrBomb = new ArrayList<BombBlock>();
+
+        /**music loader*/
+        assetManager = new TLAssetManager();
+        assetManager.InitAsset();
 
         //初始化陨石时，需要将陨石一个一个的从边界处释放，并且跟随时间戳变化增多
         //打算，一个石头消失就生成两个石头，或者是每两秒增加一个石头
@@ -287,6 +293,25 @@ public class FastDie implements ApplicationListener {
 
         stage.act();
         stage.draw();
+
+        checkCollision();
+
+//        for(BombBlock s:arrBomb){
+//            if(BombCollision.checkBombCollision(s, sprite)){
+//                assetManager.PlayHitMusic();
+//                arrBomb.remove(s);
+//            }
+//        }
+    }
+
+    private void checkCollision(){
+        for(int i =0; i < this.arrBomb.size(); i++){
+            if(BombCollision.checkBombCollision(this.arrBomb.get(i), sprite)){
+                assetManager.PlayHitMusic();
+                arrBomb.remove(this.arrBomb.get(i));
+                i--;
+            }
+        }
     }
 
     @Override
