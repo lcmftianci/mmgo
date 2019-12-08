@@ -21,7 +21,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.lcmf.mmgo.simpleutil.DateUtils;
 import com.lcmf.mmgo.threelife.PhysicsUtil.BombCollision;
 import com.lcmf.mmgo.threelife.music.TLAssetManager;
-import com.lcmf.mmgo.threelife.sprite.AirPlane;
 import com.lcmf.mmgo.threelife.sprite.BombBlock;
 
 import java.util.ArrayList;
@@ -56,7 +55,7 @@ public class FastDie implements ApplicationListener {
     TextureRegionDrawable touchBackground;
     Texture textureBack;
     Texture textureFront;
-    Texture killer;     //精灵
+    //Texture killer;     //精灵
     int speed;
     int speedX;
     int speedY;
@@ -118,10 +117,10 @@ public class FastDie implements ApplicationListener {
     public void create() {
         //fStart = Gdx.graphics.getDeltaTime();
         spriteBatch = new SpriteBatch();
-        background = new Texture(Gdx.files.internal("mubu/mubu.jpg"));
-        airPlane = new Texture(Gdx.files.internal("shoot/enemy1.png"));
-        backUpper = new Texture(Gdx.files.internal("backer/backer.jpg"));
-        bomb = new Texture(Gdx.files.internal("backer/rock.png"));
+        background = new Texture(Gdx.files.internal("threelife/mubu.jpg"));
+        airPlane = new Texture(Gdx.files.internal("threelife/enemy1.png"));
+        backUpper = new Texture(Gdx.files.internal("threelife/backer.jpg"));
+        bomb = new Texture(Gdx.files.internal("threelife/rock.png"));
         bombRegion = new TextureRegion(bomb, 13,13, 45,45);
 
         spriteDown = new Sprite(backUpper, 0,0, 100,100);
@@ -157,13 +156,15 @@ public class FastDie implements ApplicationListener {
         //sprite = atlas.createSprite("");
         //sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        sprite = new Sprite(airPlane, 0,0,49,37);
+        //sprite = new Sprite(airPlane, 0,0,49,37);
+        //sprite = new Sprite(airPlane, 11,6,140,98);
+        sprite = new Sprite(airPlane, 11,6,45,35);
         sprite.setSize(Gdx.graphics.getWidth()/15*4/3, Gdx.graphics.getWidth()/15);
         sprite.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
 
-        textureBack = new Texture(Gdx.files.internal("controller/panzi.jpg"));
-        textureFront = new Texture(Gdx.files.internal("controller/pn.jpg"));
-        killer = new Texture(Gdx.files.internal("shoot/bomb.png"));
+        textureBack = new Texture(Gdx.files.internal("threelife/panzi.jpg"));
+        textureFront = new Texture(Gdx.files.internal("threelife/pn.jpg"));
+        //killer = new Texture(Gdx.files.internal("shoot/bomb.png"));
 
         touchBackground = new TextureRegionDrawable(new TextureRegion(textureBack, 50, 50, 400,400));
         knobRegion = new TextureRegionDrawable(new TextureRegion(textureFront, 170, 170, 155,155));

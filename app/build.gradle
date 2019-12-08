@@ -47,6 +47,11 @@ android {
             abiFilters 'armeabi'//, 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 //repositories{
@@ -69,7 +74,8 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'cn.hutool:hutool-all:5.0.7'
+    //implementation 'cn.hutool:hutool-all:5.0.7'
+    implementation 'cn.hutool:hutool-all:+'
 
 //    implementation 'com.badoo.mobile:android-weak-handler:1.0'
 //    implementation 'de.greenrobot:eventbus:2.4.0'
