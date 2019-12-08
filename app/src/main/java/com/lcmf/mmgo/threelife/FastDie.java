@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.lcmf.mmgo.simpleutil.DateUtils;
 import com.lcmf.mmgo.threelife.PhysicsUtil.BombCollision;
 import com.lcmf.mmgo.threelife.music.TLAssetManager;
 import com.lcmf.mmgo.threelife.sprite.AirPlane;
@@ -68,17 +69,21 @@ public class FastDie implements ApplicationListener {
     Texture bomb;
     TextureRegion bombRegion;
     float fStart;
+    long lStart;
 
     TLAssetManager assetManager;
 
 
     private int randomGenerateBlock(){
         //float fEnd = Gdx.graphics.getDeltaTime();  //只是距离上一帧的时间值
-        float fEnd = Gdx.graphics.getRawDeltaTime();
-        Log.d(TAG, "delta time:" + fEnd + "s");
-        if(Math.abs(fEnd - fStart) > 0.01f)
+        //float fEnd = Gdx.graphics.getRawDeltaTime();
+        //Log.d(TAG, "delta time:" + fEnd + "s");
+        long lEnd = DateUtils.getCurentTimes();
+        Log.d(TAG, "cur times:" + DateUtils.getCurentTimes());
+
+        if(Math.abs(lEnd - lStart) > 1000)
         {
-            fStart = fEnd;
+            lStart = lEnd;
 
             int option = MathUtils.random(0,3);
             switch (option){
@@ -111,7 +116,7 @@ public class FastDie implements ApplicationListener {
 
     @Override
     public void create() {
-        fStart = Gdx.graphics.getDeltaTime();
+        //fStart = Gdx.graphics.getDeltaTime();
         spriteBatch = new SpriteBatch();
         background = new Texture(Gdx.files.internal("mubu/mubu.jpg"));
         airPlane = new Texture(Gdx.files.internal("shoot/enemy1.png"));

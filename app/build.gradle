@@ -69,6 +69,8 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    implementation 'cn.hutool:hutool-all:5.0.7'
+
 //    implementation 'com.badoo.mobile:android-weak-handler:1.0'
 //    implementation 'de.greenrobot:eventbus:2.4.0'
 //    implementation 'com.facebook.rebound:rebound:0.3.6'
