@@ -53,7 +53,7 @@ public class SplashActivity extends Activity {
         Random r = new Random();
         int ran1 = r.nextInt(arrImage.length);
         Log.v(TAG, "number:" + String.valueOf(ran1));
-        mImageView.setImageResource(arrImage[1]);
+        mImageView.setImageResource(arrImage[2]);
 
         //1、先判断版本是不是首次运行
         SharedPreferences mVersion = getSharedPreferences("version", MODE_PRIVATE);
