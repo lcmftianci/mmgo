@@ -13,6 +13,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.lcmf.mmgo.recyclemenu.HolyTsMainActivity;
+import com.tencent.bugly.crashreport.CrashReport;
+
 import java.util.Random;
 
 import cdc.sed.yff.AdManager;
@@ -34,6 +37,8 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        CrashReport.initCrashReport(getApplicationContext(), "18df439d92", false);
         //AdManager.getInstance(SplashActivity.this.getApplicationContext()).init("98b79534d27dd504", "a44a477c4f5c8b0a", true);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.splash);
@@ -58,15 +63,15 @@ public class SplashActivity extends Activity {
         //1、先判断版本是不是首次运行
         SharedPreferences mVersion = getSharedPreferences("version", MODE_PRIVATE);
         int nVerTimes = mVersion.getInt("times", 0);
-//        if(Integer.compare(nVerTimes, 1) != 0){
-        SharedPreferences.Editor editor = getSharedPreferences("version", MODE_PRIVATE).edit();
-        editor.putInt("times", 1);
-        editor.apply();
-//        }else {
-//            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
+        if(Integer.compare(nVerTimes, 1) != 0){
+            SharedPreferences.Editor editor = getSharedPreferences("version", MODE_PRIVATE).edit();
+            editor.putInt("times", 1);
+            editor.apply();
+        }else {
+            Intent intent = new Intent(SplashActivity.this, HolyTsMainActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         //打印日志
         Log.v(TAG, "加载Splash动画");
@@ -126,7 +131,7 @@ public class SplashActivity extends Activity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                Intent intent = new Intent(SplashActivity.this, HelloGameActivity.class);
+                Intent intent = new Intent(SplashActivity.this, HolyTsMainActivity.class);
                 startActivity(intent);
                 finish();
             }
