@@ -21,7 +21,7 @@ public class SplamActivity extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		AdManager.getInstance(mContext).init("98b79534d27dd504", "a44a477c4f5c8b0a", true);
+		//AdManager.getInstance(mContext).init("98b79534d27dd504", "a44a477c4f5c8b0a", true);
 		// 设置应用版本信息
 		//setupAppVersionInfo();
 		// 初始化视图
